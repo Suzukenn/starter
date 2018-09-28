@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソースコード">
+      <UniqueIdentifier>{d14a5076-eb2b-4a31-a1b8-a6bb8942e9de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System">
+      <UniqueIdentifier>{726813c8-19d1-4c94-9d32-8c7fe7c50c27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System\Input">
+      <UniqueIdentifier>{ecd689ef-0d6e-4fa0-96d6-3db91e173d0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System\Manager">
+      <UniqueIdentifier>{5800de44-5ff4-4b80-9640-b3e7173c7837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System\Sound">
+      <UniqueIdentifier>{c22a15f5-8074-421f-ab07-70eb1d41943b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\Scene">
+      <UniqueIdentifier>{27c1082b-9b3a-4d0c-ab5d-f60fda7d331a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\Parts">
+      <UniqueIdentifier>{8720c517-33e0-474c-b4d6-a225414a2336}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base_Scene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>ソースコード\System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>ソースコード\System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound_Manager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound_Parameter.h">
+      <Filter>ソースコード\System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Wav_Controller.h">
+      <Filter>ソースコード\System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>ソースコード</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>ソースコード\System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>ソースコード\System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound_Manager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Wav_Controller.cpp">
+      <Filter>ソースコード\System\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソースコード</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
