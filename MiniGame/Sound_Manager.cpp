@@ -9,20 +9,6 @@
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FILE_PATH L"Data/Sound/tracklist.txt"
 
-SOUND_PARAMETER g_SoundData[SOUND_LABEL_MAX] =
-{
-    { L"Data/BGM/Game.wav", XAUDIO2_LOOP_INFINITE },
-    { L"Data/BGM/GameOver.wav", XAUDIO2_LOOP_INFINITE },
-    { L"Data/BGM/Opening.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Break.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Damage.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Decision.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Hit.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Instantiate.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Jump.wav", XAUDIO2_NO_LOOP_REGION },
-    { L"Data/SE/Shot.wav", XAUDIO2_NO_LOOP_REGION },
-};
-
 //＝＝＝プロトタイプ宣言＝＝＝//
 HRESULT Load(SOUND_PARAMETER*);
 
@@ -38,7 +24,7 @@ WAV_CONTROLLER SOUND_MANAGER::WaveSound[SOUND_LABEL_MAX];          	// WAVE 音楽
 //
 //機能：ソースボイスの作成
 //
-//引数：(SOUNDpARAM)元データ,(int)格納配列番号
+//引数：(SOUNDPARAM)元データ,(int)格納配列番号
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
@@ -132,7 +118,7 @@ HRESULT SOUND_MANAGER::Initialize(void)
 //
 //機能：読み込みデータの格納
 //
-//引数：(std::list<SOUNDPARAM>)楽曲リスト
+//引数：(SOUNDPARAM*)楽曲リスト
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////

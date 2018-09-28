@@ -26,11 +26,11 @@ void GAMEOVER::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX_2D)); //頂点書式設定
-    pDevice->SetFVF(FVF_VERTEX_2D);                                  //フォーマット設定
+    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
     pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
 
-                                                                     //---頂点バッファによる背景描画---//
+    //---頂点バッファによる背景描画---//
     pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }
 
@@ -49,7 +49,7 @@ HRESULT GAMEOVER::Initialize(void)
     int nCounter;
     HRESULT hResult;
     LPDIRECT3DDEVICE9 pDevice;
-    VERTEX_2D* pVertex;
+    VERTEX* pVertex;
 
     //---初期化処理---//
     pDevice = GetDevice();
@@ -64,7 +64,7 @@ HRESULT GAMEOVER::Initialize(void)
     }
 
     //---頂点バッファの生成---//
-    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, 0, FVF_VERTEX_2D, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
+    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX) * 4, 0, FVF_VERTEX, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
 
     if (FAILED(hResult))
     {
@@ -94,7 +94,6 @@ HRESULT GAMEOVER::Initialize(void)
     SOUND_MANAGER::Play(BGM_GAMEOVER);
 
     return hResult;
-
 }
 
 /////////////////////////////////////////////
@@ -109,17 +108,8 @@ HRESULT GAMEOVER::Initialize(void)
 void GAMEOVER::Uninitialize(void)
 {
     //---解放---//
-    if (VertexBuffer)
-    {
-        VertexBuffer->Release();
-        VertexBuffer = nullptr;
-    }
-
-    if (Graphic)
-    {
-        Graphic->Release();
-        Graphic = nullptr;
-    }
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic)
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAMEOVER);

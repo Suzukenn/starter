@@ -1,7 +1,6 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #define DIRECTINPUT_VERSION	0x0800
 #include <dinput.h>
-#include <memory>
 #include "Main.h"
 #include "Mouse.h"
 
@@ -15,7 +14,7 @@
 //
 //戻り値：(LRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT MOUSE::Initialize(HWND hWnd , LPDIRECTINPUT8 manager)
+HRESULT MOUSE::Initialize(HWND hWnd, LPDIRECTINPUT8 manager)
 {
     //---各種宣言---//
     HRESULT hResult;
@@ -130,11 +129,11 @@ void MOUSE::Update(void)
 //
 //機能：ボタンホールド判定
 //
-//引数：(DWORD)入力ボタン
+//引数：(MOUSE_BUTTON)入力ボタン
 //
 //戻り値：(bool)判定結果
 /////////////////////////////////////////////
-bool MOUSE::GetHold(DWORD button)
+bool MOUSE::GetHold(MOUSE_BUTTON button)
 {
     if (button >= _countof(Current.rgbButtons))
     {
@@ -163,11 +162,11 @@ DIMOUSESTATE* MOUSE::GetMove(void)
 //
 //機能：ボタントリガ判定
 //
-//引数：(DWORD)入力ボタン
+//引数：(MOUSE_BUTTON)入力ボタン
 //
 //戻り値：(bool)判定結果
 /////////////////////////////////////////////
-bool MOUSE::GetTrigger(DWORD button)
+bool MOUSE::GetTrigger(MOUSE_BUTTON button)
 {
     if (button >= _countof(Trigger.rgbButtons))
     {
@@ -181,11 +180,11 @@ bool MOUSE::GetTrigger(DWORD button)
 //
 //機能：ボタンリリース判定
 //
-//引数：(DWORD)入力ボタン
+//引数：(MOUSE_BUTTON)入力ボタン
 //
 //戻り値：(bool)判定結果
 /////////////////////////////////////////////
-bool MOUSE::GetRelease(DWORD button)
+bool MOUSE::GetRelease(MOUSE_BUTTON button)
 {
     if (button >= _countof(Release.rgbButtons))
     {

@@ -25,11 +25,11 @@ void DrawFPS(void);
 #endif
 
 //＝＝＝グローバル変数＝＝＝//
-LPDIRECT3D9 g_pD3D;			  //Direct3D オブジェクト
+LPDIRECT3D9 g_pD3D;			    //Direct3D オブジェクト
 LPDIRECT3DDEVICE9 g_pD3DDevice; //Deviceオブジェクト(描画に必要)
 
 #ifdef _DEBUG
-int	g_nCountFPS;			        //FPSカウンタ
+int	g_nCountFPS;	    //FPSカウンタ
 LPD3DXFONT g_pD3DXFont;	//フォントへのポインタ
 #endif
 
@@ -342,13 +342,13 @@ static HRESULT SetupEnvironment(HWND hWnd, BOOL bWindow)
     if (bWindow)
     {
         //ウィンドウモード
-        d3dpp.FullScreen_RefreshRateInHz = 0;								//リフレッシュレート
+        d3dpp.FullScreen_RefreshRateInHz = 0;						//リフレッシュレート
         d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;	//垂直同期信号に同期しない
     }
     else
     {
         //フルスクリーンモード
-        d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;			//リフレッシュレート
+        d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;		//リフレッシュレート
         d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;		//垂直同期信号に同期する
     }
 
@@ -424,18 +424,10 @@ void UnInitialize(void)
 #endif
 
     //デバイスの開放
-    if (g_pD3DDevice)
-    {
-        g_pD3DDevice->Release();
-        g_pD3DDevice = nullptr;
-    }
+    SAFE_RELEASE(g_pD3DDevice);
 
     //Direct3Dオブジェクトの開放
-    if (g_pD3D)
-    {
-        g_pD3D->Release();
-        g_pD3D = nullptr;
-    }
+    SAFE_RELEASE(g_pD3D);
 }
 
 /////////////////////////////////////////////

@@ -1,9 +1,6 @@
 #ifndef _KEYBOARD_H_
 #define _KEYBOARD_H_
 
-//＝＝＝ヘッダファイル読み込み＝＝＝//
-#include <memory>
-
 //＝＝＝クラス宣言＝＝＝//
 class KEYBOARD
 {

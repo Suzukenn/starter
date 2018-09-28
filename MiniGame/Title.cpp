@@ -26,8 +26,8 @@ void TITLE::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX_2D)); //頂点書式設定
-    pDevice->SetFVF(FVF_VERTEX_2D);                                  //フォーマット設定
+    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
     pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
 
     //---頂点バッファによる背景描画---//
@@ -49,7 +49,7 @@ HRESULT TITLE::Initialize(void)
     int nCounter;
     HRESULT hResult;
     LPDIRECT3DDEVICE9 pDevice;
-    VERTEX_2D* pVertex;
+    VERTEX* pVertex;
 
     //---初期化処理---//
     pDevice = GetDevice();
@@ -62,7 +62,7 @@ HRESULT TITLE::Initialize(void)
     }
 
     //---頂点バッファの生成---//
-    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, 0, FVF_VERTEX_2D, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
+    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX) * 4, 0, FVF_VERTEX, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
 
     if (FAILED(hResult))
     {
@@ -106,17 +106,8 @@ HRESULT TITLE::Initialize(void)
 void TITLE::Uninitialize(void)
 {
     //---解放---//
-    if (VertexBuffer)
-    {
-        VertexBuffer->Release();
-        VertexBuffer = nullptr;
-    }
-
-    if (Graphic)
-    {
-        Graphic->Release();
-        Graphic = nullptr;
-    }
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic)
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_OPENING);
@@ -133,7 +124,7 @@ void TITLE::Uninitialize(void)
 /////////////////////////////////////////////
 void TITLE::Update(void)
 {
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER) || INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, TRIGGER))
     {
         SCENE_MANAGER::SetScene(SCENE_GAME);
     }
