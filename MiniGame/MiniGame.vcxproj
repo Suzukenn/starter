@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Base_Scene.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Wav_Controller.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />

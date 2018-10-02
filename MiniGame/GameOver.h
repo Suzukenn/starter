@@ -2,6 +2,7 @@
 #define _GAMEOVER_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
+#include "BackGround.h"
 #include "Base_Scene.h"
 #include "Main.h"
 
@@ -9,9 +10,7 @@
 class GAMEOVER final : public BASE_SCENE
 {
     private:
-        unsigned int Score;
-        LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
-        LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
+		BACKGROUND Back;
 
     public:
         virtual void Draw(void) final;
