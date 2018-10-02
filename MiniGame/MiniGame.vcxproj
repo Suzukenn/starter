@@ -135,6 +135,8 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Operation.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sound_Manager.h" />
     <ClInclude Include="Sound_Parameter.h" />
@@ -149,6 +151,8 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
     <ClCompile Include="Title.cpp" />

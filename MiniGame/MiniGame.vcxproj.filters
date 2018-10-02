@@ -29,6 +29,9 @@
     <Filter Include="ソースコード\Object">
       <UniqueIdentifier>{b170ea11-4b7a-4569-970d-6400a04f82fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソースコード\Actor">
+      <UniqueIdentifier>{6bebc2f6-fc99-4844-8f8d-a0677c42ff5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base_Scene.h">
@@ -70,6 +73,12 @@
     <ClInclude Include="BackGround.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Operation.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -104,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Operation.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソースコード\Actor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
