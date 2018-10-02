@@ -4,7 +4,9 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "BackGround.h"
 #include "Base_Scene.h"
+#include "Camera.h"
 #include "Main.h"
+#include "Lift.h"
 #include "Operation.h"
 #include "Player.h"
 
@@ -13,6 +15,8 @@ class GAME final : public BASE_SCENE
 {
     private:
 		BACKGROUND Back;
+        CAMERA Camera;
+        LIFT Lift;
 		OPERATION Operation;
 		PLAYER Player;
 

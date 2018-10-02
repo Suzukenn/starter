@@ -1,2 +1,5 @@
-﻿  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
+﻿  Player.cpp
+d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(171): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(172): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)

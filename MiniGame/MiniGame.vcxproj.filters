@@ -79,6 +79,15 @@
     <ClInclude Include="Player.h">
       <Filter>ソースコード\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Lift.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -119,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Lift.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソースコード\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

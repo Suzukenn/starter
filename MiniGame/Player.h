@@ -18,8 +18,9 @@ class PLAYER
 		D3DXVECTOR2 Move;						//プレイヤーの重力用
 		LPDIRECT3DTEXTURE9 Graphic;				//テクスチャ
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
-		VERTEX* pVertex;
+		VERTEX* Vertex;
 		OPERATION* Operation;
+        bool Hit;
 
 	public:
 		PLAYER();
@@ -31,6 +32,8 @@ class PLAYER
 		void Update(void);
 		void Draw(void);
 
+        D3DXVECTOR2 GetPos(void) { return Pos; }
+        void SetHit(bool hit) { Hit = hit; }
 };
 
 #endif

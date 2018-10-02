@@ -72,18 +72,18 @@ HRESULT OPERATION::Initialize(void)
 
 	//---頂点バッファへの値の設定---//
 	//バッファのポインタを取得
-	VertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
+	VertexBuffer->Lock(0, 0, (void**)&Vertex, 0);
 
 	//値の設定
 	for (nCounter = 0; nCounter < 4; nCounter++)
 	{
-		pVertex[nCounter].U = (float)(nCounter & 1);
-		pVertex[nCounter].V = (float)((nCounter >> 1) & 1);
-		pVertex[nCounter].Position.x = pVertex[nCounter].U * OPERATION_WIDTH + Pos.x;
-		pVertex[nCounter].Position.y = pVertex[nCounter].V * OPERATION_HEIGHT + Pos.y;
-		pVertex[nCounter].Position.z = 0.0F;
-		pVertex[nCounter].RHW = 1.0F;
-		pVertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        Vertex[nCounter].U = (float)(nCounter & 1);
+        Vertex[nCounter].V = (float)((nCounter >> 1) & 1);
+        Vertex[nCounter].Position.x = Vertex[nCounter].U * OPERATION_WIDTH + Pos.x;
+        Vertex[nCounter].Position.y = Vertex[nCounter].V * OPERATION_HEIGHT + Pos.y;
+        Vertex[nCounter].Position.z = 0.0F;
+        Vertex[nCounter].RHW = 1.0F;
+        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
 	}
 
 	//バッファのポインタの解放
@@ -104,17 +104,8 @@ HRESULT OPERATION::Initialize(void)
 void OPERATION::Uninitialize(void)
 {
 	//---解放---//
-	if (VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
-
-	if (Graphic)
-	{
-		Graphic->Release();
-		Graphic = nullptr;
-	}
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic)
 }
 
 //＝＝＝関数定義＝＝＝//
@@ -138,10 +129,10 @@ void OPERATION::Draw(void)
 	//---書式設定---//
 	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
 	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+	pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 																	 
 	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
@@ -162,8 +153,8 @@ void OPERATION::Update(void)
 	//---座標反映---//
 	for (int i = 0; i < 4; ++i)
 	{
-		pVertex[i].Position.x = Pos.x + (i & 1) * OPERATION_WIDTH - OPERATION_WIDTH / 2;
-		pVertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
+        Vertex[i].Position.x = Pos.x + (i & 1) * OPERATION_WIDTH - OPERATION_WIDTH / 2;
+        Vertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
 	}
 }
 
