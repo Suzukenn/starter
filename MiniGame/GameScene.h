@@ -5,12 +5,16 @@
 #include "BackGround.h"
 #include "Base_Scene.h"
 #include "Main.h"
+#include "Operation.h"
+#include "Player.h"
 
 //ƒNƒ‰ƒXéŒ¾//
 class GAME final : public BASE_SCENE
 {
     private:
 		BACKGROUND Back;
+		OPERATION Operation;
+		PLAYER Player;
 
     public:
         virtual void Draw(void) final;

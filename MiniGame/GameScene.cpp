@@ -20,6 +20,10 @@
 void GAME::Draw(void)
 {
 	Back.Draw();
+	//プレイヤーの描画処理
+	Player.Draw();
+	//マウスカーソルの描画処理
+	Operation.Draw();
 }
 
 /////////////////////////////////////////////
@@ -38,6 +42,10 @@ HRESULT GAME::Initialize(void)
 	{
 		return E_FAIL;
 	}
+	//プレイヤーの初期化
+	Player.Initialize();
+	//マウスカーソルの初期化
+	Operation.Initialize();
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
@@ -56,7 +64,9 @@ HRESULT GAME::Initialize(void)
 /////////////////////////////////////////////
 void GAME::Uninitialize(void)
 {
-    //---解放---//
+    //---各種解放---//
+	Operation.Uninitialize();
+	Player.Uninitialize();
 	Back.Uninitialize();
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
@@ -74,6 +84,10 @@ void GAME::Uninitialize(void)
 void GAME::Update(void)
 {
 	//---オブジェクトの更新---//
+	//マウスカーソルの更新処理
+	Operation.Update();
+	//プレイヤーの更新処理
+	Player.Update();
 	Back.Update();
 
     //---画面遷移---//
