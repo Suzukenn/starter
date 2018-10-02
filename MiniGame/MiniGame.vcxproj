@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
-    <ClInclude Include="Base_Scene.h" />
+    <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="GameOver.h" />
@@ -141,7 +141,7 @@
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Sound_Manager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sound_Parameter.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wav_Controller.h" />
@@ -160,7 +160,7 @@
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Sound_Manager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wav_Controller.cpp" />
   </ItemGroup>

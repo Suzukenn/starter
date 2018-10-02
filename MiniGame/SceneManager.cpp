@@ -67,20 +67,6 @@ HRESULT SCENE_MANAGER::Initialize(void)
 }
 
 /////////////////////////////////////////////
-//関数名：SetScene
-//
-//機能：シーンの設定
-//
-//引数：(SCENE)シーン番号
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void SCENE_MANAGER::SetScene(SCENE scene)
-{
-    NextScene = scene;
-}
-
-/////////////////////////////////////////////
 //関数名：UpdateScene
 //
 //機能：シーンの更新
@@ -110,7 +96,13 @@ void SCENE_MANAGER::Update(void)
                 Scene = new GAMEOVER();
                 break;
         }
-        Scene->Initialize();
+
+        if (FAILED(Scene->Initialize()))
+        {
+            MessageBoxW(nullptr, L"シーンの初期化に失敗しました失敗", L"初期化エラー", MB_OK);
+            exit(EXIT_FAILURE);
+        }
+
         CurrentScene = NextScene;
     }
     else

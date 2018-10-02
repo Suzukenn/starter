@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Lift.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -21,7 +21,7 @@ void GAME::Draw(void)
     //---オブジェクトの描画---//
 	Back.Draw();
     Camera.Draw();
-    //Lift.Draw();
+    Lift.Draw();
 	Player.Draw();	    //プレイヤー
     Operation.Draw();	//マウスカーソル
 }
@@ -43,6 +43,7 @@ HRESULT GAME::Initialize(void)
 	{
 		return E_FAIL;
 	}
+
 	//プレイヤー
     if (FAILED(Player.Initialize()))
     {

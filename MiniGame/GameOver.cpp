@@ -2,7 +2,7 @@
 #include "GameOver.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 
 //ŠÖ”’è‹`//
 /////////////////////////////////////////////
@@ -75,7 +75,7 @@ void GAMEOVER::Update(void)
 	Back.Update();
 
     //---‰æ–Ê‘JˆÚ---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
     {
         SCENE_MANAGER::SetScene(SCENE_TITLE);
     }

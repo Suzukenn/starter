@@ -34,9 +34,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base_Scene.h">
-      <Filter>ソースコード\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
@@ -56,9 +53,6 @@
       <Filter>ソースコード\System\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound_Manager.h">
       <Filter>ソースコード\System\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Sound_Parameter.h">
@@ -88,6 +82,12 @@
     <ClInclude Include="Collision.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -109,9 +109,6 @@
       <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound_Manager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Wav_Controller.cpp">
@@ -137,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

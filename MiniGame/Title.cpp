@@ -1,14 +1,14 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 #include "Title.h"
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：背景の描画
+//機能：タイトルの描画
 //
 //引数：なし
 //
@@ -22,7 +22,7 @@ void TITLE::Draw(void)
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：背景の初期化
+//機能：タイトルの初期化
 //
 //引数：なし
 //
@@ -45,7 +45,7 @@ HRESULT TITLE::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：背景の終了
+//機能：タイトルの終了
 //
 //引数：なし
 //
@@ -63,7 +63,7 @@ void TITLE::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：背景の更新
+//機能：タイトルの更新
 //
 //引数：なし
 //
@@ -76,7 +76,7 @@ void TITLE::Update(void)
     Back.Update();
 
     //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
     {
         SCENE_MANAGER::SetScene(SCENE_GAME);
     }

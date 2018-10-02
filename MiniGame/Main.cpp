@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Main.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FPS 1000 / 60

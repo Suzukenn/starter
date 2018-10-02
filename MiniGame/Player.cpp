@@ -6,7 +6,7 @@
 #include "GameScene.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 #include "Player.h"
 
 //======定数・マクロ定義=====
@@ -41,6 +41,33 @@ PLAYER::~PLAYER()
 	{
 		delete Operation;
 	}
+}
+
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：プレイヤーの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void PLAYER::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+
+                                                                     // 頂点配列によるポリゴン描画
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
@@ -115,33 +142,6 @@ void PLAYER::Uninitialize(void)
 	//---解放---//
     SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic)
-}
-
-//＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：Draw
-//
-//機能：プレイヤーの描画
-//
-//引数：なし
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void PLAYER::Draw(void)
-{
-	//---各種宣言---//
-	LPDIRECT3DDEVICE9 pDevice;
-
-	//---初期化処理---//
-	pDevice = GetDevice();
-
-	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
-	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
-																	 
-	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////

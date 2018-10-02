@@ -10,7 +10,7 @@
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：カメラの描画
+//機能：リフトの描画
 //
 //引数：なし
 //
@@ -35,7 +35,7 @@ void LIFT::Draw(void)
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：カメラの初期化
+//機能：リフトの初期化
 //
 //引数：なし
 //
@@ -98,7 +98,7 @@ HRESULT LIFT::Initialize(D3DXVECTOR2 position, D3DXVECTOR2 size)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：カメラの終了
+//機能：リフトの終了
 //
 //引数：なし
 //
@@ -114,7 +114,7 @@ void LIFT::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：カメラの更新
+//機能：リフトの更新
 //
 //引数：なし
 //
@@ -122,33 +122,5 @@ void LIFT::Uninitialize(void)
 /////////////////////////////////////////////
 void LIFT::Update(void)
 {
-    //---各種宣言---//
-    int nCounter;
 
-    //---移動---//
-    if (INPUT_MANAGER::GetKey(DIK_A, HOLD))
-    {
-        Position.x -= 5.0F;
-    }
-    else if (INPUT_MANAGER::GetKey(DIK_D, HOLD))
-    {
-        Position.x += 5.0F;
-    }
-    if (INPUT_MANAGER::GetKey(DIK_W, HOLD))
-    {
-        Position.y -= 5.0F;
-    }
-    if (INPUT_MANAGER::GetKey(DIK_S, HOLD))
-    {
-        Position.y += 5.0F;
-    }
-
-    Center = { Position.x + Size.x / 2, Position.y + Size.y / 2 };
-
-    //---操作反映---//
-    for (nCounter = 0; nCounter < 4; nCounter++)
-    {
-        Vertex[nCounter].Position.x = Position.x + (nCounter & 1) * Size.x;
-        Vertex[nCounter].Position.y = Position.y + (nCounter / 2) * Size.y;
-    }
 }

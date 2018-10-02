@@ -6,7 +6,7 @@
 #include "GameScene.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 #include "Operation.h"
 
 //======定数・マクロ定義=====
@@ -34,10 +34,37 @@ OPERATION::~OPERATION()
 	
 }
 
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：操作ポインタの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void OPERATION::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
+
+    // 頂点配列によるポリゴン描画
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
+}
+
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：プレイヤーの初期化
+//機能：操作ポインタの初期化
 //
 //引数：なし
 //
@@ -95,7 +122,7 @@ HRESULT OPERATION::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：プレイヤーの終了
+//機能：操作ポインタの終了
 //
 //引数：なし
 //
@@ -108,37 +135,10 @@ void OPERATION::Uninitialize(void)
     SAFE_RELEASE(Graphic)
 }
 
-//＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：Draw
-//
-//機能：プレイヤーの描画
-//
-//引数：なし
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void OPERATION::Draw(void)
-{
-	//---各種宣言---//
-	LPDIRECT3DDEVICE9 pDevice;
-
-	//---初期化処理---//
-	pDevice = GetDevice();
-
-	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
-	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
-																	 
-	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
-}
-
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：プレイヤーの更新
+//機能：操作ポインタの更新
 //
 //引数：なし
 //
