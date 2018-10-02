@@ -1,8 +1,13 @@
 #ifndef _MOUSE_H_
 #define _MOUSE_H_
 
-//＝＝＝ヘッダファイル読み込み＝＝＝//
-#include <memory>
+//＝＝＝列挙型定義＝＝＝//
+typedef enum
+{
+    BUTTON_LEFT,
+    BUTTON_CENTER,
+    BUTTON_RIGHT,
+} MOUSE_BUTTON;
 
 //＝＝＝クラス宣言＝＝＝//
 class MOUSE
@@ -14,16 +19,15 @@ class MOUSE
         DIMOUSESTATE Trigger;	 //トリガ状態
         DIMOUSESTATE Release;	 //リリース状態
 
-
     public:
         HRESULT Initialize(HWND, LPDIRECTINPUT8);
         void Uninitialize(void);
         void Update(void);
 
-        bool GetHold(DWORD);
+        bool GetHold(MOUSE_BUTTON);
         DIMOUSESTATE* GetMove(void);
-        bool GetTrigger(DWORD);
-        bool GetRelease(DWORD);
+        bool GetTrigger(MOUSE_BUTTON);
+        bool GetRelease(MOUSE_BUTTON);
 };
 
 #endif

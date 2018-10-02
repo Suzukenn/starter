@@ -1,7 +1,6 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #define DIRECTINPUT_VERSION	0x0800
 #include <dinput.h>
-#include <memory>
 #include "Keyboard.h"
 #include "Main.h"
 
@@ -15,7 +14,7 @@
 //
 //戻り値：(LRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT KEYBOARD::Initialize(HWND hWnd ,LPDIRECTINPUT8 manager)
+HRESULT KEYBOARD::Initialize(HWND hWnd, LPDIRECTINPUT8 manager)
 {
     //---各種宣言---//
     HRESULT hResult;

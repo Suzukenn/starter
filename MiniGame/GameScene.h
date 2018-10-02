@@ -2,22 +2,29 @@
 #define _GAME_SCENE_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "Base_Scene.h"
+#include "BackGround.h"
+#include "BaseScene.h"
+#include "Camera.h"
 #include "Main.h"
+#include "Lift.h"
+#include "Operation.h"
+#include "Player.h"
 
 //＝＝＝クラス宣言＝＝＝//
-class GAME final: public BASE_SCENE
+class GAME final : public BASE_SCENE
 {
     private:
-        unsigned int Score;
-        LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
-        LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
+		BACKGROUND Back;
+        CAMERA Camera;
+        LIFT Lift;
+		OPERATION Operation;
+		PLAYER Player;
 
     public:
-        void Draw(void) final;
-        void Uninitialize(void) final;
-        HRESULT Initialize(void) final;
-        void Update(void) final;
+        virtual void Draw(void) final;
+        virtual void Uninitialize(void) final;
+        virtual HRESULT Initialize(void) final;
+        virtual void Update(void) final;
 };
 
 #endif

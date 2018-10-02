@@ -26,11 +26,14 @@
     <Filter Include="ソースコード\Parts">
       <UniqueIdentifier>{8720c517-33e0-474c-b4d6-a225414a2336}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソースコード\Object">
+      <UniqueIdentifier>{b170ea11-4b7a-4569-970d-6400a04f82fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\Actor">
+      <UniqueIdentifier>{6bebc2f6-fc99-4844-8f8d-a0677c42ff5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base_Scene.h">
-      <Filter>ソースコード\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
@@ -52,9 +55,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>ソースコード\System\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Sound_Manager.h">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Sound_Parameter.h">
       <Filter>ソースコード\System\Sound</Filter>
     </ClInclude>
@@ -63,6 +63,30 @@
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>ソースコード</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Operation.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Lift.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>ソースコード\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,14 +111,32 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Sound_Manager.cpp">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Wav_Controller.cpp">
       <Filter>ソースコード\System\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>ソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Operation.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Lift.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

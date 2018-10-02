@@ -1,11 +1,10 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
+#include "Camera.h"
 #include "GameScene.h"
 #include "InputManager.h"
+#include "Lift.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
-
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/BackGround.tga" //パス名
+#include "SoundManager.h"
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -19,19 +18,12 @@
 /////////////////////////////////////////////
 void GAME::Draw(void)
 {
-    //---各種宣言---//
-    LPDIRECT3DDEVICE9 pDevice;
-
-    //---初期化処理---//
-    pDevice = GetDevice();
-
-    //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX_2D)); //頂点書式設定
-    pDevice->SetFVF(FVF_VERTEX_2D);                                  //フォーマット設定
-    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
-
-    //---頂点バッファによる背景描画---//
-    pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+    //---オブジェクトの描画---//
+	Back.Draw();
+    Camera.Draw();
+    Lift.Draw();
+	Player.Draw();	    //プレイヤー
+    Operation.Draw();	//マウスカーソル
 }
 
 /////////////////////////////////////////////
@@ -45,55 +37,41 @@ void GAME::Draw(void)
 /////////////////////////////////////////////
 HRESULT GAME::Initialize(void)
 {
-    //---各種宣言---//
-    int nCounter;
-    HRESULT hResult;
-    LPDIRECT3DDEVICE9 pDevice;
-    VERTEX_2D* pVertex;
+	//---オブジェクトの初期化---//
+    //背景
+	if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
+	{
+		return E_FAIL;
+	}
 
-    //---初期化処理---//
-    pDevice = GetDevice();
-
-    //---テクスチャの読み込み---//
-    hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
-    if (FAILED(hResult))
+	//プレイヤー
+    if (FAILED(Player.Initialize()))
     {
-        MessageBoxW(nullptr, L"ゲーム画面の初期化に失敗しました", FILE_PATH, MB_OK);
-        Graphic = nullptr;
-        return hResult;
+        return E_FAIL;
     }
 
-    //---頂点バッファの生成---//
-    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, 0, FVF_VERTEX_2D, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
-
-    if (FAILED(hResult))
+	//マウスカーソル
+    if (FAILED(Operation.Initialize()))
     {
-        return hResult;
+        return E_FAIL;
     }
 
-    //---頂点バッファへの値の設定---//
-    //バッファのポインタを取得
-    VertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
-
-    //値の設定
-    for (nCounter = 0; nCounter < 4; nCounter++)
+    //カメラ
+    if (FAILED(Camera.Initialize()))
     {
-        pVertex[nCounter].U = (float)(nCounter & 1);
-        pVertex[nCounter].V = (float)((nCounter >> 1) & 1);
-        pVertex[nCounter].Position.x = pVertex[nCounter].U * SCREEN_WIDTH;
-        pVertex[nCounter].Position.y = pVertex[nCounter].V * SCREEN_HEIGHT;
-        pVertex[nCounter].Position.z = 0.0F;
-        pVertex[nCounter].RHW = 1.0F;
-        pVertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        return E_FAIL;
     }
 
-    //バッファのポインタの解放
-    VertexBuffer->Unlock();
+    //リフト
+    if (FAILED(Lift.Initialize({ 600.0F, 300.0F }, { 150.0F, 30.0F })))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
 
-    return hResult;
+    return S_OK;
 }
 
 /////////////////////////////////////////////
@@ -107,18 +85,12 @@ HRESULT GAME::Initialize(void)
 /////////////////////////////////////////////
 void GAME::Uninitialize(void)
 {
-    //---解放---//
-    if (VertexBuffer)
-    {
-        VertexBuffer->Release();
-        VertexBuffer = nullptr;
-    }
-
-    if (Graphic)
-    {
-        Graphic->Release();
-        Graphic = nullptr;
-    }
+    //---各種解放---//
+    Back.Uninitialize();
+    Camera.Uninitialize();
+    Lift.Uninitialize();
+	Operation.Uninitialize();
+	Player.Uninitialize();
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
@@ -135,8 +107,17 @@ void GAME::Uninitialize(void)
 /////////////////////////////////////////////
 void GAME::Update(void)
 {
+	//---オブジェクトの更新---//
+    Back.Update();      //背景
+    Camera.Update();
+    Lift.Update();
+	Operation.Update(); //マウスカーソル
+	Player.Update();	//プレイヤー
+
+    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), 55.0F));
+
     //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
     {
         SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
     }

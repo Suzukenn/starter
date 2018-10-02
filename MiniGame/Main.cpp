@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Main.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FPS 1000 / 60
@@ -25,11 +25,11 @@ void DrawFPS(void);
 #endif
 
 //＝＝＝グローバル変数＝＝＝//
-LPDIRECT3D9 g_pD3D;			  //Direct3D オブジェクト
+LPDIRECT3D9 g_pD3D;			    //Direct3D オブジェクト
 LPDIRECT3DDEVICE9 g_pD3DDevice; //Deviceオブジェクト(描画に必要)
-
+HWND		g_hWnd;
 #ifdef _DEBUG
-int	g_nCountFPS;			        //FPSカウンタ
+int	g_nCountFPS;	    //FPSカウンタ
 LPD3DXFONT g_pD3DXFont;	//フォントへのポインタ
 #endif
 
@@ -45,7 +45,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DWORD dwFPSLastTime;
 	DWORD dwCurrentTime;
 	DWORD dwFrameCount;
-    HWND hWnd;
+//    HWND hWnd;
     MSG msg;
     
     //---初期化処理---//
@@ -67,20 +67,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	RegisterClassExW(&wcex);
 
 	//ウィンドウの作成
-    hWnd = CreateWindowExW(0, WINDOW_CLASS_NAME, WINDOW_CAPTION, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_BORDER | WS_MINIMIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, (int)(SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2), (int)(SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION)), nullptr, nullptr, hInstance, nullptr);
+    g_hWnd = CreateWindowExW(0, WINDOW_CLASS_NAME, WINDOW_CAPTION, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_BORDER | WS_MINIMIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, (int)(SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2), (int)(SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION)), nullptr, nullptr, hInstance, nullptr);
 
-    if (!hWnd)
+    if (!g_hWnd)
     {
         MessageBoxW(nullptr, L"ウィンドウの作成に失敗しました", L"初期化エラー", MB_OK);
         return -1;
     }
 
     //ウィンドウの表示
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
+    ShowWindow(g_hWnd, nCmdShow);
+    UpdateWindow(g_hWnd);
 
 	//データ初期化処理
-	if (FAILED(Initialize(hInstance, hWnd, TRUE)))
+	if (FAILED(Initialize(hInstance, g_hWnd, TRUE)))
 	{
         MessageBoxW(nullptr, L"データの初期化に失敗しました", L"初期化エラー", MB_OK);
 		return -1;
@@ -342,13 +342,13 @@ static HRESULT SetupEnvironment(HWND hWnd, BOOL bWindow)
     if (bWindow)
     {
         //ウィンドウモード
-        d3dpp.FullScreen_RefreshRateInHz = 0;								//リフレッシュレート
+        d3dpp.FullScreen_RefreshRateInHz = 0;						//リフレッシュレート
         d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;	//垂直同期信号に同期しない
     }
     else
     {
         //フルスクリーンモード
-        d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;			//リフレッシュレート
+        d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;		//リフレッシュレート
         d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;		//垂直同期信号に同期する
     }
 
@@ -424,18 +424,10 @@ void UnInitialize(void)
 #endif
 
     //デバイスの開放
-    if (g_pD3DDevice)
-    {
-        g_pD3DDevice->Release();
-        g_pD3DDevice = nullptr;
-    }
+    SAFE_RELEASE(g_pD3DDevice);
 
     //Direct3Dオブジェクトの開放
-    if (g_pD3D)
-    {
-        g_pD3D->Release();
-        g_pD3D = nullptr;
-    }
+    SAFE_RELEASE(g_pD3D);
 }
 
 /////////////////////////////////////////////
@@ -468,6 +460,20 @@ void Update(void)
 LPDIRECT3DDEVICE9 GetDevice(void)
 {
 	return g_pD3DDevice;
+}
+
+/////////////////////////////////////////////
+//関数名：GethWnd
+//
+//機能：hWndの取得
+//
+//引数：なし
+//
+//戻り値：(HWND)ハンドル
+/////////////////////////////////////////////
+HWND* GethWnd(void)
+{
+	return &g_hWnd;
 }
 
 #ifdef _DEBUG

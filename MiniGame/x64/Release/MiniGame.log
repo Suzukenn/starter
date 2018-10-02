@@ -1,15 +1,2 @@
-﻿  GameOver.cpp
-  GameScene.cpp
-  InputManager.cpp
-  Keyboard.cpp
-  Main.cpp
-  Mouse.cpp
-  SceneManager.cpp
-  Sound_Manager.cpp
-  Title.cpp
-  Wav_Controller.cpp
-  コード生成しています。
-  All 673 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  コード生成が終了しました。
-  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\MiniGame\x64\Release\MiniGame.exe
-  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\MiniGame\x64\Release\MiniGame.pdb (Full PDB)
+﻿  MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Release\MiniGame.exe
+  MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Release\MiniGame.pdb (Full PDB)

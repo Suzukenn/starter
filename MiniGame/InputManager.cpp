@@ -107,15 +107,15 @@ bool INPUT_MANAGER::GetKey(DWORD button, PUSH_TYPE type)
 }
 
 /////////////////////////////////////////////
-//関数名：GetButton
+//関数名：GetMouseButton
 //
 //機能：マウスボタン入力判定
 //
-//引数：(DWORD)入力ボタン,(PUSH_TYPE)判定タイプ
+//引数：(MOUSE_BUTTON)入力ボタン,(PUSH_TYPE)判定タイプ
 //
 //戻り値：(bool)判定結果
 /////////////////////////////////////////////
-bool INPUT_MANAGER::GetButton(DWORD button, PUSH_TYPE type)
+bool INPUT_MANAGER::GetMouseButton(MOUSE_BUTTON button, PUSH_TYPE type)
 {
     switch (type)
     {

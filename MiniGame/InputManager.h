@@ -30,8 +30,8 @@ class INPUT_MANAGER
         static void Uninitialize(void);
         static void Update(void);
 
-        static bool GetButton(DWORD, PUSH_TYPE);
         static bool GetKey(DWORD, PUSH_TYPE);
+        static bool GetMouseButton(MOUSE_BUTTON, PUSH_TYPE);
 };
 
 #endif
