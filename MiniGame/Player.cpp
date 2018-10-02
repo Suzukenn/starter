@@ -65,7 +65,7 @@ HRESULT PLAYER::Initialize(void)
 	hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
 	if (FAILED(hResult))
 	{
-		MessageBoxW(nullptr, L"ゲーム画面の初期化に失敗しました", FILE_PATH, MB_OK);
+		MessageBoxW(nullptr, L"プレイヤーの初期化に失敗しました", FILE_PATH, MB_OK);
 		Graphic = nullptr;
 		return hResult;
 	}

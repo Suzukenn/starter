@@ -4,9 +4,6 @@
 #include "SceneManager.h"
 #include "Sound_Manager.h"
 
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/BackGround.tga" //パス名
-
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
 //関数名：Draw
@@ -19,11 +16,10 @@
 /////////////////////////////////////////////
 void GAME::Draw(void)
 {
+    //---オブジェクトの描画---//
 	Back.Draw();
-	//プレイヤーの描画処理
-	Player.Draw();
-	//マウスカーソルの描画処理
-	Operation.Draw();
+	Player.Draw();	    //プレイヤー
+    Operation.Draw();	//マウスカーソル
 }
 
 /////////////////////////////////////////////
@@ -38,14 +34,22 @@ void GAME::Draw(void)
 HRESULT GAME::Initialize(void)
 {
 	//---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+    //背景
+	if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
 	{
 		return E_FAIL;
 	}
-	//プレイヤーの初期化
-	Player.Initialize();
-	//マウスカーソルの初期化
-	Operation.Initialize();
+	//プレイヤー
+    if (FAILED(Player.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+	//マウスカーソル
+    if (FAILED(Operation.Initialize()))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
@@ -65,9 +69,10 @@ HRESULT GAME::Initialize(void)
 void GAME::Uninitialize(void)
 {
     //---各種解放---//
+    Back.Uninitialize();
 	Operation.Uninitialize();
 	Player.Uninitialize();
-	Back.Uninitialize();
+
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
 }
@@ -84,11 +89,10 @@ void GAME::Uninitialize(void)
 void GAME::Update(void)
 {
 	//---オブジェクトの更新---//
-	//マウスカーソルの更新処理
-	Operation.Update();
-	//プレイヤーの更新処理
-	Player.Update();
-	Back.Update();
+    //背景
+    Back.Update();
+	Operation.Update(); 	//マウスカーソル
+	Player.Update();	//プレイヤー
 
     //---画面遷移---//
     if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))

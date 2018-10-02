@@ -4,9 +4,6 @@
 #include "SceneManager.h"
 #include "Sound_Manager.h"
 
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/GameOver.png" //パス名
-
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
 //関数名：Draw
@@ -34,7 +31,7 @@ void GAMEOVER::Draw(void)
 HRESULT GAMEOVER::Initialize(void)
 {
     //---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+	if (FAILED(Back.Initialize(L"Data/Game/GameOver.png")))
 	{
 		return E_FAIL;
 	}

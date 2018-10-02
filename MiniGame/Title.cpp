@@ -4,9 +4,6 @@
 #include "Sound_Manager.h"
 #include "Title.h"
 
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/Title.png" //パス名
-
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
 //関数名：Draw
@@ -34,7 +31,7 @@ void TITLE::Draw(void)
 HRESULT TITLE::Initialize(void)
 {
 	//---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+	if (FAILED(Back.Initialize(L"Data/Game/Title.png")))
 	{
 		return E_FAIL;
 	}
@@ -75,7 +72,11 @@ void TITLE::Uninitialize(void)
 void TITLE::Update(void)
 {
 	//---オブジェクトの更新---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER) || INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, TRIGGER))
+    //背景
+    Back.Update();
+
+    //---画面遷移---//
+    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
     {
         SCENE_MANAGER::SetScene(SCENE_GAME);
     }
