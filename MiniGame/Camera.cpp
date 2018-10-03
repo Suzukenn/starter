@@ -138,6 +138,7 @@ void CAMERA::Uninitialize(void)
     //---‰ð•ú---//
     SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////

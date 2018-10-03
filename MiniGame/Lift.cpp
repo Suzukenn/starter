@@ -68,7 +68,7 @@ HRESULT LIFT::Initialize(D3DXVECTOR2 position, D3DXVECTOR2 size)
 
     if (FAILED(hResult))
     {
-        MessageBoxW(nullptr, L"頂点バッファの生成にに失敗しました", FILE_PATH, MB_OK);
+        MessageBoxW(nullptr, L"頂点バッファの生成に失敗しました", FILE_PATH, MB_OK);
         Uninitialize();
         return hResult;
     }
@@ -108,7 +108,8 @@ void LIFT::Uninitialize(void)
 {
     //---解放---//
     SAFE_RELEASE(VertexBuffer);
-    SAFE_RELEASE(Graphic)
+    SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////

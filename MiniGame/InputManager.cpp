@@ -9,7 +9,7 @@ MOUSE INPUT_MANAGER::Mouse;
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
-//関数名：Create
+//関数名：Initialize
 //
 //機能：デバイスの初期化
 //
@@ -27,6 +27,7 @@ HRESULT INPUT_MANAGER::Initialize(HWND hWnd)
     if (FAILED(hResult))
     {
         MessageBoxW(hWnd, L"DirectInputオブジェクト生成に失敗しました。", L"ERROR", MB_ICONSTOP | MB_OK);
+        Uninitialize();
         return hResult;
     }
 
@@ -50,7 +51,7 @@ HRESULT INPUT_MANAGER::Initialize(HWND hWnd)
 }
 
 //////////////////////////////////2///////////
-//関数名：End
+//関数名：Uninitialize
 //
 //機能：デバイスの終了
 //
@@ -62,6 +63,7 @@ void INPUT_MANAGER::Uninitialize(void)
 {
 	Keyboard.Uninitialize();
     Mouse.Uninitialize();
+    SAFE_RELEASE(Manager);
 }
 
 /////////////////////////////////////////////

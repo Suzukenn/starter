@@ -3,10 +3,7 @@
 //
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "GameScene.h"
 #include "InputManager.h"
-#include "SceneManager.h"
-#include "SoundManager.h"
 #include "Operation.h"
 
 //======定数・マクロ定義=====
@@ -132,7 +129,8 @@ void OPERATION::Uninitialize(void)
 {
 	//---解放---//
     SAFE_RELEASE(VertexBuffer);
-    SAFE_RELEASE(Graphic)
+    SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////
