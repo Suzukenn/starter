@@ -1,6 +1,6 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 #include "InputManager.h"
 #include "Main.h"
 #include "SceneManager.h"
@@ -8,14 +8,14 @@
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FPS 1000 / 60
-#define WINDOW_CAPTION L"スケータガール RESTART"	//ウインドウのキャプション名
-#define WINDOW_CLASS_NAME L"SkaterGirl"			    //ウインドウのクラス名
+#define WINDOW_CAPTION L"スパイの僕に対する当たり判定を作るのはずいぶん難しいらしい"	//ウインドウのキャプション名
+#define WINDOW_CLASS_NAME L"MiniGame"			    //ウインドウのクラス名
 
 //＝＝＝プロトタイプ宣言＝＝＝//
 void Draw(void);
-HRESULT Initialize(HINSTANCE, HWND , BOOL);
+HRESULT Initialize(HINSTANCE, HWND);
 static void OnCreate(HWND, LPCREATESTRUCT);
-static HRESULT SetupEnvironment(HWND, BOOL);
+static HRESULT SetupEnvironment(HWND);
 void UnInitialize(void);
 void Update(void);
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
@@ -27,7 +27,7 @@ void DrawFPS(void);
 //＝＝＝グローバル変数＝＝＝//
 LPDIRECT3D9 g_pD3D;			    //Direct3D オブジェクト
 LPDIRECT3DDEVICE9 g_pD3DDevice; //Deviceオブジェクト(描画に必要)
-HWND		g_hWnd;
+HWND g_hWnd;
 #ifdef _DEBUG
 int	g_nCountFPS;	    //FPSカウンタ
 LPD3DXFONT g_pD3DXFont;	//フォントへのポインタ
@@ -45,15 +45,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DWORD dwFPSLastTime;
 	DWORD dwCurrentTime;
 	DWORD dwFrameCount;
-//    HWND hWnd;
     MSG msg;
     
+    const WNDCLASSEXW wcex = { sizeof(WNDCLASSEXW), CS_CLASSDC, WindowProc, 0, 0, hInstance, nullptr, LoadCursorW(nullptr, IDC_ARROW), (HBRUSH)(COLOR_WINDOW + 1), nullptr, WINDOW_CLASS_NAME, nullptr };
+
     //---初期化処理---//
     //乱数シード値の初期化
     srand((unsigned int)time(NULL));
-
-    //ウィンドウクラスの初期化
-	const WNDCLASSEXW wcex = {sizeof(WNDCLASSEXW), CS_CLASSDC, WindowProc, 0, 0, hInstance, nullptr, LoadCursorW(nullptr, IDC_ARROW), (HBRUSH)(COLOR_WINDOW + 1), nullptr, WINDOW_CLASS_NAME, nullptr };
 
     //---ウィンドウ準備---//
     //COMライブラリの初期化
@@ -80,7 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     UpdateWindow(g_hWnd);
 
 	//データ初期化処理
-	if (FAILED(Initialize(hInstance, g_hWnd, TRUE)))
+	if (FAILED(Initialize(hInstance, g_hWnd)))
 	{
         MessageBoxW(nullptr, L"データの初期化に失敗しました", L"初期化エラー", MB_OK);
 		return -1;
@@ -231,44 +229,37 @@ void Draw(void)
 //
 //機能：初期化の統合関数
 //
-//引数：(HINSTANCE)インスタンス,(HWND)ハンドル,(BOOL)表示方法
+//引数：(HINSTANCE)インスタンス,(HWND)ハンドル
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT Initialize(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
+HRESULT Initialize(HINSTANCE hInstance, HWND hWnd)
 {
-    //---各種宣言---//
-    HRESULT hResult;
-
     //---環境設定---//
-    hResult = SetupEnvironment(hWnd, bWindow);
+    if (FAILED(SetupEnvironment(hWnd)))
+    {
+        return E_FAIL;
+    }
 
     //---入力初期化---//
-    if (SUCCEEDED(hResult))
+    if (FAILED(INPUT_MANAGER::Initialize(hWnd)))
     {
-        hResult = INPUT_MANAGER::Initialize(hWnd);
+        return E_FAIL;
     }
 
     //---サウンド初期化---//
-    if (SUCCEEDED(hResult))
+    if (FAILED(SOUND_MANAGER::Initialize()))
     {
-        hResult = SOUND_MANAGER::Initialize();
+        return E_FAIL;
     }
 
     //---シーン初期化---//
-    if (SUCCEEDED(hResult))
+    if (FAILED(SCENE_MANAGER::Initialize()))
     {
-        hResult = SCENE_MANAGER::Initialize();
+        return E_FAIL;
     }
 
-    if (SUCCEEDED(hResult))
-    {
-        return S_OK;
-    }
-    else
-    {
-        return S_FALSE;
-    }
+    return S_FALSE;
 }
 
 /////////////////////////////////////////////
@@ -305,11 +296,11 @@ static void OnCreate(HWND hWnd, LPCREATESTRUCT lpcs)
 //
 //機能：環境設定
 //
-//引数：(HWND)ハンドル,(BOOL)表示方法
+//引数：(HWND)ハンドル
 //
 //戻り値：なし
 /////////////////////////////////////////////
-static HRESULT SetupEnvironment(HWND hWnd, BOOL bWindow)
+static HRESULT SetupEnvironment(HWND hWnd)
 {
     //---各種宣言---//
     D3DDISPLAYMODE d3ddm;
@@ -335,22 +326,13 @@ static HRESULT SetupEnvironment(HWND hWnd, BOOL bWindow)
     d3dpp.BackBufferHeight = (UINT)SCREEN_HEIGHT;			//ゲーム画面サイズ(高さ)
     d3dpp.BackBufferFormat = d3ddm.Format;				    //バックバッファフォーマットはディスプレイモードに合わせて設定
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;	            //映像信号に同期してフリップする
-    d3dpp.Windowed = bWindow;					            //ウィンドウモード
+    d3dpp.Windowed = TRUE;  					            //ウィンドウモード
     d3dpp.EnableAutoDepthStencil = TRUE;				    //デプスバッファ（Ｚバッファ）とステンシルバッファを作成
     d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;		    //デプスバッファとして24bit、ステンシルバッファとして8bitを使う
 
-    if (bWindow)
-    {
-        //ウィンドウモード
-        d3dpp.FullScreen_RefreshRateInHz = 0;						//リフレッシュレート
-        d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;	//垂直同期信号に同期しない
-    }
-    else
-    {
-        //フルスクリーンモード
-        d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;		//リフレッシュレート
-        d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;		//垂直同期信号に同期する
-    }
+    //---ウィンドウモード---//
+    d3dpp.FullScreen_RefreshRateInHz = 0;						//リフレッシュレート
+    d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;	//垂直同期信号に同期しない
 
     //---デバイスオブジェクトの生成---//
     //[デバイス作成制御]<描画>と<頂点処理>をハードウェアで行なう
@@ -415,18 +397,14 @@ void UnInitialize(void)
     SOUND_MANAGER::Uninitialize();
 
 #ifdef _DEBUG
-    //情報表示用フォントの開放
-    if (g_pD3DXFont)
-    {
-        g_pD3DXFont->Release();
-        g_pD3DXFont = nullptr;
-    }
+    //情報表示用フォントの解放
+    SAFE_RELEASE(g_pD3DXFont);
 #endif
 
-    //デバイスの開放
+    //デバイスの解放
     SAFE_RELEASE(g_pD3DDevice);
 
-    //Direct3Dオブジェクトの開放
+    //Direct3Dオブジェクトの解放
     SAFE_RELEASE(g_pD3D);
 }
 

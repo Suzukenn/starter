@@ -3,10 +3,7 @@
 //
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "GameScene.h"
 #include "InputManager.h"
-#include "SceneManager.h"
-#include "SoundManager.h"
 #include "Player.h"
 
 //======定数・マクロ定義=====
@@ -26,7 +23,7 @@
 PLAYER::PLAYER()
 {
 	//動的確保
-	Operation = new OPERATION();
+    Operation = new OPERATION();
 	//位置設定
 	Pos.x = SCREEN_CENTER_X;
 	Pos.y = SCREEN_CENTER_Y;
@@ -37,10 +34,8 @@ PLAYER::PLAYER()
 PLAYER::~PLAYER()
 {
 	//解放
-	if (Operation)
-	{
-		delete Operation;
-	}
+	delete Operation;
+    Operation = nullptr;
 }
 
 //＝＝＝関数定義＝＝＝//
@@ -93,7 +88,7 @@ HRESULT PLAYER::Initialize(void)
 	hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
 	if (FAILED(hResult))
 	{
-		MessageBoxW(nullptr, L"プレイヤーの初期化に失敗しました", FILE_PATH, MB_OK);
+		MessageBoxW(nullptr, L"プレイヤーのテクスチャを読み込めませんでした", FILE_PATH, MB_OK);
 		Graphic = nullptr;
 		return hResult;
 	}
@@ -103,6 +98,7 @@ HRESULT PLAYER::Initialize(void)
 
 	if (FAILED(hResult))
 	{
+        MessageBoxW(nullptr, L"頂点バッファの生成に失敗しました", L"初期化エラー", MB_OK);
 		return hResult;
 	}
 
@@ -139,9 +135,12 @@ HRESULT PLAYER::Initialize(void)
 /////////////////////////////////////////////
 void PLAYER::Uninitialize(void)
 {
+    Operation->Uninitialize();
+
 	//---解放---//
     SAFE_RELEASE(VertexBuffer);
-    SAFE_RELEASE(Graphic)
+    SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////

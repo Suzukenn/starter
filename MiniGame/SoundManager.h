@@ -2,7 +2,6 @@
 #define _SOUND_MANAGER_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include <vector>
 #include <xaudio2.h>
 #include "Main.h"
 #include "Sound_Parameter.h"

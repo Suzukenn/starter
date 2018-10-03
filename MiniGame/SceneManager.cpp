@@ -1,6 +1,7 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "GameOver.h"
 #include "GameScene.h"
+#include "Main.h"
 #include "SceneManager.h"
 #include "Title.h"
 
@@ -36,6 +37,8 @@ void SCENE_MANAGER::Draw(void)
 void SCENE_MANAGER::Uninitialize(void)
 {
     Scene->Uninitialize();
+    delete Scene;
+    Scene = nullptr;
 }
 
 /////////////////////////////////////////////
@@ -49,21 +52,14 @@ void SCENE_MANAGER::Uninitialize(void)
 /////////////////////////////////////////////
 HRESULT SCENE_MANAGER::Initialize(void)
 {
-    //---各種宣言---//
-    HRESULT hResult;
-    
-    //---初期化処理---//
-    hResult = E_FAIL;
-
-    //---シーンの切り替え---//
-    hResult = Scene->Initialize();
-    if (FAILED(hResult))
+    //---シーンの初期化---//
+    if (FAILED(Scene->Initialize()))
     {
         MessageBoxW(nullptr, L"シーンの初期化に失敗しました失敗", L"初期化エラー", MB_OK);
-        return hResult;
+        return E_FAIL;
     }
 
-    return hResult;
+    return S_OK;
 }
 
 /////////////////////////////////////////////
@@ -81,7 +77,6 @@ void SCENE_MANAGER::Update(void)
     if (CurrentScene != NextScene)
     {
         Scene->Uninitialize();
-        delete Scene;
         switch (NextScene)
         {
             case SCENE_TITLE:

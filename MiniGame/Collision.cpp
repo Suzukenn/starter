@@ -179,6 +179,7 @@ void COLLISION::Uninitialize(void)
 {
     //---‰ð•ú---//
     SAFE_RELEASE(VertexBuffer);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////

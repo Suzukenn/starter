@@ -28,7 +28,6 @@ class OPERATION
 		void Update(void);
 		void Draw(void);
 		POINT* GetMousePos(void);
-
 };
 
 #endif

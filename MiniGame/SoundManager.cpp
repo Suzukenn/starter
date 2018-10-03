@@ -1,7 +1,5 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include <fstream>
-#include <iostream>
-#include <list>
 #include <string>
 #include "Main.h"
 #include "SoundManager.h"
