@@ -11,7 +11,7 @@
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：背景の描画
+//機能：背景とボタンの描画
 //
 //引数：なし
 //
@@ -20,12 +20,13 @@
 void TITLE::Draw(void)
 {
 	Back.Draw();
+	Start_B.Draw();
 }
 
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：背景の初期化
+//機能：背景とボタンの初期化
 //
 //引数：なし
 //
@@ -39,6 +40,9 @@ HRESULT TITLE::Initialize(void)
 		return E_FAIL;
 	}
 
+	//スタートボタンの初期化
+	Start_B.Initialize();
+
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_OPENING);
 
@@ -48,7 +52,7 @@ HRESULT TITLE::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：背景の終了
+//機能：背景とボタンの終了
 //
 //引数：なし
 //
@@ -57,6 +61,7 @@ HRESULT TITLE::Initialize(void)
 void TITLE::Uninitialize(void)
 {
     //---解放---//
+	Start_B.Uninitialize();
 	Back.Uninitialize();
 
     //---BGM停止---//
@@ -66,7 +71,7 @@ void TITLE::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：背景の更新
+//機能：背景とボタンの更新
 //
 //引数：なし
 //
@@ -75,8 +80,5 @@ void TITLE::Uninitialize(void)
 void TITLE::Update(void)
 {
 	//---オブジェクトの更新---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER) || INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, TRIGGER))
-    {
-        SCENE_MANAGER::SetScene(SCENE_GAME);
-    }
+	Start_B.Update();
 }

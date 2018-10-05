@@ -1,10 +1,26 @@
-﻿  GameOver.cpp
-  コードを生成中...
-  コンパイル中...
-  SceneManager.cpp
-  コードを生成中...
-  スキップ中... (関連する変更は検出されませんでした)
+﻿  Wav_Controller.cpp
+  TitleButton.cpp
   Title.cpp
+  StartButton.cpp
+  Sound_Manager.cpp
+  SceneManager.cpp
+  RetryButton.cpp
+  Player.cpp
+c:\users\tsuyoshi\documents\github\starter\minigame\player.cpp(179): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\tsuyoshi\documents\github\starter\minigame\player.cpp(180): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Operation.cpp
+c:\users\tsuyoshi\documents\github\starter\minigame\operation.cpp(20): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
+c:\users\tsuyoshi\documents\github\starter\minigame\operation.cpp(21): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
+c:\users\tsuyoshi\documents\github\starter\minigame\operation.cpp(158): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
+c:\users\tsuyoshi\documents\github\starter\minigame\operation.cpp(159): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
+  Mouse.cpp
+  Main.cpp
+  Keyboard.cpp
+  InputManager.cpp
   GameScene.cpp
-  MiniGame.vcxproj -> C:\Users\delta\OneDrive\ドキュメント\GitHub\starter\x64\Debug\MiniGame.exe
-  MiniGame.vcxproj -> C:\Users\delta\OneDrive\ドキュメント\GitHub\starter\x64\Debug\MiniGame.pdb (Partial PDB)
+  GameOver.cpp
+  BackGround.cpp
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.exe
+  MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.pdb (Partial PDB)

@@ -137,10 +137,13 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RetryButton.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sound_Manager.h" />
     <ClInclude Include="Sound_Parameter.h" />
+    <ClInclude Include="StartButton.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleButton.h" />
     <ClInclude Include="Wav_Controller.h" />
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +156,12 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RetryButton.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
+    <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleButton.cpp" />
     <ClCompile Include="Wav_Controller.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

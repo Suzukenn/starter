@@ -12,13 +12,6 @@
 //======定数・マクロ定義=====
 // パス名
 #define FILE_PATH	L"Data/Game/hand.png"
-//プレイヤーサイズ
-#define OPERATION_WIDTH	(30)	//幅
-#define OPERATION_HEIGHT	(30)	//高さ
-//#define OPERATION_HITBOX_WIDTH		(50)
-//#define OPERATION_HITBOX_HEIGHT	(64)
-//円判定用
-#define OPERATION_RADIUS	(30)
 
 //=====コンストラクタ=====
 OPERATION::OPERATION()
@@ -37,7 +30,7 @@ OPERATION::~OPERATION()
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：プレイヤーの初期化
+//機能：マウスカーソルの初期化
 //
 //引数：なし
 //
@@ -95,7 +88,7 @@ HRESULT OPERATION::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：プレイヤーの終了
+//機能：マウスカーソルの終了
 //
 //引数：なし
 //
@@ -121,7 +114,7 @@ void OPERATION::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：プレイヤーの描画
+//機能：マウスカーソルの描画
 //
 //引数：なし
 //
@@ -147,7 +140,7 @@ void OPERATION::Draw(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：プレイヤーの更新
+//機能：マウスカーソルの更新
 //
 //引数：なし
 //

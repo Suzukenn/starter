@@ -9,6 +9,16 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "Main.h"
 
+//＝＝＝定数・マクロ定義＝＝＝//
+//マウスカーソルサイズ
+#define OPERATION_WIDTH			(30)	//幅
+#define OPERATION_HEIGHT		(30)	//高さ
+//四角判定用
+#define OPERATION_HIT_WIDTH		(5)		//幅
+#define OPERATION_HIT_HEIGHT	(5)		//高さ
+//円判定用
+#define OPERATION_RADIUS	(30)
+
 //＝＝＝クラス宣言＝＝＝//
 class OPERATION
 {
