@@ -18,7 +18,7 @@ class CAMERA
         COLLISION Collision;
 
     public:
-        bool CheckPlayer(D3DXVECTOR2, float);
+        bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);
         HRESULT Initialize(void);

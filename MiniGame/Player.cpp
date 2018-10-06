@@ -12,8 +12,6 @@
 //プレイヤーサイズ
 #define PLAYER_WIDTH	(64)	//幅
 #define PLAYER_HEIGHT	(64)	//高さ
-#define PLAYER_HITBOX_WIDTH		(50)
-#define PLAYER_HITBOX_HEIGHT	(64)
 //円判定用
 #define PLAYER_RADIUS	(30)
 //重力
@@ -27,6 +25,8 @@ PLAYER::PLAYER()
 	//位置設定
 	Pos.x = SCREEN_CENTER_X;
 	Pos.y = SCREEN_CENTER_Y;
+    Size.x = 50.0F;
+    Size.y = 50.0F;
     Hit = false;
 }
 

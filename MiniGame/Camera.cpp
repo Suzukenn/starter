@@ -16,9 +16,9 @@
 //
 //戻り値：なし
 /////////////////////////////////////////////
-bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, float radius)
+bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 {
-    return Collision.CheckPlayer(player_pos, radius);
+    return Collision.CheckPlayer(player_pos, size);
 }
 
 /////////////////////////////////////////////
@@ -38,14 +38,15 @@ void CAMERA::Draw(void)
     //---初期化処理---//
     pDevice = GetDevice();
 
+    //---当たり判定の描画---//
+    Collision.Draw();
+
     //---書式設定---//
     pDevice->SetFVF(FVF_VERTEX);       //フォーマット設定
     pDevice->SetTexture(0, Graphic);   //テクスチャ設定
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
-
-    Collision.Draw();
 }
 
 /////////////////////////////////////////////
@@ -66,7 +67,7 @@ HRESULT CAMERA::Initialize(void)
 
     //---初期化処理---//
     pDevice = GetDevice();
-    Position = { SCREEN_CENTER_X, 10.0F };
+    Position = { SCREEN_CENTER_X, 50.0F };
     Center = { SIZE / 2, SIZE / 2 };
     Angle = 45.0F;
 
@@ -171,5 +172,6 @@ void CAMERA::Update(void)
         Vertex[nCounter].Position.y = (Position.y + (fDx * fSin + fDy * fCosine)) + SIZE / 2;
     }
 
+    Collision.SetData(Position + Center, Angle);
     Collision.Update();
 }

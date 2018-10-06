@@ -9,15 +9,18 @@ class COLLISION
 {
     private:
         D3DXVECTOR2 Position[3];
+        float Angle;
         LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
         VERTEX* Vertex;
 
     public:
-        bool CheckPlayer(D3DXVECTOR2, float);
+        bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);
         HRESULT Initialize(D3DXVECTOR2);
         void Update(void);
+
+        void SetData(D3DXVECTOR2 position, float rad) { Position[0] = position; Angle = rad; }
 };
 
 #endif
