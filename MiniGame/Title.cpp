@@ -78,6 +78,6 @@ void TITLE::Update(void)
     //---‰æ–Ê‘JˆÚ---//
     if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
     {
-        SCENE_MANAGER::SetScene(SCENE_GAME);
+        SCENE_MANAGER::SetScene(SCENE_SELECT);
     }
 }

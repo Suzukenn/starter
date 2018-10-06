@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "Main.h"
 #include "SceneManager.h"
+#include "SelectScene.h"
 #include "Title.h"
 
 //＝＝＝グローバル変数＝＝＝//
@@ -76,11 +77,15 @@ void SCENE_MANAGER::Update(void)
     //---シーン切り替え---//
     if (CurrentScene != NextScene)
     {
-        Scene->Uninitialize();
+        Uninitialize();
         switch (NextScene)
         {
             case SCENE_TITLE:
                 Scene = new TITLE();
+                break;
+
+            case SCENE_SELECT:
+                Scene = new SELECTSCENE();
                 break;
 
             case SCENE_GAME:

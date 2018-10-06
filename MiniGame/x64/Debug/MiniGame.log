@@ -1,5 +1,14 @@
-﻿  SceneManager.cpp
-  Main.cpp
+﻿  SoundManager.cpp
+  SelectScene.cpp
   コードを生成中...
+  コンパイル中...
+  Title.cpp
+  Main.cpp
+  GameScene.cpp
+  GameOver.cpp
+  コードを生成中...
+  スキップ中... (関連する変更は検出されませんでした)
+  Player.cpp
+  Operation.cpp
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)

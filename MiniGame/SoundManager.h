@@ -10,9 +10,10 @@
 //＝＝＝列挙型定義＝＝＝//
 typedef enum
 { 
-    BGM_GAME,       //オープニング
+    BGM_GAME,       //ゲームBGM
     BGM_GAMEOVER,	//ゲームBGM
     BGM_OPENING, 	//オープニング
+    BGM_SELECT,     //セレクト画面
     SE_BREAK,       //撃破
     SE_DAMAGE,	   	//被弾
     SE_DECISION,	//決定

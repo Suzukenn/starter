@@ -88,6 +88,9 @@
     <ClInclude Include="BaseScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
