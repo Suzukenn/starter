@@ -12,8 +12,6 @@
 //プレイヤーサイズ
 #define PLAYER_WIDTH	(64)	//幅
 #define PLAYER_HEIGHT	(64)	//高さ
-#define PLAYER_HITBOX_WIDTH		(50)
-#define PLAYER_HITBOX_HEIGHT	(64)
 //円判定用
 #define PLAYER_RADIUS	(30)
 //重力
@@ -27,6 +25,8 @@ PLAYER::PLAYER()
 	//位置設定
 	Pos.x = SCREEN_CENTER_X;
 	Pos.y = SCREEN_CENTER_Y;
+    Size.x = 50.0F;
+    Size.y = 50.0F;
     Hit = false;
 }
 
@@ -57,11 +57,11 @@ void PLAYER::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    //pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
     pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+    pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 
-                                                                     // 頂点配列によるポリゴン描画
+    // 頂点配列によるポリゴン描画                                                               
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 

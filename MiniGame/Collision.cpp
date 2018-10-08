@@ -1,11 +1,59 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "Collision.h"
-#include "GameScene.h"
 #include "Main.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
+#define VIEW_ANGLE 15.0F
 
 //＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：CheckDeadAngle
+//
+//機能：プレイヤーの死角内判定
+//
+//引数：なし
+//
+//戻り値：(bool)判定結果
+/////////////////////////////////////////////
+bool COLLISION::CheckInst(D3DXVECTOR2 lift_left, D3DXVECTOR2 lift_right, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
+{
+    ////---各種宣言---//
+    //float Crs_v_v1;
+    //float Crs_v_v2;
+    //float Crs_v1_v2;
+    //float t1;
+    //float t2;
+    //D3DXVECTOR2 v;
+
+    //const float eps = 0.00001F;
+
+    //v = Position[0] - lift_left;
+    //Crs_v1_v2 = Position[1].x * lift_right.y - Position[1].y * lift_right.x;
+
+    //// 平行状態
+    //if (!Crs_v1_v2)
+    //{
+    //    return false;
+    //}
+
+    //Crs_v_v1 = v.x * lift_left.y - v.y * lift_left.x;
+    //Crs_v_v2 = v.x * lift_right.y - v.y * lift_right.x;
+
+    //t1 = Crs_v_v2 / Crs_v1_v2;
+    //t2 = Crs_v_v1 / Crs_v1_v2;
+
+    //// 交差していない
+    //if (t1 + eps < 0 || t1 - eps > 1 || t2 + eps < 0 || t2 - eps > 1) 
+    //{
+    //    return false;
+    //}
+
+    //if (outPos)
+    //    *outPos = seg1.s + seg1.v * t1;
+
+    return true;
+}
+
 /////////////////////////////////////////////
 //関数名：CheckPlayer
 //
@@ -15,76 +63,59 @@
 //
 //戻り値：なし
 /////////////////////////////////////////////
-bool COLLISION::CheckPlayer(D3DXVECTOR2 player_pos, float radius)
+bool COLLISION::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 {
     //---各種宣言---//
     int nCounter;
-    float fDotAA;
-    float fDotAV;
-    float fS;
-    float fSq;
-    D3DXVECTOR2 vRayVector;
-    D3DXVECTOR2 vOrigin;
-    float Angle = 0.0F;
-    const D3DXVECTOR2 vCameraVector[4] = { {1.0F, 1.0F}, {-1.0F,-1.0F}, {-1.0F, -1.0F}, {1.0F, -1.0F} };
+    double dCorner1;
+    double dCorner2;
+    double dCorner3;
+    D3DXVECTOR2 vecAB;
+    D3DXVECTOR2 vecBC;
+    D3DXVECTOR2 vecCA;
+    D3DXVECTOR2 vecAP;
+    D3DXVECTOR2 vecBP;
+    D3DXVECTOR2 vecCP;
+
+    D3DXVECTOR2 vecPlayerVertex[4];
 
     //---初期化処理---//
-    nCounter = 0;
-    vOrigin = { SCREEN_CENTER_X, 10.0F };
-    vRayVector = { Angle, SCREEN_HEIGHT };
-    vRayVector.x *= vCameraVector[(int)(Angle / 90.0F)].x;
-    vRayVector.y *= vCameraVector[(int)(Angle / 90.0F)].y;
+    vecPlayerVertex[0] = player_pos; 
+    vecPlayerVertex[1] = { player_pos.x + size.x, player_pos.y };
+    vecPlayerVertex[2] = player_pos + size; 
+    vecPlayerVertex[3] = { player_pos.x, player_pos.y + size.y };
 
-    //半径がマイナスはエラー（半径ゼロは許容）
-    if (radius < 0.0F)
+    //---判定---//
+    for (nCounter = 0; nCounter < 4; nCounter++)
     {
-        return false;
+        //方向ベクトル計算
+        vecAB = Position[0] - Position[1];
+        vecBP = vecPlayerVertex[nCounter] - Position[0];
+
+        vecBC = Position[1] - Position[2];
+        vecCP = vecPlayerVertex[nCounter] - Position[1];
+
+        vecCA = Position[2] - Position[0];
+        vecAP = vecPlayerVertex[nCounter] - Position[2];
+
+
+        //外積の計算
+        dCorner1 = vecAB.x * vecBP.y - vecAB.y * vecBP.x;
+        dCorner2 = vecBC.x * vecCP.y - vecBC.y * vecCP.x;
+        dCorner3 = vecCA.x * vecAP.y - vecCA.y * vecAP.x;
+
+        //判定
+        if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0))
+        {
+            //死角判定
+            if (!DeadAngle.CheckDeadAngle(player_pos, size))
+            {
+                return true;
+            }
+        }
     }
 
-    //円の中心点が原点になるように始点をオフセット
-    vOrigin -= player_pos;
-
-    for (nCounter = 0; nCounter < 3; nCounter++)
-    {
-        //レイの方向ベクトルを正規化
-        vRayVector /= sqrtf(vRayVector.x * vRayVector.x + vRayVector.y * vRayVector.y);
-
-        //係数tを算出
-        fDotAV = vOrigin.x * vRayVector.x + vOrigin.y * vRayVector.y;
-        fDotAA = vOrigin.x * vOrigin.x + vOrigin.y * vOrigin.y;
-        fS = fDotAV * fDotAV - fDotAA + radius * radius;
-
-        //誤差修正
-        if (fabsf(fS) < 0.000001F)
-        {
-            fS = 0.0F;
-        }
-
-        //衝突していない
-        if (fS < 0.0F)
-        {
-            vRayVector = { Angle + 15.0F * (nCounter + 1), SCREEN_HEIGHT };
-            vRayVector *= *vCameraVector[(int)(Angle / 90.0F)];
-            continue;
-        }
-
-        fSq = sqrtf(fS);
-
-        //もしt1及びt2がマイナスだったら始点が円内にめり込んでいるのでエラーとする
-        if ((-fDotAV - fSq) < 0.0F || (-fDotAV + fSq) < 0.0F)
-        {
-            vRayVector = { Angle + 15.0F * (nCounter + 1), SCREEN_HEIGHT };
-            vRayVector *= *vCameraVector[(int)(Angle / 90.0F)];
-        }
-        else
-        {
-            return true;
-        }
-    }
     return false;
-
-    //const D3DXVECTOR2 poVertex[3] = { { player_pos.x, player_pos.y },{ player_pos.x + 50.0F, SCREEN_HEIGHT },{ player_pos.x - 50.0F, SCREEN_HEIGHT } };
-    //return false;
 }
 
 /////////////////////////////////////////////
@@ -110,12 +141,15 @@ void COLLISION::Draw(void)
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, Vertex, sizeof(VERTEX));
+
+    //---死角の描画---//
+    DeadAngle.Draw();
 }
 
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：カメラの初期化
+//機能：当たり判定の初期化
 //
 //引数：なし
 //
@@ -130,9 +164,6 @@ HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
 
     //---初期化処理---//
     pDevice = GetDevice();
-    Position[0] = { position.x, position.y };
-    Position[1] = { position.x + 50.0F, SCREEN_HEIGHT };
-    Position[2] = { position.x - 50.0F, SCREEN_HEIGHT };
 
     //---頂点バッファの生成---//
     hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX) * 3, 0, FVF_VERTEX, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
@@ -153,8 +184,8 @@ HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
     {
         Vertex[nCounter].U = (float)(nCounter & 1);
         Vertex[nCounter].V = (float)((nCounter >> 1) & 1);
-        Vertex[nCounter].Position.x = Position[nCounter].x;
-        Vertex[nCounter].Position.y = Position[nCounter].y;
+        Vertex[nCounter].Position.x = 0.0F;
+        Vertex[nCounter].Position.y = 0.0F;
         Vertex[nCounter].Position.z = 0.0F;
         Vertex[nCounter].RHW = 1.0F;
         Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
@@ -163,13 +194,15 @@ HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
     //バッファのポインタの解放
     VertexBuffer->Unlock();
 
+    DeadAngle.Initialize();
+
     return hResult;
 }
 
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：カメラの終了
+//機能：当たり判定の終了
 //
 //引数：なし
 //
@@ -185,7 +218,7 @@ void COLLISION::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：カメラの更新
+//機能：当たり判定の更新
 //
 //引数：なし
 //
@@ -193,5 +226,25 @@ void COLLISION::Uninitialize(void)
 /////////////////////////////////////////////
 void COLLISION::Update(void)
 {
+    //---各種宣言---//
+    int nCounter;
+    float fHeight;
+    float fWidth1;
+    float fWidth2;
 
+    //---初期化処理---//
+    fHeight = SCREEN_HEIGHT - Position[0].y;
+
+    //---頂点の算出---//
+    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F + VIEW_ANGLE)));
+    Position[1] = { Position[0].x + fWidth1, SCREEN_HEIGHT };
+
+    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F - VIEW_ANGLE)));
+    Position[2] = { Position[0].x + fWidth2, SCREEN_HEIGHT };
+
+    //---バッファに反映---//
+    for (nCounter = 0; nCounter < 3; nCounter++)
+    {
+        Vertex[nCounter].Position = { Position[nCounter].x, Position[nCounter].y, 0.0F };
+    }
 }
