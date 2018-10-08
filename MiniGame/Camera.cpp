@@ -8,13 +8,32 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
+//関数名：CheckDeadAngle
+//
+//機能：プレイヤーの死角内判定
+//
+//引数：なし
+//
+//戻り値：(bool)判定結果
+/////////////////////////////////////////////
+bool CAMERA::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 player_size, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
+{
+    //---各種宣言---//
+    bool bJudge;
+    D3DXVECTOR2 vecDifferential;
+
+    vecDifferential = lift_size - Position;
+    return false;
+}
+
+/////////////////////////////////////////////
 //関数名：CheckPlayer
 //
 //機能：プレイヤーの視野角内判定
 //
-//引数：なし
+//引数：(D3DXVECTOR2)プレイヤーの位置,(D3DXVECTOR2)プレイヤーの大きさ
 //
-//戻り値：なし
+//戻り値：(bool)判定結果
 /////////////////////////////////////////////
 bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 {
@@ -113,7 +132,7 @@ HRESULT CAMERA::Initialize(void)
     hResult = Collision.Initialize(Center);
     if (FAILED(hResult))
     {
-        MessageBoxW(nullptr, L"当たり判定の初期化に失敗しました", FILE_PATH, MB_OK);
+        MessageBoxW(nullptr, L"カメラの初期化に失敗しました", FILE_PATH, MB_OK);
         Uninitialize();
         return hResult;
     }

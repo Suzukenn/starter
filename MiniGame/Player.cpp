@@ -57,11 +57,11 @@ void PLAYER::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    //pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
     pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+    pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 
-                                                                     // 頂点配列によるポリゴン描画
+    // 頂点配列によるポリゴン描画                                                               
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 

@@ -9,17 +9,19 @@ class DEADANGLE
 {
     private:
         D3DXVECTOR2 Position[4];
+        D3DXVECTOR2 Size;
+        LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
         LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
         VERTEX* Vertex;
 
     public:
-        bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
+        bool CheckDeadAngle(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);
-        HRESULT Initialize(D3DXVECTOR2);
+        HRESULT Initialize(void);
         void Update(void);
 
-        void SetData(D3DXVECTOR2 position, float rad) { Position[0] = position; Angle = rad; }
+        void SetData(D3DXVECTOR2 position, D3DXVECTOR2 size) { Position[0] = position; Size = size; }
 };
 
 #endif

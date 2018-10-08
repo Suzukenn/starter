@@ -7,27 +7,30 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
-//関数名：CheckPlayer
+//関数名：CheckDeadAngle
 //
-//機能：プレイヤーの視野角内判定
+//機能：プレイヤーの死角内判定
 //
 //引数：なし
 //
 //戻り値：なし
 /////////////////////////////////////////////
-bool DEADANGLE::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
+bool DEADANGLE::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 {
     //---各種宣言---//
     int nCounter;
     double dCorner1;
     double dCorner2;
     double dCorner3;
+    double dCorner4;
     D3DXVECTOR2 vecAB;
     D3DXVECTOR2 vecBC;
-    D3DXVECTOR2 vecCA;
+    D3DXVECTOR2 vecCD;
+    D3DXVECTOR2 vecDA;
     D3DXVECTOR2 vecAP;
     D3DXVECTOR2 vecBP;
     D3DXVECTOR2 vecCP;
+    D3DXVECTOR2 vecDP;
 
     D3DXVECTOR2 vecPlayerVertex[4];
 
@@ -47,17 +50,20 @@ bool DEADANGLE::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
         vecBC = Position[1] - Position[2];
         vecCP = vecPlayerVertex[nCounter] - Position[1];
 
-        vecCA = Position[2] - Position[0];
-        vecAP = vecPlayerVertex[nCounter] - Position[2];
+        vecCD = Position[2] - Position[3];
+        vecDP = vecPlayerVertex[nCounter] - Position[2];
 
+        vecCD = Position[3] - Position[0];
+        vecAP = vecPlayerVertex[nCounter] - Position[3];
 
         //外積の計算
         dCorner1 = vecAB.x * vecBP.y - vecAB.y * vecBP.x;
         dCorner2 = vecBC.x * vecCP.y - vecBC.y * vecCP.x;
-        dCorner3 = vecCA.x * vecAP.y - vecCA.y * vecAP.x;
+        dCorner3 = vecCD.x * vecDP.y - vecCD.y * vecDP.x;
+        dCorner4 = vecDA.x * vecAP.y - vecDA.y * vecAP.x;
 
         //判定
-        if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0))
+        if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0 && dCorner4 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0 && dCorner4 < 0))
         {
             return true;
         }
@@ -69,7 +75,7 @@ bool DEADANGLE::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：当たり判定の描画
+//機能：死角の描画
 //
 //引数：なし
 //
@@ -85,22 +91,22 @@ void DEADANGLE::Draw(void)
 
     //---書式設定---//
     pDevice->SetFVF(FVF_VERTEX);       //フォーマット設定
-    pDevice->SetTexture(0, nullptr);   //テクスチャ設定
+    pDevice->SetTexture(0, Graphic);   //テクスチャ設定
 
     //---描画---//
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, Vertex, sizeof(VERTEX));
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：カメラの初期化
+//機能：死角の初期化
 //
 //引数：なし
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT DEADANGLE::Initialize(D3DXVECTOR2 position)
+HRESULT DEADANGLE::Initialize(void)
 {
     //---各種宣言---//
     int nCounter;
@@ -109,6 +115,15 @@ HRESULT DEADANGLE::Initialize(D3DXVECTOR2 position)
 
     //---初期化処理---//
     pDevice = GetDevice();
+
+    //---テクスチャの読み込み---//
+    hResult = D3DXCreateTextureFromFileW(pDevice, L"Data/Game/BackGround.tga", &Graphic);
+    if (FAILED(hResult))
+    {
+        MessageBoxW(nullptr, L"死角用背景の初期化に失敗しました", L"Data/Game/BackGround.tga", MB_OK);
+        Uninitialize();
+        return hResult;
+    }
 
     //---頂点バッファの生成---//
     hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX) * 4, 0, FVF_VERTEX, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
@@ -145,7 +160,7 @@ HRESULT DEADANGLE::Initialize(D3DXVECTOR2 position)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：カメラの終了
+//機能：死角の終了
 //
 //引数：なし
 //
@@ -154,6 +169,7 @@ HRESULT DEADANGLE::Initialize(D3DXVECTOR2 position)
 void DEADANGLE::Uninitialize(void)
 {
     //---解放---//
+    SAFE_RELEASE(Graphic);
     SAFE_RELEASE(VertexBuffer);
     Vertex = nullptr;
 }
@@ -161,7 +177,7 @@ void DEADANGLE::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：カメラの更新
+//機能：死角の更新
 //
 //引数：なし
 //
@@ -171,23 +187,25 @@ void DEADANGLE::Update(void)
 {
     //---各種宣言---//
     int nCounter;
-    float fHeight;
     float fWidth1;
     float fWidth2;
 
+    const short nRate[2] = { -1,1 };
+
     //---初期化処理---//
-    fHeight = SCREEN_HEIGHT - Position[0].y;
 
     //---頂点の算出---//
-    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F + VIEW_ANGLE)));
-    Position[1] = { Position[0].x + fWidth1, SCREEN_HEIGHT };
-
-    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F - VIEW_ANGLE)));
-    Position[2] = { Position[0].x + fWidth2, SCREEN_HEIGHT };
+    for (nCounter = 1; nCounter < 4; nCounter++)
+    {
+        Position[nCounter].x = Position[0].x + nRate[nCounter & 1] * Size.x;
+        Position[nCounter].y = Position[0].y + nRate[nCounter >> 1] * Size.y;
+    }
 
     //---バッファに反映---//
     for (nCounter = 0; nCounter < 3; nCounter++)
     {
         Vertex[nCounter].Position = { Position[nCounter].x, Position[nCounter].y, 0.0F };
+        Vertex[nCounter].U = SCREEN_WIDTH / Position[nCounter].x;
+        Vertex[nCounter].V = SCREEN_HEIGHT / Position[nCounter].y;
     }
 }

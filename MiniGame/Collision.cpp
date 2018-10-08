@@ -7,6 +7,54 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
+//関数名：CheckDeadAngle
+//
+//機能：プレイヤーの死角内判定
+//
+//引数：なし
+//
+//戻り値：(bool)判定結果
+/////////////////////////////////////////////
+bool COLLISION::CheckInst(D3DXVECTOR2 lift_left, D3DXVECTOR2 lift_right, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
+{
+    ////---各種宣言---//
+    //float Crs_v_v1;
+    //float Crs_v_v2;
+    //float Crs_v1_v2;
+    //float t1;
+    //float t2;
+    //D3DXVECTOR2 v;
+
+    //const float eps = 0.00001F;
+
+    //v = Position[0] - lift_left;
+    //Crs_v1_v2 = Position[1].x * lift_right.y - Position[1].y * lift_right.x;
+
+    //// 平行状態
+    //if (!Crs_v1_v2)
+    //{
+    //    return false;
+    //}
+
+    //Crs_v_v1 = v.x * lift_left.y - v.y * lift_left.x;
+    //Crs_v_v2 = v.x * lift_right.y - v.y * lift_right.x;
+
+    //t1 = Crs_v_v2 / Crs_v1_v2;
+    //t2 = Crs_v_v1 / Crs_v1_v2;
+
+    //// 交差していない
+    //if (t1 + eps < 0 || t1 - eps > 1 || t2 + eps < 0 || t2 - eps > 1) 
+    //{
+    //    return false;
+    //}
+
+    //if (outPos)
+    //    *outPos = seg1.s + seg1.v * t1;
+
+    return true;
+}
+
+/////////////////////////////////////////////
 //関数名：CheckPlayer
 //
 //機能：プレイヤーの視野角内判定
@@ -59,7 +107,11 @@ bool COLLISION::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
         //判定
         if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0))
         {
-            return true;
+            //死角判定
+            if (!DeadAngle.CheckDeadAngle(player_pos, size))
+            {
+                return true;
+            }
         }
     }
 
@@ -89,6 +141,9 @@ void COLLISION::Draw(void)
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, Vertex, sizeof(VERTEX));
+
+    //---死角の描画---//
+    DeadAngle.Draw();
 }
 
 /////////////////////////////////////////////
@@ -138,6 +193,8 @@ HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
 
     //バッファのポインタの解放
     VertexBuffer->Unlock();
+
+    DeadAngle.Initialize();
 
     return hResult;
 }

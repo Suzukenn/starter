@@ -17,7 +17,10 @@ class CAMERA
         VERTEX* Vertex;
         COLLISION Collision;
 
+        bool CheckInst();
+
     public:
+        bool CheckDeadAngle(D3DXVECTOR2, D3DXVECTOR2, D3DXVECTOR2, D3DXVECTOR2);
         bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);

@@ -1,5 +1,14 @@
 ﻿  Player.cpp
 d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(170): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
 d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(171): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+  DeadAngle.cpp
+d:\documents\hal課題\2年\gm\starter\minigame\deadangle.cpp(191): warning C4101: 'fWidth2': ローカル変数は 1 度も使われていません。
+d:\documents\hal課題\2年\gm\starter\minigame\deadangle.cpp(190): warning C4101: 'fWidth1': ローカル変数は 1 度も使われていません。
+  Collision.cpp
+  コードを生成中...
+  スキップ中... (関連する変更は検出されませんでした)
+  SceneManager.cpp
+  GameScene.cpp
+  Camera.cpp
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)
