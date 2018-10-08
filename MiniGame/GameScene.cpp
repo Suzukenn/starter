@@ -114,7 +114,7 @@ void GAME::Update(void)
 	Operation.Update(); //マウスカーソル
 	Player.Update();	//プレイヤー
 
-    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), 55.0F));
+    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
     if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))

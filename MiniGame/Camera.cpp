@@ -8,17 +8,36 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
+//関数名：CheckDeadAngle
+//
+//機能：プレイヤーの死角内判定
+//
+//引数：なし
+//
+//戻り値：(bool)判定結果
+/////////////////////////////////////////////
+bool CAMERA::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 player_size, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
+{
+    //---各種宣言---//
+    bool bJudge;
+    D3DXVECTOR2 vecDifferential;
+
+    vecDifferential = lift_size - Position;
+    return false;
+}
+
+/////////////////////////////////////////////
 //関数名：CheckPlayer
 //
 //機能：プレイヤーの視野角内判定
 //
-//引数：なし
+//引数：(D3DXVECTOR2)プレイヤーの位置,(D3DXVECTOR2)プレイヤーの大きさ
 //
-//戻り値：なし
+//戻り値：(bool)判定結果
 /////////////////////////////////////////////
-bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, float radius)
+bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 {
-    return Collision.CheckPlayer(player_pos, radius);
+    return Collision.CheckPlayer(player_pos, size);
 }
 
 /////////////////////////////////////////////
@@ -38,14 +57,15 @@ void CAMERA::Draw(void)
     //---初期化処理---//
     pDevice = GetDevice();
 
+    //---当たり判定の描画---//
+    Collision.Draw();
+
     //---書式設定---//
     pDevice->SetFVF(FVF_VERTEX);       //フォーマット設定
     pDevice->SetTexture(0, Graphic);   //テクスチャ設定
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
-
-    Collision.Draw();
 }
 
 /////////////////////////////////////////////
@@ -66,7 +86,7 @@ HRESULT CAMERA::Initialize(void)
 
     //---初期化処理---//
     pDevice = GetDevice();
-    Position = { SCREEN_CENTER_X, 10.0F };
+    Position = { SCREEN_CENTER_X, 50.0F };
     Center = { SIZE / 2, SIZE / 2 };
     Angle = 45.0F;
 
@@ -112,7 +132,7 @@ HRESULT CAMERA::Initialize(void)
     hResult = Collision.Initialize(Center);
     if (FAILED(hResult))
     {
-        MessageBoxW(nullptr, L"当たり判定の初期化に失敗しました", FILE_PATH, MB_OK);
+        MessageBoxW(nullptr, L"カメラの初期化に失敗しました", FILE_PATH, MB_OK);
         Uninitialize();
         return hResult;
     }
@@ -171,5 +191,6 @@ void CAMERA::Update(void)
         Vertex[nCounter].Position.y = (Position.y + (fDx * fSin + fDy * fCosine)) + SIZE / 2;
     }
 
+    Collision.SetData(Position + Center, Angle);
     Collision.Update();
 }

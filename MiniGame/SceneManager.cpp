@@ -77,12 +77,12 @@ void SCENE_MANAGER::Update(void)
     //---ƒV[ƒ“Ø‚è‘Ö‚¦---//
     if (CurrentScene != NextScene)
     {
-        Uninitialize();
+        Scene->Uninitialize();
         switch (NextScene)
         {
-            case SCENE_TITLE:
-                Scene = new TITLE();
-                break;
+        case SCENE_TITLE:
+            Scene = new TITLE();
+            break;
 
             case SCENE_SELECT:
                 Scene = new SELECTSCENE();

@@ -22,7 +22,8 @@ class LIFT
         void Update(void);
 
         D3DXVECTOR2 GetCenter(void) { return Center; }
-        float GetSize(void) { return (Size.x + Size.y) / 2; }
+        D3DXVECTOR2 GetPos(void) { return Position; }
+        D3DXVECTOR2 GetSize(void) { return Size; }
 };
 
 #endif

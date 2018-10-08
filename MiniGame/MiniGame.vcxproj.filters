@@ -88,6 +88,9 @@
     <ClInclude Include="BaseScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="DeadAngle.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
     <ClInclude Include="SelectScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadAngle.cpp">
+      <Filter>ソースコード\Object</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>ソースコード\Scene</Filter>
