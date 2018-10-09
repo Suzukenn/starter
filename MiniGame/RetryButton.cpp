@@ -21,6 +21,9 @@
 //円判定用
 #define RETRYBUTTON_RADIUS	(30)
 
+//=====グローバル宣言=====
+SCENE RETRYBUTTON::RetryScene;
+
 //=====コンストラクタ=====
 RETRYBUTTON::RETRYBUTTON()
 {
@@ -181,6 +184,20 @@ void RETRYBUTTON::Update(void)
 			<= MousePos->y + OPERATION_HIT_HEIGHT && MousePos->y - OPERATION_HIT_HEIGHT <= Pos.y + RETRYBUTTON_HIT_HEIGHT))
 	{
 		//ゲームシーン切替
-		SCENE_MANAGER::SetScene(SCENE_GAME);
+		SCENE_MANAGER::SetScene(RetryScene);
 	}
+}
+
+/////////////////////////////////////////////
+//関数名：SetRetryScene
+//
+//機能：リトライ先のシーンセット
+//
+//引数：(SCENE)リトライ先のシーン
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void RETRYBUTTON::SetRetryScene(SCENE Scene)
+{
+	RetryScene = Scene;
 }

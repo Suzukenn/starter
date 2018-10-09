@@ -14,7 +14,7 @@ class GAME final : public BASE_SCENE
     private:
 		BACKGROUND Back;
 		OPERATION Operation;
-		PLAYER Player;
+		PLAYER Player[MAX_PLAYER];
 
     public:
         virtual void Draw(void) final;

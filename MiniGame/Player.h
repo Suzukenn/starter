@@ -10,6 +10,15 @@
 #include "Main.h"
 #include "Operation.h"
 
+//=====マクロ定数定義=====
+#define MAX_PLAYER (2)
+
+//＝＝＝構造体定義＝＝＝//
+typedef struct _ANIM_PAT {
+	int Frame;		//パターンNo
+	int Count;		//フレーム数	
+} ANIM_PAT;
+
 //＝＝＝クラス宣言＝＝＝//
 class PLAYER
 {
@@ -20,6 +29,9 @@ class PLAYER
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
 		VERTEX* pVertex;
 		OPERATION* Operation;
+		int			Anim;						// モーションNo.0～7
+		int			AnimPat;					// パターンNo.0～2
+		int			AnimCnt;					// フレーム数0～15
 
 	public:
 		PLAYER();
@@ -30,6 +42,8 @@ class PLAYER
 		void Uninitialize(void);
 		void Update(void);
 		void Draw(void);
+
+		void SetPlayerAnimFrame(int);
 
 };
 

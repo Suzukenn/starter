@@ -1,11 +1,9 @@
-﻿  GameOver.cpp
-  RetryButton.cpp
-  SceneManager.cpp
-  Title.cpp
-  TitleButton.cpp
+﻿  Player.cpp
+Player.cpp(217): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+Player.cpp(218): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
   コード生成しています。
-  39 of 710 functions ( 5.5%) were compiled, the rest were copied from previous compilation.
-    6 functions were new in current compilation
+  32 of 718 functions ( 4.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     13 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Release\MiniGame.exe

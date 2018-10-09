@@ -88,6 +88,9 @@
     <ClInclude Include="TitleButton.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene_2.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="TitleButton.cpp">
       <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_2.cpp">
+      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -20,8 +20,11 @@
 void GAME::Draw(void)
 {
 	Back.Draw();
-	//プレイヤーの描画処理
-	Player.Draw();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		//プレイヤーの描画処理
+		Player[i].Draw();
+	}
 	//マウスカーソルの描画処理
 	Operation.Draw();
 }
@@ -42,8 +45,11 @@ HRESULT GAME::Initialize(void)
 	{
 		return E_FAIL;
 	}
-	//プレイヤーの初期化
-	Player.Initialize();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		//プレイヤーの初期化
+		Player[i].Initialize();
+	}
 	//マウスカーソルの初期化
 	Operation.Initialize();
 
@@ -66,7 +72,10 @@ void GAME::Uninitialize(void)
 {
     //---各種解放---//
 	Operation.Uninitialize();
-	Player.Uninitialize();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		Player[i].Uninitialize();
+	}
 	Back.Uninitialize();
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
@@ -86,13 +95,16 @@ void GAME::Update(void)
 	//---オブジェクトの更新---//
 	//マウスカーソルの更新処理
 	Operation.Update();
-	//プレイヤーの更新処理
-	Player.Update();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		//プレイヤーの更新処理
+		Player[i].Update();
+	}
 	Back.Update();
 
     //---画面遷移---//
     if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
     {
-        SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+        SCENE_MANAGER::SetScene(SCENE_GAME_2);
     }
 }

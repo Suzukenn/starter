@@ -131,6 +131,7 @@
     <ClInclude Include="Base_Scene.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Main.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Main.cpp" />

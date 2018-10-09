@@ -9,6 +9,7 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "Main.h"
 #include "Operation.h"
+#include "SceneManager.h"
 
 //＝＝＝クラス宣言＝＝＝//
 class RETRYBUTTON
@@ -19,6 +20,7 @@ class RETRYBUTTON
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
 		VERTEX* pVertex;
 		OPERATION* Operation;					//マウスカーソル情報
+		static SCENE RetryScene;				//リトライ先のシーン
 
 	public:
 		RETRYBUTTON();
@@ -30,6 +32,7 @@ class RETRYBUTTON
 		void Update(void);
 		void Draw(void);
 
+		static void SetRetryScene(SCENE);		//リトライ先のセット
 };
 
 #endif
