@@ -74,8 +74,6 @@ void CAMERA::Draw(void)
 	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, VertexRoot, sizeof(VERTEX));
 
     Collision.Draw();
-    //---•`‰æ---//
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
