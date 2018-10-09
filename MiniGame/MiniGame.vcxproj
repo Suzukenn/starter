@@ -131,6 +131,7 @@
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="DeadAngle.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
@@ -141,8 +142,10 @@
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sound_Parameter.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Wav_Controller.h" />
   </ItemGroup>
@@ -150,6 +153,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="DeadAngle.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -160,7 +164,9 @@
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Wav_Controller.cpp" />
   </ItemGroup>

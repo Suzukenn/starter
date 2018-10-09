@@ -24,6 +24,7 @@ void GAME::Draw(void)
     Lift.Draw();
 	Player.Draw();	    //プレイヤー
     Operation.Draw();	//マウスカーソル
+    Timer.Draw();
 }
 
 /////////////////////////////////////////////
@@ -68,6 +69,12 @@ HRESULT GAME::Initialize(void)
         return E_FAIL;
     }
 
+    //タイマー
+    if (FAILED(Timer.Initialize()))
+    {
+        return E_FAIL;
+    }
+
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
 
@@ -91,6 +98,7 @@ void GAME::Uninitialize(void)
     Lift.Uninitialize();
 	Operation.Uninitialize();
 	Player.Uninitialize();
+    Timer.Uninitialize();
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
@@ -113,11 +121,12 @@ void GAME::Update(void)
     Lift.Update();
 	Operation.Update(); //マウスカーソル
 	Player.Update();	//プレイヤー
+    Timer.Update();
 
-    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), 55.0F));
+    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
+    if (!Timer.GetTime())
     {
         SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
     }

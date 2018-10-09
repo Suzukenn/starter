@@ -9,6 +9,7 @@
 #include "Lift.h"
 #include "Operation.h"
 #include "Player.h"
+#include "Timer.h"
 
 //ƒNƒ‰ƒXéŒ¾//
 class GAME final : public BASE_SCENE
@@ -19,6 +20,7 @@ class GAME final : public BASE_SCENE
         LIFT Lift;
 		OPERATION Operation;
 		PLAYER Player;
+        TIMER Timer;
 
     public:
         virtual void Draw(void) final;
