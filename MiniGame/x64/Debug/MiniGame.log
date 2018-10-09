@@ -1,12 +1,2 @@
-﻿  SelectScene.cpp
-  Player.cpp
-d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(170): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
-d:\documents\hal課題\2年\gm\starter\minigame\player.cpp(171): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
-  Operation.cpp
-d:\documents\hal課題\2年\gm\starter\minigame\operation.cpp(24): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
-d:\documents\hal課題\2年\gm\starter\minigame\operation.cpp(25): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
-d:\documents\hal課題\2年\gm\starter\minigame\operation.cpp(154): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-d:\documents\hal課題\2年\gm\starter\minigame\operation.cpp(155): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-  コードを生成中...
-  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
-  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)
+﻿  MiniGame.vcxproj -> C:\Users\delta\OneDrive\ドキュメント\GitHub\starter\x64\Debug\MiniGame.exe
+  MiniGame.vcxproj -> C:\Users\delta\OneDrive\ドキュメント\GitHub\starter\x64\Debug\MiniGame.pdb (Partial PDB)

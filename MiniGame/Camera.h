@@ -12,10 +12,13 @@ class CAMERA
         D3DXVECTOR2 Position;                 //位置
         D3DXVECTOR2 Center;                   //画像中心位置
         float Angle;                          //回転
-        LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
-        LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
-        VERTEX* Vertex;
-        COLLISION Collision;
+		LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
+		LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
+		VERTEX* Vertex;
+		LPDIRECT3DTEXTURE9 GraphicRoot;           //テクスチャ
+		LPDIRECT3DVERTEXBUFFER9 VertexBufferRoot; //頂点バッファ
+		VERTEX* VertexRoot;
+		COLLISION Collision;
 
         bool CheckInst();
 
