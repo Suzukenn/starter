@@ -80,10 +80,4 @@ void TITLE::Update(void)
 	Start_B.Update();
     //”wŒi
     Back.Update();
-
-    //---‰æ–Ê‘JˆÚ---//
-    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
-    {
-        SCENE_MANAGER::SetScene(SCENE_SELECT);
-    }
 }
