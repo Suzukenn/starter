@@ -94,6 +94,9 @@
     <ClInclude Include="SelectScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>ソースコード\Actor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
