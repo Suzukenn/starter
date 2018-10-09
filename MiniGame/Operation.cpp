@@ -9,13 +9,6 @@
 //======定数・マクロ定義=====
 // パス名
 #define FILE_PATH	L"Data/Game/hand.png"
-//プレイヤーサイズ
-#define OPERATION_WIDTH	(30)	//幅
-#define OPERATION_HEIGHT	(30)	//高さ
-//#define OPERATION_HITBOX_WIDTH		(50)
-//#define OPERATION_HITBOX_HEIGHT	(64)
-//円判定用
-#define OPERATION_RADIUS	(30)
 
 //=====コンストラクタ=====
 OPERATION::OPERATION()
@@ -61,7 +54,11 @@ void OPERATION::Draw(void)
 /////////////////////////////////////////////
 //関数名：Initialize
 //
+<<<<<<< HEAD
+//機能：マウスカーソルの初期化
+=======
 //機能：操作ポインタの初期化
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -119,7 +116,11 @@ HRESULT OPERATION::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
+<<<<<<< HEAD
+//機能：マウスカーソルの終了
+=======
 //機能：操作ポインタの終了
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -128,15 +129,60 @@ HRESULT OPERATION::Initialize(void)
 void OPERATION::Uninitialize(void)
 {
 	//---解放---//
+<<<<<<< HEAD
+	if (VertexBuffer)
+	{
+		VertexBuffer->Release();
+		VertexBuffer = nullptr;
+	}
+
+	if (Graphic)
+	{
+		Graphic->Release();
+		Graphic = nullptr;
+	}
+}
+
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：マウスカーソルの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void OPERATION::Draw(void)
+{
+	//---各種宣言---//
+	LPDIRECT3DDEVICE9 pDevice;
+
+	//---初期化処理---//
+	pDevice = GetDevice();
+
+	//---書式設定---//
+	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+																	 
+	// 頂点配列によるポリゴン描画
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+=======
     SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic);
     Vertex = nullptr;
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }
 
 /////////////////////////////////////////////
 //関数名：Update
 //
+<<<<<<< HEAD
+//機能：マウスカーソルの更新
+=======
 //機能：操作ポインタの更新
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //

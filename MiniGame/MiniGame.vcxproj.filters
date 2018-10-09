@@ -73,6 +73,20 @@
     <ClInclude Include="Player.h">
       <Filter>ソースコード\Actor</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="StartButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RetryButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_2.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="Lift.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
@@ -97,6 +111,7 @@
     <ClInclude Include="Timer.h">
       <Filter>ソースコード\Actor</Filter>
     </ClInclude>
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -135,6 +150,20 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソースコード\Actor</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="StartButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RetryButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_2.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+=======
     <ClCompile Include="Lift.cpp">
       <Filter>ソースコード\Object</Filter>
     </ClCompile>
@@ -156,5 +185,6 @@
     <ClCompile Include="Timer.cpp">
       <Filter>ソースコード\Actor</Filter>
     </ClCompile>
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
   </ItemGroup>
 </Project>

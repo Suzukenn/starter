@@ -1,7 +1,11 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "GameOver.h"
 #include "GameScene.h"
+<<<<<<< HEAD
+#include "GameScene_2.h"
+=======
 #include "Main.h"
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 #include "SceneManager.h"
 #include "SelectScene.h"
 #include "Title.h"
@@ -76,7 +80,7 @@ void SCENE_MANAGER::Update(void)
 {
     //---シーン切り替え---//
     if (CurrentScene != NextScene)
-    {
+	{
         Scene->Uninitialize();
         switch (NextScene)
         {
@@ -91,6 +95,10 @@ void SCENE_MANAGER::Update(void)
             case SCENE_GAME:
                 Scene = new GAME();
                 break;
+
+			case SCENE_GAME_2:
+				Scene = new GAME_2();
+				break;
 
             case SCENE_GAMEOVER:
                 Scene = new GAMEOVER();
