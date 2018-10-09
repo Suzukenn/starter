@@ -4,7 +4,6 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #define DIRECTINPUT_VERSION	0x0800
 #include <dinput.h>
-#include <memory>
 #include "Keyboard.h"
 #include "Mouse.h"
 

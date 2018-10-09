@@ -1,2 +1,6 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
+<<<<<<< HEAD
 Debug|x64|C:\Users\tsuyoshi\Documents\GitHub\starter\|
+=======
+Debug|x64|D:\Documents\HAL課題\2年\GM\starter\|
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4

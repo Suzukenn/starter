@@ -1,8 +1,13 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "GameOver.h"
 #include "GameScene.h"
+<<<<<<< HEAD
 #include "GameScene_2.h"
+=======
+#include "Main.h"
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 #include "SceneManager.h"
+#include "SelectScene.h"
 #include "Title.h"
 
 //＝＝＝グローバル変数＝＝＝//
@@ -37,6 +42,8 @@ void SCENE_MANAGER::Draw(void)
 void SCENE_MANAGER::Uninitialize(void)
 {
     Scene->Uninitialize();
+    delete Scene;
+    Scene = nullptr;
 }
 
 /////////////////////////////////////////////
@@ -50,35 +57,14 @@ void SCENE_MANAGER::Uninitialize(void)
 /////////////////////////////////////////////
 HRESULT SCENE_MANAGER::Initialize(void)
 {
-    //---各種宣言---//
-    HRESULT hResult;
-    
-    //---初期化処理---//
-    hResult = E_FAIL;
-
-    //---シーンの切り替え---//
-    hResult = Scene->Initialize();
-    if (FAILED(hResult))
+    //---シーンの初期化---//
+    if (FAILED(Scene->Initialize()))
     {
         MessageBoxW(nullptr, L"シーンの初期化に失敗しました失敗", L"初期化エラー", MB_OK);
-        return hResult;
+        return E_FAIL;
     }
 
-    return hResult;
-}
-
-/////////////////////////////////////////////
-//関数名：SetScene
-//
-//機能：シーンの設定
-//
-//引数：(SCENE)シーン番号
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void SCENE_MANAGER::SetScene(SCENE scene)
-{
-    NextScene = scene;
+    return S_OK;
 }
 
 /////////////////////////////////////////////
@@ -96,11 +82,14 @@ void SCENE_MANAGER::Update(void)
     if (CurrentScene != NextScene)
 	{
         Scene->Uninitialize();
-        delete Scene;
         switch (NextScene)
         {
-            case SCENE_TITLE:
-                Scene = new TITLE();
+        case SCENE_TITLE:
+            Scene = new TITLE();
+            break;
+
+            case SCENE_SELECT:
+                Scene = new SELECTSCENE();
                 break;
 
             case SCENE_GAME:
@@ -115,7 +104,13 @@ void SCENE_MANAGER::Update(void)
                 Scene = new GAMEOVER();
                 break;
         }
-        Scene->Initialize();
+
+        if (FAILED(Scene->Initialize()))
+        {
+            MessageBoxW(nullptr, L"シーンの初期化に失敗しました失敗", L"初期化エラー", MB_OK);
+            exit(EXIT_FAILURE);
+        }
+
         CurrentScene = NextScene;
     }
     else

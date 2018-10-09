@@ -26,7 +26,7 @@ class OPERATION
 		POINT Pos;								//マウスのの位置
 		LPDIRECT3DTEXTURE9 Graphic;				//テクスチャ
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
-		VERTEX* pVertex;
+		VERTEX* Vertex;
 
 	public:
 		OPERATION();
@@ -38,7 +38,6 @@ class OPERATION
 		void Update(void);
 		void Draw(void);
 		POINT* GetMousePos(void);
-
 };
 
 #endif

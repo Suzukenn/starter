@@ -1,8 +1,3 @@
-// FileName		:	CWAVE.hpp
-// Contents		:	WAVE ファイルクラス
-// UpDate		:	11/04/08(Fri)	
-// LastUpDate	:	11/04/08(Fri)
-
 #ifndef _WAV_CONTROLLER_H_
 #define _WAV_CONTROLLER_H_
 

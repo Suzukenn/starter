@@ -3,18 +3,24 @@
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "BackGround.h"
-#include "Base_Scene.h"
+#include "BaseScene.h"
+#include "Camera.h"
 #include "Main.h"
+#include "Lift.h"
 #include "Operation.h"
 #include "Player.h"
+#include "Timer.h"
 
 //＝＝＝クラス宣言＝＝＝//
 class GAME final : public BASE_SCENE
 {
     private:
 		BACKGROUND Back;
+        CAMERA Camera;
+        LIFT Lift;
 		OPERATION Operation;
 		PLAYER Player[MAX_PLAYER];
+        TIMER Timer;
 
     public:
         virtual void Draw(void) final;

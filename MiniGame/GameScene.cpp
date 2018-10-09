@@ -1,11 +1,10 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
+#include "Camera.h"
 #include "GameScene.h"
 #include "InputManager.h"
+#include "Lift.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
-
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/BackGround.tga" //パス名
+#include "SoundManager.h"
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -19,6 +18,7 @@
 /////////////////////////////////////////////
 void GAME::Draw(void)
 {
+    //---オブジェクトの描画---//
 	Back.Draw();
 	for (int i = 0; i < MAX_PLAYER; i++)
 	{
@@ -27,6 +27,10 @@ void GAME::Draw(void)
 	}
 	//マウスカーソルの描画処理
 	Operation.Draw();
+    Camera.Draw();
+    Lift.Draw();
+    Operation.Draw();	//マウスカーソル
+    Timer.Draw();
 }
 
 /////////////////////////////////////////////
@@ -41,17 +45,46 @@ void GAME::Draw(void)
 HRESULT GAME::Initialize(void)
 {
 	//---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+    //背景
+	if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
 	{
 		return E_FAIL;
 	}
+
+    //プレイヤーの初期化
 	for (int i = 0; i < MAX_PLAYER; i++)
 	{
-		//プレイヤーの初期化
-		Player[i].Initialize();
-	}
+        if (FAILED(Player[i].Initialize())
+        {
+            return E_FAIL;
+        }
+    }
 	//マウスカーソルの初期化
 	Operation.Initialize();
+
+	//マウスカーソル
+    if (FAILED(Operation.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    //カメラ
+    if (FAILED(Camera.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    //リフト
+    if (FAILED(Lift.Initialize({ 600.0F, 300.0F }, { 150.0F, 30.0F })))
+    {
+        return E_FAIL;
+    }
+
+    //タイマー
+    if (FAILED(Timer.Initialize()))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
@@ -71,12 +104,17 @@ HRESULT GAME::Initialize(void)
 void GAME::Uninitialize(void)
 {
     //---各種解放---//
+    Back.Uninitialize();
+    Camera.Uninitialize();
+    Lift.Uninitialize();
 	Operation.Uninitialize();
 	for (int i = 0; i < MAX_PLAYER; i++)
 	{
 		Player[i].Uninitialize();
 	}
 	Back.Uninitialize();
+    Timer.Uninitialize();
+
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
 }
@@ -101,9 +139,14 @@ void GAME::Update(void)
 		Player[i].Update();
 	}
 	Back.Update();
+    Camera.Update();
+    Lift.Update();
+    Timer.Update();
+
+    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+    if (!Timer.GetTime())
     {
         SCENE_MANAGER::SetScene(SCENE_GAME_2);
     }

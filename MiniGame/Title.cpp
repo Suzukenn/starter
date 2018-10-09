@@ -1,17 +1,18 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 #include "Title.h"
-
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/Title.png" //パス名
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
 //関数名：Draw
 //
+<<<<<<< HEAD
 //機能：背景とボタンの描画
+=======
+//機能：タイトルの描画
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -26,7 +27,11 @@ void TITLE::Draw(void)
 /////////////////////////////////////////////
 //関数名：Initialize
 //
+<<<<<<< HEAD
 //機能：背景とボタンの初期化
+=======
+//機能：タイトルの初期化
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -35,7 +40,7 @@ void TITLE::Draw(void)
 HRESULT TITLE::Initialize(void)
 {
 	//---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+	if (FAILED(Back.Initialize(L"Data/Game/Title.png")))
 	{
 		return E_FAIL;
 	}
@@ -52,7 +57,11 @@ HRESULT TITLE::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
+<<<<<<< HEAD
 //機能：背景とボタンの終了
+=======
+//機能：タイトルの終了
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -71,7 +80,11 @@ void TITLE::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
+<<<<<<< HEAD
 //機能：背景とボタンの更新
+=======
+//機能：タイトルの更新
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -80,5 +93,16 @@ void TITLE::Uninitialize(void)
 void TITLE::Update(void)
 {
 	//---オブジェクトの更新---//
+<<<<<<< HEAD
 	Start_B.Update();
+=======
+    //背景
+    Back.Update();
+
+    //---画面遷移---//
+    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
+    {
+        SCENE_MANAGER::SetScene(SCENE_SELECT);
+    }
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }

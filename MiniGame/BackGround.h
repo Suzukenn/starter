@@ -8,7 +8,6 @@
 class BACKGROUND
 {
 	private:
-		unsigned int Score;
 		LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
 

@@ -34,9 +34,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base_Scene.h">
-      <Filter>ソースコード\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
@@ -58,9 +55,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>ソースコード\System\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Sound_Manager.h">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Sound_Parameter.h">
       <Filter>ソースコード\System\Sound</Filter>
     </ClInclude>
@@ -79,6 +73,7 @@
     <ClInclude Include="Player.h">
       <Filter>ソースコード\Actor</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="StartButton.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
@@ -91,6 +86,32 @@
     <ClInclude Include="GameScene_2.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="Lift.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadAngle.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -114,9 +135,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Sound_Manager.cpp">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Wav_Controller.cpp">
       <Filter>ソースコード\System\Sound</Filter>
     </ClCompile>
@@ -132,6 +150,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソースコード\Actor</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="StartButton.cpp">
       <Filter>ソースコード\Object</Filter>
     </ClCompile>
@@ -144,5 +163,28 @@
     <ClCompile Include="GameScene_2.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="Lift.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadAngle.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
   </ItemGroup>
 </Project>

@@ -2,13 +2,14 @@
 #define _SCENE_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "Base_Scene.h"
+#include "BaseScene.h"
 #include "Main.h"
 
 //＝＝＝列挙型定義＝＝＝//
 typedef enum
 {
     SCENE_TITLE,
+    SCENE_SELECT,
     SCENE_GAME,
 	SCENE_GAME_2,
     SCENE_GAMEOVER,
@@ -29,8 +30,7 @@ class SCENE_MANAGER
         static HRESULT Initialize(void);
         static void Update(void);
     
-        static void SetScene(SCENE);
-
+        static void SetScene(SCENE scene) { NextScene = scene; }
 };
 
 #endif

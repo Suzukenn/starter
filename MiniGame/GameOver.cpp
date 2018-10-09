@@ -2,10 +2,7 @@
 #include "GameOver.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
-
-//＝＝＝定数・マクロ定義＝＝＝//
-#define FILE_PATH L"Data/Game/GameOver.png" //パス名
+#include "SoundManager.h"
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -36,7 +33,7 @@ void GAMEOVER::Draw(void)
 HRESULT GAMEOVER::Initialize(void)
 {
     //---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
+	if (FAILED(Back.Initialize(L"Data/Game/GameOver.png")))
 	{
 		return E_FAIL;
 	}
@@ -86,8 +83,15 @@ void GAMEOVER::Update(void)
 	//---オブジェクトの更新---//
 	Back.Update();
     //---画面遷移---//
+<<<<<<< HEAD
 	//リトライボタンの更新処理
 	Retry_B.Update();
 	//タイトルボタンの更新処理
 	Title_B.Update();
+=======
+    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
+    {
+        SCENE_MANAGER::SetScene(SCENE_TITLE);
+    }
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }

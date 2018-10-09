@@ -3,10 +3,7 @@
 //
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "GameScene.h"
 #include "InputManager.h"
-#include "SceneManager.h"
-#include "Sound_Manager.h"
 #include "Player.h"
 
 //======定数・マクロ定義=====
@@ -15,8 +12,6 @@
 //プレイヤーサイズ
 #define PLAYER_WIDTH	(64)	//幅
 #define PLAYER_HEIGHT	(64)	//高さ
-#define PLAYER_HITBOX_WIDTH		(50)
-#define PLAYER_HITBOX_HEIGHT	(64)
 //円判定用
 #define PLAYER_RADIUS	(30)
 //重力
@@ -39,6 +34,7 @@ static ANIM_PAT g_animPat[][3] = {
 PLAYER::PLAYER()
 {
 	//動的確保
+<<<<<<< HEAD
 	Operation = new OPERATION();
 	//各初期化
 	Pos.x	= SCREEN_CENTER_X;
@@ -46,16 +42,50 @@ PLAYER::PLAYER()
 	Anim	= 0;
 	AnimPat = 0;
 	AnimCnt = 0;
+=======
+    Operation = new OPERATION();
+	//位置設定
+	Pos.x = SCREEN_CENTER_X;
+	Pos.y = SCREEN_CENTER_Y;
+    Size.x = 50.0F;
+    Size.y = 50.0F;
+    Hit = false;
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }
 
 //=====デストラクタ=====
 PLAYER::~PLAYER()
 {
 	//解放
-	if (Operation)
-	{
-		delete Operation;
-	}
+	delete Operation;
+    Operation = nullptr;
+}
+
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：プレイヤーの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void PLAYER::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    //pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
+
+    // 頂点配列によるポリゴン描画                                                               
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
@@ -102,7 +132,7 @@ HRESULT PLAYER::Initialize(void)
 	hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
 	if (FAILED(hResult))
 	{
-		MessageBoxW(nullptr, L"ゲーム画面の初期化に失敗しました", FILE_PATH, MB_OK);
+		MessageBoxW(nullptr, L"プレイヤーのテクスチャを読み込めませんでした", FILE_PATH, MB_OK);
 		Graphic = nullptr;
 		return hResult;
 	}
@@ -112,23 +142,24 @@ HRESULT PLAYER::Initialize(void)
 
 	if (FAILED(hResult))
 	{
+        MessageBoxW(nullptr, L"頂点バッファの生成に失敗しました", L"初期化エラー", MB_OK);
 		return hResult;
 	}
 
 	//---頂点バッファへの値の設定---//
 	//バッファのポインタを取得
-	VertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
+	VertexBuffer->Lock(0, 0, (void**)&Vertex, 0);
 
 	//値の設定
 	for (nCounter = 0; nCounter < 4; nCounter++)
 	{
-		pVertex[nCounter].U = (float)(nCounter & 1);
-		pVertex[nCounter].V = (float)((nCounter >> 1) & 1);
-		pVertex[nCounter].Position.x = pVertex[nCounter].U * PLAYER_WIDTH + Pos.x;
-		pVertex[nCounter].Position.y = pVertex[nCounter].V * PLAYER_HEIGHT + Pos.y;
-		pVertex[nCounter].Position.z = 0.0F;
-		pVertex[nCounter].RHW = 1.0F;
-		pVertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        Vertex[nCounter].U = (float)(nCounter & 1);
+        Vertex[nCounter].V = (float)((nCounter >> 1) & 1);
+        Vertex[nCounter].Position.x = Vertex[nCounter].U * PLAYER_WIDTH + Pos.x;
+        Vertex[nCounter].Position.y = Vertex[nCounter].V * PLAYER_HEIGHT + Pos.y;
+        Vertex[nCounter].Position.z = 0.0F;
+        Vertex[nCounter].RHW = 1.0F;
+        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
 	}
 
 	//バッファのポインタの解放
@@ -148,45 +179,12 @@ HRESULT PLAYER::Initialize(void)
 /////////////////////////////////////////////
 void PLAYER::Uninitialize(void)
 {
+    Operation->Uninitialize();
+
 	//---解放---//
-	if (VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
-
-	if (Graphic)
-	{
-		Graphic->Release();
-		Graphic = nullptr;
-	}
-}
-
-//＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：Draw
-//
-//機能：プレイヤーの描画
-//
-//引数：なし
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void PLAYER::Draw(void)
-{
-	//---各種宣言---//
-	LPDIRECT3DDEVICE9 pDevice;
-
-	//---初期化処理---//
-	pDevice = GetDevice();
-
-	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
-	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
-																	 
-	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
 }
 
 /////////////////////////////////////////////
@@ -245,8 +243,24 @@ void PLAYER::Update(void)
 	//----- 座標反映 -----//
 	for (int i = 0; i < 4; ++i)
 	{
-		pVertex[i].Position.x = Pos.x + (i & 1) * PLAYER_WIDTH - PLAYER_WIDTH / 2;
-		pVertex[i].Position.y = Pos.y + (i >> 1) * PLAYER_HEIGHT - PLAYER_HEIGHT / 2;
+        Vertex[i].Position.x = Pos.x + (i & 1) * PLAYER_WIDTH - PLAYER_WIDTH / 2;
+        Vertex[i].Position.y = Pos.y + (i >> 1) * PLAYER_HEIGHT - PLAYER_HEIGHT / 2;
+
+        //---当たり判定---//
+        if (INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, HOLD))
+        {
+            Vertex[i].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+            continue;
+        }
+
+        if (Hit)
+        {
+            Vertex[i].Diffuse = D3DCOLOR_ARGB(128, 255, 255, 255);
+        }
+        else
+        {
+            Vertex[i].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        }
 	}
 
 	//----- 位置情報更新 -----//

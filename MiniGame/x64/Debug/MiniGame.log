@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Wav_Controller.cpp
   TitleButton.cpp
   Title.cpp
@@ -24,3 +25,8 @@ c:\users\tsuyoshi\documents\github\starter\minigame\operation.cpp(159): warning 
   LINK : 前回のインクリメンタル リンクで C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.exe
   MiniGame.vcxproj -> C:\Users\tsuyoshi\Documents\GitHub\starter\x64\Debug\MiniGame.pdb (Partial PDB)
+=======
+﻿  GameScene.cpp
+  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
+  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4

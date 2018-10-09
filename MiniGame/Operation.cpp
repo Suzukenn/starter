@@ -3,10 +3,7 @@
 //
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "GameScene.h"
 #include "InputManager.h"
-#include "SceneManager.h"
-#include "Sound_Manager.h"
 #include "Operation.h"
 
 //======定数・マクロ定義=====
@@ -27,10 +24,41 @@ OPERATION::~OPERATION()
 	
 }
 
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：操作ポインタの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void OPERATION::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
+
+    // 頂点配列によるポリゴン描画
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
+}
+
 /////////////////////////////////////////////
 //関数名：Initialize
 //
+<<<<<<< HEAD
 //機能：マウスカーソルの初期化
+=======
+//機能：操作ポインタの初期化
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -65,18 +93,18 @@ HRESULT OPERATION::Initialize(void)
 
 	//---頂点バッファへの値の設定---//
 	//バッファのポインタを取得
-	VertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
+	VertexBuffer->Lock(0, 0, (void**)&Vertex, 0);
 
 	//値の設定
 	for (nCounter = 0; nCounter < 4; nCounter++)
 	{
-		pVertex[nCounter].U = (float)(nCounter & 1);
-		pVertex[nCounter].V = (float)((nCounter >> 1) & 1);
-		pVertex[nCounter].Position.x = pVertex[nCounter].U * OPERATION_WIDTH + Pos.x;
-		pVertex[nCounter].Position.y = pVertex[nCounter].V * OPERATION_HEIGHT + Pos.y;
-		pVertex[nCounter].Position.z = 0.0F;
-		pVertex[nCounter].RHW = 1.0F;
-		pVertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        Vertex[nCounter].U = (float)(nCounter & 1);
+        Vertex[nCounter].V = (float)((nCounter >> 1) & 1);
+        Vertex[nCounter].Position.x = Vertex[nCounter].U * OPERATION_WIDTH + Pos.x;
+        Vertex[nCounter].Position.y = Vertex[nCounter].V * OPERATION_HEIGHT + Pos.y;
+        Vertex[nCounter].Position.z = 0.0F;
+        Vertex[nCounter].RHW = 1.0F;
+        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
 	}
 
 	//バッファのポインタの解放
@@ -88,7 +116,11 @@ HRESULT OPERATION::Initialize(void)
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
+<<<<<<< HEAD
 //機能：マウスカーソルの終了
+=======
+//機能：操作ポインタの終了
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -97,6 +129,7 @@ HRESULT OPERATION::Initialize(void)
 void OPERATION::Uninitialize(void)
 {
 	//---解放---//
+<<<<<<< HEAD
 	if (VertexBuffer)
 	{
 		VertexBuffer->Release();
@@ -135,12 +168,21 @@ void OPERATION::Draw(void)
 																	 
 	// 頂点配列によるポリゴン描画
 	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+=======
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic);
+    Vertex = nullptr;
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }
 
 /////////////////////////////////////////////
 //関数名：Update
 //
+<<<<<<< HEAD
 //機能：マウスカーソルの更新
+=======
+//機能：操作ポインタの更新
+>>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 //
 //引数：なし
 //
@@ -155,8 +197,8 @@ void OPERATION::Update(void)
 	//---座標反映---//
 	for (int i = 0; i < 4; ++i)
 	{
-		pVertex[i].Position.x = Pos.x + (i & 1) * OPERATION_WIDTH - OPERATION_WIDTH / 2;
-		pVertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
+        Vertex[i].Position.x = Pos.x + (i & 1) * OPERATION_WIDTH - OPERATION_WIDTH / 2;
+        Vertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
 	}
 }
 
