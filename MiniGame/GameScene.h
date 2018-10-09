@@ -19,7 +19,7 @@ class GAME final : public BASE_SCENE
         CAMERA Camera;
         LIFT Lift;
 		OPERATION Operation;
-		PLAYER Player;
+		PLAYER Player[MAX_PLAYER];
         TIMER Timer;
 
     public:

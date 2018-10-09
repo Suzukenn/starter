@@ -11,6 +11,7 @@ typedef enum
     SCENE_TITLE,
     SCENE_SELECT,
     SCENE_GAME,
+	SCENE_GAME_2,
     SCENE_GAMEOVER,
     MAX_SCENE
 }SCENE;

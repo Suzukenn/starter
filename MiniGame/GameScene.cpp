@@ -22,8 +22,12 @@ void GAME::Draw(void)
 	Back.Draw();
     Camera.Draw();
     Lift.Draw();
-	Player.Draw();	    //プレイヤー
-    Operation.Draw();	//マウスカーソル
+    Operation.Draw();
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        //プレイヤーの描画処理
+        Player[i].Draw();
+    }
     Timer.Draw();
 }
 
@@ -45,11 +49,16 @@ HRESULT GAME::Initialize(void)
 		return E_FAIL;
 	}
 
-	//プレイヤー
-    if (FAILED(Player.Initialize()))
-    {
-        return E_FAIL;
+    //プレイヤーの初期化
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+        if (FAILED(Player[i].Initialize()))
+        {
+            return E_FAIL;
+        }
     }
+	//マウスカーソルの初期化
+	Operation.Initialize();
 
 	//マウスカーソル
     if (FAILED(Operation.Initialize()))
@@ -97,7 +106,11 @@ void GAME::Uninitialize(void)
     Camera.Uninitialize();
     Lift.Uninitialize();
 	Operation.Uninitialize();
-	Player.Uninitialize();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		Player[i].Uninitialize();
+	}
+	Back.Uninitialize();
     Timer.Uninitialize();
 
     //---BGM停止---//
@@ -116,18 +129,23 @@ void GAME::Uninitialize(void)
 void GAME::Update(void)
 {
 	//---オブジェクトの更新---//
-    Back.Update();      //背景
+	//マウスカーソルの更新処理
+	Operation.Update();
+	for (int i = 0; i < MAX_PLAYER; i++)
+	{
+		//プレイヤーの更新処理
+		Player[i].Update();
+	}
+	Back.Update();
     Camera.Update();
     Lift.Update();
-	Operation.Update(); //マウスカーソル
-	Player.Update();	//プレイヤー
     Timer.Update();
 
-    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
+    //Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
     if (!Timer.GetTime())
     {
-        SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+        SCENE_MANAGER::SetScene(SCENE_GAME_2);
     }
 }

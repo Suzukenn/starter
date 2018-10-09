@@ -14,7 +14,7 @@ HRESULT Load(SOUND_PARAMETER*);
 IXAudio2* SOUND_MANAGER::Manager;                                   //管理オブジェクト
 IXAudio2MasteringVoice* SOUND_MANAGER::MasterVoice;                 //マスターボイス
 IXAudio2SourceVoice* SOUND_MANAGER::SourceVoice[SOUND_LABEL_MAX];   //ソースボイス
-WAV_CONTROLLER SOUND_MANAGER::WaveSound[SOUND_LABEL_MAX];          	// WAVE 音楽データ
+WAVCONTROLLER SOUND_MANAGER::WaveSound[SOUND_LABEL_MAX];          	// WAVE 音楽データ
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////

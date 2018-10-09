@@ -134,6 +134,7 @@
     <ClInclude Include="DeadAngle.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Lift.h" />
@@ -141,13 +142,16 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RetryButton.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Sound_Parameter.h" />
+    <ClInclude Include="SoundParameter.h" />
+    <ClInclude Include="StartButton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="Wav_Controller.h" />
+    <ClInclude Include="TitleButton.h" />
+    <ClInclude Include="WavController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
@@ -156,6 +160,7 @@
     <ClCompile Include="DeadAngle.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Lift.cpp" />
@@ -163,12 +168,15 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RetryButton.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StartButton.cpp" />
+    <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="Wav_Controller.cpp" />
+    <ClCompile Include="TitleButton.cpp" />
+    <ClCompile Include="WavController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

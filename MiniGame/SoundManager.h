@@ -4,8 +4,8 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include <xaudio2.h>
 #include "Main.h"
-#include "Sound_Parameter.h"
-#include "Wav_Controller.h"
+#include "SoundParameter.h"
+#include "WavController.h"
 
 //＝＝＝列挙型定義＝＝＝//
 typedef enum
@@ -31,7 +31,7 @@ class SOUND_MANAGER
         static IXAudio2* Manager;                                   //管理オブジェクト
         static IXAudio2MasteringVoice* MasterVoice;                 //マスターボイス
         static IXAudio2SourceVoice* SourceVoice[SOUND_LABEL_MAX];   //ソースボイス
-        static WAV_CONTROLLER WaveSound[SOUND_LABEL_MAX];          	// WAVE 音楽データ
+        static WAVCONTROLLER WaveSound[SOUND_LABEL_MAX];          	// WAVE 音楽データ
 
         static HRESULT CreateSound(SOUND_PARAMETER, int);
 

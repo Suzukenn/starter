@@ -9,13 +9,6 @@
 //======定数・マクロ定義=====
 // パス名
 #define FILE_PATH	L"Data/Game/hand.png"
-//プレイヤーサイズ
-#define OPERATION_WIDTH	(30)	//幅
-#define OPERATION_HEIGHT	(30)	//高さ
-//#define OPERATION_HITBOX_WIDTH		(50)
-//#define OPERATION_HITBOX_HEIGHT	(64)
-//円判定用
-#define OPERATION_RADIUS	(30)
 
 //=====コンストラクタ=====
 OPERATION::OPERATION()
@@ -127,7 +120,6 @@ HRESULT OPERATION::Initialize(void)
 /////////////////////////////////////////////
 void OPERATION::Uninitialize(void)
 {
-	//---解放---//
     SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic);
     Vertex = nullptr;
