@@ -6,7 +6,7 @@
 #include "GameScene.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 #include "TitleButton.h"
 
 //======定数・マクロ定義=====

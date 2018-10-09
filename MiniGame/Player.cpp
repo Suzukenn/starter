@@ -34,7 +34,6 @@ static ANIM_PAT g_animPat[][3] = {
 PLAYER::PLAYER()
 {
 	//動的確保
-<<<<<<< HEAD
 	Operation = new OPERATION();
 	//各初期化
 	Pos.x	= SCREEN_CENTER_X;
@@ -42,15 +41,9 @@ PLAYER::PLAYER()
 	Anim	= 0;
 	AnimPat = 0;
 	AnimCnt = 0;
-=======
-    Operation = new OPERATION();
-	//位置設定
-	Pos.x = SCREEN_CENTER_X;
-	Pos.y = SCREEN_CENTER_Y;
     Size.x = 50.0F;
     Size.y = 50.0F;
     Hit = false;
->>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }
 
 //=====デストラクタ=====
@@ -104,8 +97,8 @@ void PLAYER::SetPlayerAnimFrame(int nFrame)
 
 	for (int i = 0; i < 4; ++i)
 	{
-		pVertex[i].U = fU + (i % 2) * (1.0f / PLAYER_DIV_U);
-		pVertex[i].V = fV + (i / 2) * (1.0f / PLAYER_DIV_V);
+		Vertex[i].U = fU + (i % 2) * (1.0f / PLAYER_DIV_U);
+		Vertex[i].V = fV + (i / 2) * (1.0f / PLAYER_DIV_V);
 	}
 }
 

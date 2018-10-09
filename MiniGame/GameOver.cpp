@@ -83,15 +83,8 @@ void GAMEOVER::Update(void)
 	//---オブジェクトの更新---//
 	Back.Update();
     //---画面遷移---//
-<<<<<<< HEAD
 	//リトライボタンの更新処理
 	Retry_B.Update();
 	//タイトルボタンの更新処理
 	Title_B.Update();
-=======
-    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
-    {
-        SCENE_MANAGER::SetScene(SCENE_TITLE);
-    }
->>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 }

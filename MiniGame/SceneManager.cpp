@@ -1,11 +1,8 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
 #include "GameOver.h"
 #include "GameScene.h"
-<<<<<<< HEAD
 #include "GameScene_2.h"
-=======
 #include "Main.h"
->>>>>>> 7d89c597109ed6004bd3f05ead395712797e4aa4
 #include "SceneManager.h"
 #include "SelectScene.h"
 #include "Title.h"

@@ -20,16 +20,14 @@ void GAME::Draw(void)
 {
     //---オブジェクトの描画---//
 	Back.Draw();
-	for (int i = 0; i < MAX_PLAYER; i++)
-	{
-		//プレイヤーの描画処理
-		Player[i].Draw();
-	}
-	//マウスカーソルの描画処理
-	Operation.Draw();
     Camera.Draw();
     Lift.Draw();
-    Operation.Draw();	//マウスカーソル
+    Operation.Draw();
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        //プレイヤーの描画処理
+        Player[i].Draw();
+    }
     Timer.Draw();
 }
 
@@ -54,7 +52,7 @@ HRESULT GAME::Initialize(void)
     //プレイヤーの初期化
 	for (int i = 0; i < MAX_PLAYER; i++)
 	{
-        if (FAILED(Player[i].Initialize())
+        if (FAILED(Player[i].Initialize()))
         {
             return E_FAIL;
         }
@@ -143,7 +141,7 @@ void GAME::Update(void)
     Lift.Update();
     Timer.Update();
 
-    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
+    //Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
     if (!Timer.GetTime())

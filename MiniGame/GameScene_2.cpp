@@ -3,7 +3,7 @@
 #include "InputManager.h"
 #include "RetryButton.h"
 #include "SceneManager.h"
-#include "Sound_Manager.h"
+#include "SoundManager.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FILE_PATH L"Data/Game/bg.png" //パス名
