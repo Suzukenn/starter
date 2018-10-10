@@ -10,17 +10,12 @@
 //＝＝＝列挙型定義＝＝＝//
 typedef enum
 { 
-    BGM_GAME,       //オープニング
-    BGM_GAMEOVER,	//ゲームBGM
+    BGM_GAME,       //ゲームBGM
+    BGM_GAMECLEAR,	//ゲームクリア
+    BGM_GAMEOVER,	//ゲームオーバー
     BGM_OPENING, 	//オープニング
-    BGM_SELECT,
-    SE_BREAK,       //撃破
-    SE_DAMAGE,	   	//被弾
+    BGM_SELECT,     //セレクト画面
     SE_DECISION,	//決定
-    SE_HIT,		   	//攻撃
-    SE_INSTANTIATE,	//適生成
-    SE_JUMP,		//ジャンプ
-    SE_SHOT,	  	//攻撃
     SOUND_LABEL_MAX
 } SOUND_LABEL;
 

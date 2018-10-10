@@ -68,6 +68,9 @@
     <ClCompile Include="WavController.cpp">
       <Filter>ソースコード\System\Sound</Filter>
     </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="SoundParameter.h">
       <Filter>ソースコード\System\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>ソースコード\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

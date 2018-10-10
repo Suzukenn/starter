@@ -1,7 +1,16 @@
-﻿  Camera.cpp
-Camera.cpp(23): warning C4101: 'bJudge': ローカル変数は 1 度も使われていません。
+﻿  GameClear.cpp
+  GameOver.cpp
+  GameScene.cpp
+  GameScene_2.cpp
+  Main.cpp
+  RetryButton.cpp
+  SoundManager.cpp
+  StartButton.cpp
+  SelectScene.cpp
+  Title.cpp
+  TitleButton.cpp
   コード生成しています。
-  45 of 753 functions ( 6.0%) were compiled, the rest were copied from previous compilation.
+  63 of 767 functions ( 8.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     12 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。

@@ -185,6 +185,9 @@ void RETRYBUTTON::Update(void)
 	{
 		//ƒQ[ƒ€ƒV[ƒ“Ø‘Ö
 		SCENE_MANAGER::SetScene(RetryScene);
+
+        //---Œˆ’è‰¹Ä¶---//
+        SOUND_MANAGER::Play(SE_DECISION);
 	}
 }
 

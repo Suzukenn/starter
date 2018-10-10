@@ -48,6 +48,7 @@ class PLAYER
 		void SetPlayerAnimFrame(int);
 
         D3DXVECTOR2 GetPos(void) { return Pos; }
+        bool GetHit(void) { return Hit; }
         D3DXVECTOR2 GetSize(void) { return Size; }
 
         void SetHit(bool hit) { Hit = hit; }

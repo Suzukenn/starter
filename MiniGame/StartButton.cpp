@@ -182,5 +182,8 @@ void STARTBUTTON::Update(void)
 	{
 		//ƒQ[ƒ€ƒV[ƒ“Ø‘Ö
 		SCENE_MANAGER::SetScene(SCENE_GAME);
+
+        //---Œˆ’è‰¹Ä¶---//
+        SOUND_MANAGER::Play(SE_DECISION);
 	}
 }

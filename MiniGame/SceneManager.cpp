@@ -1,4 +1,5 @@
 //＝＝＝ヘッダファイル読み込み＝＝＝//
+#include "GameClear.h"
 #include "GameOver.h"
 #include "GameScene.h"
 #include "GameScene_2.h"
@@ -96,6 +97,10 @@ void SCENE_MANAGER::Update(void)
 			case SCENE_GAME_2:
 				Scene = new GAME_2();
 				break;
+
+            case SCENE_GAMECLEAR:
+                Scene = new GAMECLEAR();
+                break;
 
             case SCENE_GAMEOVER:
                 Scene = new GAMEOVER();
