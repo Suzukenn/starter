@@ -21,7 +21,7 @@ class COLLISION
         bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);
-        HRESULT Initialize(D3DXVECTOR2);
+        HRESULT Initialize(void);
         void Update(void);
 
         void SetData(D3DXVECTOR2 position, float rad) { Position[0] = position; Angle = rad; }

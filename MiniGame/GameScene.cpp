@@ -67,7 +67,7 @@ HRESULT GAME::Initialize(void)
     }
 
     //ÉJÉÅÉâ
-    if (FAILED(Camera.Initialize()))
+    if (FAILED(Camera.Initialize({ 400.0F, 10.0F }, 45.0F)))
     {
         return E_FAIL;
     }

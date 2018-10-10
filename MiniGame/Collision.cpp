@@ -155,7 +155,7 @@ void COLLISION::Draw(void)
 //
 //–ß‚è’lF(HRESULT)ˆ—‚Ì¬”Û
 /////////////////////////////////////////////
-HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
+HRESULT COLLISION::Initialize(void)
 {
     //---ŠeŽíéŒ¾---//
     int nCounter;
