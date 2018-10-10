@@ -141,11 +141,22 @@ void GAME::Update(void)
     Lift.Update();
     Timer.Update();
 
-    //Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        Player[i].SetHit(Camera.CheckPlayer(Player[i].GetPos(), Player[i].GetSize()));
+    }
 
     //---‰æ–Ê‘JˆÚ---//
     if (!Timer.GetTime())
     {
-        SCENE_MANAGER::SetScene(SCENE_GAME_2);
+        for (int i = 0; i < MAX_PLAYER; i++)
+        {
+            if (Player[i].GetHit())
+            {
+                SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+                return;
+            }
+        }
+        SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
     }
 }
