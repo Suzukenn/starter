@@ -1,7 +1,2 @@
-﻿  Operation.cpp
-c:\users\aoki\documents\github\starter\minigame\operation.cpp(17): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
-c:\users\aoki\documents\github\starter\minigame\operation.cpp(18): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
-c:\users\aoki\documents\github\starter\minigame\operation.cpp(157): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-c:\users\aoki\documents\github\starter\minigame\operation.cpp(158): warning C4244: '=': 'LONG' から 'float' への変換です。データが失われる可能性があります。
-  MiniGame.vcxproj -> C:\Users\aoki\Documents\GitHub\starter\x64\Debug\MiniGame.exe
-  MiniGame.vcxproj -> C:\Users\aoki\Documents\GitHub\starter\x64\Debug\MiniGame.pdb (Partial PDB)
+﻿  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.exe
+  MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Debug\MiniGame.pdb (Partial PDB)

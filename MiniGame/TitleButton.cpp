@@ -11,7 +11,7 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/TitleButton.tga"
+#define FILE_PATH	L"Data/Game/TitleButton.png"
 //タイトルボタンサイズ
 #define TITLEBUTTON_WIDTH	(170)	//幅
 #define TITLEBUTTON_HEIGHT	(57)	//高さ

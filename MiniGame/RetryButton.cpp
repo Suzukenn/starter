@@ -11,7 +11,7 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/RetryButton.tga"
+#define FILE_PATH	L"Data/Game/RestartButton.png"
 //リトライボタンサイズ
 #define RETRYBUTTON_WIDTH	(170)	//幅
 #define RETRYBUTTON_HEIGHT	(57)	//高さ

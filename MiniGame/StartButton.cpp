@@ -11,7 +11,7 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/StartButton.tga"
+#define FILE_PATH	L"Data/Game/GameStartButton.png"
 //スタートボタンサイズ
 #define STARTBUTTON_WIDTH	(170)	//幅
 #define STARTBUTTON_HEIGHT	(57)	//高さ
