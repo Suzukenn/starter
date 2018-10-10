@@ -23,7 +23,8 @@
 class OPERATION
 {
 	private:
-		POINT Pos;								//マウスのの位置
+		POINT Pos;								//マウスの位置
+		bool Catch;
 		LPDIRECT3DTEXTURE9 Graphic;				//テクスチャ
 		LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
 		VERTEX* Vertex;
