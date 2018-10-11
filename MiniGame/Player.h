@@ -10,9 +10,6 @@
 #include "Main.h"
 #include "Operation.h"
 
-//=====マクロ定数定義=====
-#define MAX_PLAYER (2)
-
 //＝＝＝構造体定義＝＝＝//
 typedef struct _ANIM_PAT {
 	int Frame;		//パターンNo

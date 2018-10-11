@@ -21,13 +21,8 @@ void GAME::Draw(void)
     //---オブジェクトの描画---//
 	Back.Draw();
     Camera.Draw();
-    Lift.Draw();
     Operation.Draw();
-    for (int i = 0; i < MAX_PLAYER; i++)
-    {
-        //プレイヤーの描画処理
-        Player[i].Draw();
-    }
+    Player.Draw();
     Timer.Draw();
 }
 
@@ -50,15 +45,10 @@ HRESULT GAME::Initialize(void)
 	}
 
     //プレイヤーの初期化
-	for (int i = 0; i < MAX_PLAYER; i++)
-	{
-        if (FAILED(Player[i].Initialize()))
-        {
-            return E_FAIL;
-        }
+    if (FAILED(Player.Initialize()))
+    {
+        return E_FAIL;
     }
-	//マウスカーソルの初期化
-	Operation.Initialize();
 
 	//マウスカーソル
     if (FAILED(Operation.Initialize()))
@@ -67,13 +57,7 @@ HRESULT GAME::Initialize(void)
     }
 
     //カメラ
-    if (FAILED(Camera.Initialize({ 400.0F, 10.0F }, 45.0F)))
-    {
-        return E_FAIL;
-    }
-
-    //リフト
-    if (FAILED(Lift.Initialize({ 600.0F, 300.0F }, { 150.0F, 30.0F })))
+    if (FAILED(Camera.Initialize({ 400.0F, 10.0F })))
     {
         return E_FAIL;
     }
@@ -104,12 +88,8 @@ void GAME::Uninitialize(void)
     //---各種解放---//
     Back.Uninitialize();
     Camera.Uninitialize();
-    Lift.Uninitialize();
 	Operation.Uninitialize();
-	for (int i = 0; i < MAX_PLAYER; i++)
-	{
-		Player[i].Uninitialize();
-	}
+    Player.Uninitialize();
 	Back.Uninitialize();
     Timer.Uninitialize();
 
@@ -129,34 +109,25 @@ void GAME::Uninitialize(void)
 void GAME::Update(void)
 {
 	//---オブジェクトの更新---//
-	//マウスカーソルの更新処理
-	Operation.Update();
-	for (int i = 0; i < MAX_PLAYER; i++)
-	{
-		//プレイヤーの更新処理
-		Player[i].Update();
-	}
 	Back.Update();
     Camera.Update();
-    Lift.Update();
+    Operation.Update();
+    Player.Update();
     Timer.Update();
 
-    for (int i = 0; i < MAX_PLAYER; i++)
-    {
-        Player[i].SetHit(Camera.CheckPlayer(Player[i].GetPos(), Player[i].GetSize()));
-    }
+    //---当たり判定---//
+    Player.SetHit(Camera.CheckPlayer(Player.GetPos(), Player.GetSize()));
 
     //---画面遷移---//
     if (!Timer.GetTime())
     {
-        for (int i = 0; i < MAX_PLAYER; i++)
+        if (Player.GetHit())
         {
-            if (Player[i].GetHit())
-            {
-                SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
-                return;
-            }
+            SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
         }
-        SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+        else
+        {
+            SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+        }
     }
 }

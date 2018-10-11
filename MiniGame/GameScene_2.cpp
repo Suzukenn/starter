@@ -20,11 +20,19 @@
 /////////////////////////////////////////////
 void GAME_2::Draw(void)
 {
-	Back.Draw();
-	//プレイヤーの描画処理
-	Player.Draw();
-	//マウスカーソルの描画処理
-	Operation.Draw();
+    //---各種宣言---//
+    int nCounter;
+
+    //---オブジェクトの描画---//
+    Back.Draw();
+    for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
+    {
+        Camera[nCounter].Draw();
+    }
+    Lift.Draw();
+    Operation.Draw();
+    Player.Draw();
+    Timer.Draw();
 }
 
 /////////////////////////////////////////////
@@ -38,15 +46,44 @@ void GAME_2::Draw(void)
 /////////////////////////////////////////////
 HRESULT GAME_2::Initialize(void)
 {
+    //---各種宣言---//
+    int nCounter;
+
+    const D3DXVECTOR2 CameraPos[MAX_CAMERA] = { {200.0F,10.0F},{600.0F,10.0F} };
+
 	//---オブジェクトの初期化---//
-	if (FAILED(Back.Initialize(FILE_PATH)))
-	{
-		return E_FAIL;
-	}
-	//プレイヤーの初期化
-	Player.Initialize();
-	//マウスカーソルの初期化
-	Operation.Initialize();
+    if (FAILED(Back.Initialize(FILE_PATH)))
+    {
+        return E_FAIL;
+    }
+
+    for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
+    {
+        if (FAILED(Camera[nCounter].Initialize(CameraPos[nCounter])))
+        {
+            return E_FAIL;
+        }
+    }
+
+    if (FAILED(Lift.Initialize({550.0F,300.0F})))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Operation.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Player.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Timer.Initialize()))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAME);
@@ -65,10 +102,20 @@ HRESULT GAME_2::Initialize(void)
 /////////////////////////////////////////////
 void GAME_2::Uninitialize(void)
 {
+    //---各種宣言---//
+    int nCounter;
+
     //---各種解放---//
+    Back.Uninitialize();
+    for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
+    {
+        Camera[nCounter].Uninitialize();
+    }
+    Lift.Uninitialize();
 	Operation.Uninitialize();
 	Player.Uninitialize();
-	Back.Uninitialize();
+    Timer.Uninitialize();
+
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAME);
 }
@@ -84,19 +131,35 @@ void GAME_2::Uninitialize(void)
 /////////////////////////////////////////////
 void GAME_2::Update(void)
 {
-	//---オブジェクトの更新---//
-	//マウスカーソルの更新処理
-	Operation.Update();
-	//プレイヤーの更新処理
-	Player.Update();
-	Back.Update();
+    //---各種宣言---//
+    int nCounter;
 
-    //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
+	//---オブジェクトの更新---//
+    Back.Update();
+    for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
     {
-		//リトライ先のセット
-		RETRYBUTTON::SetRetryScene(SCENE_GAME_2);
-		//シーン切替
-        SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+        Camera[nCounter].Update();
+    }
+    Lift.Update();
+    Operation.Update();
+    Player.Update();
+    Timer.Update();
+
+    //---当たり判定---//
+    for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
+    {
+        Player.SetHit(Camera[nCounter].CheckPlayer(Player.GetPos(), Player.GetSize()));
+    }
+    //---画面遷移---//
+    if (!Timer.GetTime())
+    {
+        if (Player.GetHit())
+        {
+            SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+        }
+        else
+        {
+            SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+        }
     }
 }

@@ -27,7 +27,7 @@ class CAMERA
         bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);
         void Uninitialize(void);
-        HRESULT Initialize(D3DXVECTOR2, float);
+        HRESULT Initialize(D3DXVECTOR2);
         void Update(void);
 };
 

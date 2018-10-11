@@ -3,7 +3,7 @@
 #include "Main.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
-#define VIEW_ANGLE 15.0F
+#define VIEW_ANGLE 25.0F
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -211,6 +211,7 @@ HRESULT COLLISION::Initialize(void)
 void COLLISION::Uninitialize(void)
 {
     //---解放---//
+    DeadAngle.Uninitialize();
     SAFE_RELEASE(VertexBuffer);
     Vertex = nullptr;
 }
@@ -236,11 +237,11 @@ void COLLISION::Update(void)
     fHeight = SCREEN_HEIGHT - Position[0].y;
 
     //---頂点の算出---//
-    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F + VIEW_ANGLE)));
+    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(VIEW_ANGLE)));
     Position[1] = { Position[0].x + fWidth1, SCREEN_HEIGHT };
 
-    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F - VIEW_ANGLE)));
-    Position[2] = { Position[0].x + fWidth2, SCREEN_HEIGHT };
+    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(VIEW_ANGLE)));
+    Position[2] = { Position[0].x - fWidth2, SCREEN_HEIGHT };
 
     //---バッファに反映---//
     for (nCounter = 0; nCounter < 3; nCounter++)

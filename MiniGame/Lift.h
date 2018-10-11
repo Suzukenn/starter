@@ -18,7 +18,7 @@ class LIFT
     public:
         void Draw(void);
         void Uninitialize(void);
-        HRESULT Initialize(D3DXVECTOR2 position, D3DXVECTOR2 size);
+        HRESULT Initialize(D3DXVECTOR2);
         void Update(void);
 
         D3DXVECTOR2 GetCenter(void) { return Center; }

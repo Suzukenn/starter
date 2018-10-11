@@ -181,7 +181,7 @@ void STARTBUTTON::Update(void)
 			<= MousePos->y + OPERATION_HIT_HEIGHT && MousePos->y - OPERATION_HIT_HEIGHT <= Pos.y + STARTBUTTON_HIT_HEIGHT))
 	{
 		//ƒQ[ƒ€ƒV[ƒ“Ø‘Ö
-		SCENE_MANAGER::SetScene(SCENE_GAME);
+		SCENE_MANAGER::SetScene(SCENE_SELECT);
 
         //---Œˆ’è‰¹Ä¶---//
         SOUND_MANAGER::Play(SE_DECISION);

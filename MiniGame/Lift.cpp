@@ -37,11 +37,11 @@ void LIFT::Draw(void)
 //
 //機能：リフトの初期化
 //
-//引数：なし
+//引数：(D3DXVECTOR2)位置
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT LIFT::Initialize(D3DXVECTOR2 position, D3DXVECTOR2 size)
+HRESULT LIFT::Initialize(D3DXVECTOR2 position)
 {
     //---各種宣言---//
     int nCounter;
@@ -51,7 +51,7 @@ HRESULT LIFT::Initialize(D3DXVECTOR2 position, D3DXVECTOR2 size)
     //---初期化処理---//
     pDevice = GetDevice();
     Position = position;
-    Size = size;
+    Size = { 170.0F,20.0F };
     Center = { Position.x + Size.x / 2, Position.y + Size.y / 2 };
 
     //---テクスチャの読み込み---//

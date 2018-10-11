@@ -30,8 +30,8 @@ RETRYBUTTON::RETRYBUTTON()
 	//動的確保
 	Operation = new OPERATION();
 	//位置設定
-	Pos.x = SCREEN_CENTER_X + 150;
-	Pos.y = SCREEN_CENTER_Y + 150;
+	Pos.x = SCREEN_CENTER_X + 150.0F;
+	Pos.y = SCREEN_CENTER_Y + 150.0F;
 }
 
 //=====デストラクタ=====

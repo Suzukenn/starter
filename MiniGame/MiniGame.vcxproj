@@ -135,6 +135,7 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameScene_3.h" />
     <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
@@ -145,9 +146,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RetryButton.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SelectButton.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SoundParameter.h" />
+    <ClInclude Include="Stage_EasyButton.h" />
+    <ClInclude Include="Stage_HardButton.h" />
+    <ClInclude Include="Stage_NormalButton.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
@@ -162,6 +167,7 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameScene_3.cpp" />
     <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -172,7 +178,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RetryButton.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SelectButton.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Stage_EasyButton.cpp" />
+    <ClCompile Include="Stage_HardButton.cpp" />
+    <ClCompile Include="Stage_NormalButton.cpp" />
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="Timer.cpp" />

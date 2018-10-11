@@ -85,7 +85,7 @@ void CAMERA::Draw(void)
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT CAMERA::Initialize(D3DXVECTOR2 position, float angle)
+HRESULT CAMERA::Initialize(D3DXVECTOR2 position)
 {
     //---各種宣言---//
     int nCounter;
@@ -96,7 +96,7 @@ HRESULT CAMERA::Initialize(D3DXVECTOR2 position, float angle)
     pDevice = GetDevice();
     Position = position;
     Center = { SIZE / 2, SIZE / 2 };
-    Angle = angle;
+    Angle = 0.0F;
 
     //---テクスチャの読み込み---//
     hResult = D3DXCreateTextureFromFileW(pDevice, FILE_CAMERAPATH, &Graphic);
@@ -175,6 +175,7 @@ HRESULT CAMERA::Initialize(D3DXVECTOR2 position, float angle)
 	VertexBufferRoot->Unlock();
 
 	//当たり判定の初期化
+    Collision.SetData(Position + Center, 0.0F);
     hResult = Collision.Initialize();
     if (FAILED(hResult))
     {

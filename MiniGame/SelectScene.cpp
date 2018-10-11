@@ -2,6 +2,9 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "SelectScene.h"
+#include "Stage_EasyButton.h"
+#include "Stage_HardButton.h"
+#include "Stage_NormalButton.h"
 #include "SoundManager.h"
 
 //＝＝＝関数定義＝＝＝//
@@ -17,6 +20,10 @@
 void SELECTSCENE::Draw(void)
 {
     Back.Draw();
+    Easy.Draw();
+    Hard.Draw();
+    Normal.Draw();
+    Title.Draw();
 }
 
 /////////////////////////////////////////////
@@ -32,6 +39,26 @@ HRESULT SELECTSCENE::Initialize(void)
 {
     //---オブジェクトの初期化---//
     if (FAILED(Back.Initialize(L"Data/Game/Select.png")))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Easy.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Hard.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Normal.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Title.Initialize()))
     {
         return E_FAIL;
     }
@@ -55,6 +82,10 @@ void SELECTSCENE::Uninitialize(void)
 {
     //---解放---//
     Back.Uninitialize();
+    Easy.Uninitialize();
+    Hard.Uninitialize();
+    Normal.Uninitialize();
+    Title.Initialize();
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_SELECT);
@@ -72,12 +103,9 @@ void SELECTSCENE::Uninitialize(void)
 void SELECTSCENE::Update(void)
 {
     //---オブジェクトの更新---//
-    //背景
     Back.Update();
-
-    //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_SPACE, TRIGGER))
-    {
-        SCENE_MANAGER::SetScene(SCENE_GAME);
-    }
+    Easy.Update();
+    Hard.Update();
+    Normal.Update();
+    Title.Update();
 }

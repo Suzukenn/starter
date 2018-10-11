@@ -3,6 +3,7 @@
 #include "GameOver.h"
 #include "GameScene.h"
 #include "GameScene_2.h"
+#include "GameScene_3.h"
 #include "Main.h"
 #include "SceneManager.h"
 #include "SelectScene.h"
@@ -10,8 +11,8 @@
 
 //＝＝＝グローバル変数＝＝＝//
 BASE_SCENE* SCENE_MANAGER::Scene = new TITLE();
-SCENE SCENE_MANAGER::CurrentScene;
-SCENE SCENE_MANAGER::NextScene;
+SCENE SCENE_MANAGER::CurrentScene = SCENE_TITLE;
+SCENE SCENE_MANAGER::NextScene = SCENE_TITLE;
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
@@ -82,9 +83,9 @@ void SCENE_MANAGER::Update(void)
         Scene->Uninitialize();
         switch (NextScene)
         {
-        case SCENE_TITLE:
-            Scene = new TITLE();
-            break;
+            case SCENE_TITLE:
+                Scene = new TITLE();
+                break;
 
             case SCENE_SELECT:
                 Scene = new SELECTSCENE();
@@ -92,11 +93,18 @@ void SCENE_MANAGER::Update(void)
 
             case SCENE_GAME:
                 Scene = new GAME();
+                RETRYBUTTON::SetRetryScene(SCENE_GAME);
                 break;
 
-			case SCENE_GAME_2:
-				Scene = new GAME_2();
-				break;
+            case SCENE_GAME_2:
+                Scene = new GAME_2();
+                RETRYBUTTON::SetRetryScene(SCENE_GAME_2);
+                break;
+
+            case SCENE_GAME_3:
+                Scene = new GAME_3();
+                RETRYBUTTON::SetRetryScene(SCENE_GAME_3);
+                break;
 
             case SCENE_GAMECLEAR:
                 Scene = new GAMECLEAR();

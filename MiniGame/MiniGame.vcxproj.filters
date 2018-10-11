@@ -71,6 +71,21 @@
     <ClCompile Include="GameClear.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Stage_EasyButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_3.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_HardButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_NormalButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -148,6 +163,21 @@
     </ClInclude>
     <ClInclude Include="GameClear.h">
       <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_EasyButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_3.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_HardButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_NormalButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectButton.h">
+      <Filter>ソースコード\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
