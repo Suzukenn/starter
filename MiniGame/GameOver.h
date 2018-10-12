@@ -2,16 +2,19 @@
 #define _GAMEOVER_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
+#include "BackGround.h"
 #include "Base_Scene.h"
 #include "Main.h"
+#include "RetryButton.h"
+#include "TitleButton.h"
 
 //＝＝＝クラス宣言＝＝＝//
 class GAMEOVER final : public BASE_SCENE
 {
     private:
-        unsigned int Score;
-        LPDIRECT3DTEXTURE9 Graphic;           //テクスチャ
-        LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
+		BACKGROUND Back;
+		RETRYBUTTON Retry_B;	//リトライボタン用
+		TITLEBUTTON Title_B;	//タイトルボタン用
 
     public:
         virtual void Draw(void) final;

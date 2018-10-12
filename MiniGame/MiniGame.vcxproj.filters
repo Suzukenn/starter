@@ -26,6 +26,12 @@
     <Filter Include="ソースコード\Parts">
       <UniqueIdentifier>{8720c517-33e0-474c-b4d6-a225414a2336}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソースコード\Object">
+      <UniqueIdentifier>{b170ea11-4b7a-4569-970d-6400a04f82fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\Actor">
+      <UniqueIdentifier>{6bebc2f6-fc99-4844-8f8d-a0677c42ff5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base_Scene.h">
@@ -64,6 +70,27 @@
     <ClInclude Include="Main.h">
       <Filter>ソースコード</Filter>
     </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Operation.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソースコード\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RetryButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButton.h">
+      <Filter>ソースコード\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_2.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameOver.cpp">
@@ -95,6 +122,27 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>ソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Operation.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RetryButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButton.cpp">
+      <Filter>ソースコード\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_2.cpp">
+      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

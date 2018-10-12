@@ -11,7 +11,7 @@
 /////////////////////////////////////////////
 //関数名：Draw
 //
-//機能：ゲームオーバーの描画
+//機能：ゲームオーバーとボタンの描画
 //
 //引数：なし
 //
@@ -19,25 +19,15 @@
 /////////////////////////////////////////////
 void GAMEOVER::Draw(void)
 {
-    //---各種宣言---//
-    LPDIRECT3DDEVICE9 pDevice;
-
-    //---初期化処理---//
-    pDevice = GetDevice();
-
-    //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
-    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
-
-    //---頂点バッファによる背景描画---//
-    pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+	Back.Draw();
+	Retry_B.Draw();
+	Title_B.Draw();
 }
 
 /////////////////////////////////////////////
 //関数名：Initialize
 //
-//機能：ゲームオーバーの初期化
+//機能：ゲームオーバーとボタンの初期化
 //
 //引数：なし
 //
@@ -45,61 +35,27 @@ void GAMEOVER::Draw(void)
 /////////////////////////////////////////////
 HRESULT GAMEOVER::Initialize(void)
 {
-    //---各種宣言---//
-    int nCounter;
-    HRESULT hResult;
-    LPDIRECT3DDEVICE9 pDevice;
-    VERTEX* pVertex;
+    //---オブジェクトの初期化---//
+	if (FAILED(Back.Initialize(FILE_PATH)))
+	{
+		return E_FAIL;
+	}
 
-    //---初期化処理---//
-    pDevice = GetDevice();
-
-    //---テクスチャの読み込み---//
-    hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
-    if (FAILED(hResult))
-    {
-        MessageBoxW(nullptr, L"ゲームオーバー画面の初期化に失敗しました", FILE_PATH, MB_OK);
-        Graphic = nullptr;
-        return hResult;
-    }
-
-    //---頂点バッファの生成---//
-    hResult = pDevice->CreateVertexBuffer(sizeof(VERTEX) * 4, 0, FVF_VERTEX, D3DPOOL_MANAGED, &VertexBuffer, nullptr);
-
-    if (FAILED(hResult))
-    {
-        return hResult;
-    }
-
-    //---頂点バッファへの値の設定---//
-    //バッファのポインタを取得
-    VertexBuffer->Lock(0, 0, (void**)&pVertex, 0);
-
-    //値の設定
-    for (nCounter = 0; nCounter < 4; nCounter++)
-    {
-        pVertex[nCounter].U = (float)(nCounter & 1);
-        pVertex[nCounter].V = (float)((nCounter >> 1) & 1);
-        pVertex[nCounter].Position.x = pVertex[nCounter].U * SCREEN_WIDTH;
-        pVertex[nCounter].Position.y = pVertex[nCounter].V * SCREEN_HEIGHT;
-        pVertex[nCounter].Position.z = 0.0F;
-        pVertex[nCounter].RHW = 1.0F;
-        pVertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
-    }
-
-    //バッファのポインタの解放
-    VertexBuffer->Unlock();
+	//リトライボタンの初期化
+	Retry_B.Initialize();
+	//タイトルボタンの初期化
+	Title_B.Initialize();
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAMEOVER);
 
-    return hResult;
+    return S_OK;
 }
 
 /////////////////////////////////////////////
 //関数名：Uninitialize
 //
-//機能：ゲームオーバーの終了
+//機能：ゲームオーバーとボタンの終了
 //
 //引数：なし
 //
@@ -108,9 +64,10 @@ HRESULT GAMEOVER::Initialize(void)
 void GAMEOVER::Uninitialize(void)
 {
     //---解放---//
-    SAFE_RELEASE(VertexBuffer);
-    SAFE_RELEASE(Graphic)
-
+	Title_B.Uninitialize();
+	Retry_B.Uninitialize();
+    Back.Uninitialize();
+   
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_GAMEOVER);
 }
@@ -118,7 +75,7 @@ void GAMEOVER::Uninitialize(void)
 /////////////////////////////////////////////
 //関数名：Update
 //
-//機能：ゲームオーバーの更新
+//機能：ゲームオーバーとボタンの更新
 //
 //引数：なし
 //
@@ -126,9 +83,11 @@ void GAMEOVER::Uninitialize(void)
 /////////////////////////////////////////////
 void GAMEOVER::Update(void)
 {
+	//---オブジェクトの更新---//
+	Back.Update();
     //---画面遷移---//
-    if (INPUT_MANAGER::GetKey(DIK_A, TRIGGER))
-    {
-        SCENE_MANAGER::SetScene(SCENE_TITLE);
-    }
+	//リトライボタンの更新処理
+	Retry_B.Update();
+	//タイトルボタンの更新処理
+	Title_B.Update();
 }

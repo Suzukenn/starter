@@ -45,5 +45,6 @@ typedef struct
 
 //＝＝＝プロトタイプ宣言＝＝＝//
 LPDIRECT3DDEVICE9 GetDevice(void);
+HWND* GethWnd(void);
 
 #endif //_MAIN_H_
