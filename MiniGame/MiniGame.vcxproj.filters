@@ -50,9 +50,6 @@
     <ClCompile Include="RetryButton.cpp">
       <Filter>ソースコード\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソースコード\UI</Filter>
-    </ClCompile>
     <ClCompile Include="SelectButton.cpp">
       <Filter>ソースコード\UI</Filter>
     </ClCompile>
@@ -84,6 +81,15 @@
       <Filter>ソースコード\UI</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ManualButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,9 +146,6 @@
     <ClInclude Include="RetryButton.h">
       <Filter>ソースコード\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ソースコード\UI</Filter>
-    </ClInclude>
     <ClInclude Include="SelectButton.h">
       <Filter>ソースコード\UI</Filter>
     </ClInclude>
@@ -177,6 +180,15 @@
       <Filter>ソースコード\UI</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ManualButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
   </ItemGroup>

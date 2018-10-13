@@ -5,6 +5,7 @@
 #include "Main.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
+#define CHECK_TIME 4
 #define DIGITS 2				//最大表示桁
 
 //＝＝＝クラス宣言＝＝＝//
@@ -13,6 +14,7 @@ class TIMER
     private:
         int Fream;
         int Time;
+        bool Check;
         LPDIRECT3DTEXTURE9 Graphic;				        //テクスチャ
         LPDIRECT3DVERTEXBUFFER9 VertexBuffer;	//頂点バッファ
         VERTEX Vertex[4];
@@ -23,7 +25,11 @@ class TIMER
         void Update(void);
         void Draw(void);
 
+        bool GetCheck(void) { return Check; }
         int GetTime(void) { return Time; }
+        void SetCheck(bool check) { Check = check; }
+        void SetTime(int time) { Fream = time * 60; }
+
 };
 
 #endif

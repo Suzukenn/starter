@@ -199,51 +199,56 @@ void PLAYER::Draw(void)
 //
 //戻り値：なし
 /////////////////////////////////////////////
-void PLAYER::Update(int num)
+void PLAYER::Update(int num, bool move)
 {
-	//----- 各種宣言 -----//
-	POINT* MousePos = Operation->GetMousePos();
-	GetCursorPos(MousePos);										// マウス座標(スクリーン座標)取得
-	ScreenToClient(*GethWnd(), MousePos);						// ウィンドウ ローカル座標に変換
+    //----- 各種宣言 -----//
+    POINT* MousePos = Operation->GetMousePos();
+    GetCursorPos(MousePos);										// マウス座標(スクリーン座標)取得
+    ScreenToClient(*GethWnd(), MousePos);						// ウィンドウ ローカル座標に変換
 
-	if (!Invincible)
-	{
-		//移動量への影響を反映
-		Move.y += VAL_GRAVITY;
-	}
-	else
-	{
+    if (!Invincible)
+    {
+        //移動量への影響を反映
+        Move.y += VAL_GRAVITY;
+    }
+    else
+    {
         //無敵位置（スタート位置）へ
-		Pos.x = PLAYER_WIDTH / 2.0f;
-		Pos.y = SCREEN_HEIGHT - PLAYER_HEIGHT / 2.0f - (Interval * num);
-	}
+        Pos.x = PLAYER_WIDTH / 2.0f;
+        Pos.y = SCREEN_HEIGHT - PLAYER_HEIGHT / 2.0f - (Interval * num);
+    }
 
-	//----- マウスカーソルとの当たり判定 -----//
-	if (INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, HOLD) &&
-		(Pos.x - MousePos->x) * (Pos.x - MousePos->x) + (Pos.y - MousePos->y) * (Pos.y - MousePos->y) <= 
-		(PLAYER_RADIUS + 20) * (PLAYER_RADIUS + 20))
-	{
-		//ポジションの更新
-		Pos.x = MousePos->x;
-		Pos.y = MousePos->y;
-		//重力の無効
-		Move.y = 0.0f;
-		//掴まれたアニメーション
-		Anim = 1;
-		//無敵状態を解放
-		Invincible = false;
-	}
-	else
-	{
-		//無敵位置（スタート位置）判定
-		if (Pos.x - PLAYER_WIDTH < 50.0f)
-		{
-			Invincible = true;
-		}
-		//通常アニメーション
-		Anim = 0;
-	}
-	//-----アニメーション-----//
+    //----- マウスカーソルとの当たり判定 -----//
+    if (INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, HOLD) &&
+        (Pos.x - MousePos->x) * (Pos.x - MousePos->x) + (Pos.y - MousePos->y) * (Pos.y - MousePos->y) <=
+        (PLAYER_RADIUS + 20) * (PLAYER_RADIUS + 20))
+    {
+        if (move)
+        {
+
+            //ポジションの更新
+            Pos.x = MousePos->x;
+            Pos.y = MousePos->y;
+            //重力の無効
+            Move.y = 0.0f;
+            //掴まれたアニメーション
+            Anim = 1;
+            //無敵状態を解放
+            Invincible = false;
+        }
+    }
+    else
+    {
+        //無敵位置（スタート位置）判定
+        if (Pos.x - PLAYER_WIDTH < 50.0f)
+        {
+            Invincible = true;
+        }
+        //通常アニメーション
+        Anim = 0;
+    }
+
+    //-----アニメーション-----//
 	//アニメーション更新
 	++AnimCnt;
 	if (AnimCnt >= g_animPat[Anim][AnimPat].Count)

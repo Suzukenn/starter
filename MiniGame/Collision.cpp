@@ -188,7 +188,7 @@ HRESULT COLLISION::Initialize(void)
         Vertex[nCounter].Position.y = 0.0F;
         Vertex[nCounter].Position.z = 0.0F;
         Vertex[nCounter].RHW = 1.0F;
-        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(128, 255, 255, 255);
     }
 
     //バッファのポインタの解放

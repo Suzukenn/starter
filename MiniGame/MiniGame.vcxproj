@@ -141,6 +141,8 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Lift.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Manual.h" />
+    <ClInclude Include="ManualButton.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
@@ -173,6 +175,8 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Lift.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Manual.cpp" />
+    <ClCompile Include="ManualButton.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />

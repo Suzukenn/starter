@@ -42,9 +42,9 @@ class PLAYER
 		~PLAYER();
 
 		//===プロトタイプ宣言===
-		HRESULT Initialize(int num);
+		HRESULT Initialize(int);
 		void Uninitialize(void);
-		void Update(int num);
+		void Update(int, bool);
 		void Draw(void);
 
         bool GetHit(void) { return Hit; }

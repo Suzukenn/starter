@@ -13,8 +13,8 @@
 // パス名
 #define FILE_PATH	L"Data/Game/GameStartButton.png"
 //スタートボタンサイズ
-#define STARTBUTTON_WIDTH	(170)	//幅
-#define STARTBUTTON_HEIGHT	(57)	//高さ
+#define STARTBUTTON_WIDTH	(250)	//幅
+#define STARTBUTTON_HEIGHT	(120)	//高さ
 //四角判定用
 #define STARTBUTTON_HIT_WIDTH	(80)	//幅
 #define STARTBUTTON_HIT_HEIGHT	(25)	//高さ

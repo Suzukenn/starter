@@ -9,6 +9,7 @@
 typedef enum
 {
     SCENE_TITLE,
+    SCENE_MANUAL,
     SCENE_SELECT,
     SCENE_GAME,
     SCENE_GAME_2,

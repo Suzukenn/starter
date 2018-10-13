@@ -30,6 +30,8 @@ class TITLEBUTTON
 		void Update(void);
 		void Draw(void);
 
+        void SetPos(D3DXVECTOR2 pos) { Pos = pos; }
+
 };
 
 #endif

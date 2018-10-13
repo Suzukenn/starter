@@ -18,8 +18,8 @@
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FVF_VERTEX (D3DFVF_XYZRHW|D3DFVF_TEX1|D3DFVF_DIFFUSE)    //テクスチャのフォーマット
-#define SCREEN_HEIGHT 480.0F                                        //ウインドウの高さ
-#define SCREEN_WIDTH 854.0F  		                                //ウインドウの幅
+#define SCREEN_HEIGHT 600.0F                                        //ウインドウの高さ
+#define SCREEN_WIDTH 800.0F  		                                //ウインドウの幅
 #define SCREEN_CENTER_X	(SCREEN_WIDTH / 2)                          //ウインドウの中心Ｘ座標
 #define SCREEN_CENTER_Y	(SCREEN_HEIGHT / 2)	                        //ウインドウの中心Ｙ座標
 

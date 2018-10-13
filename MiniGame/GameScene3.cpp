@@ -50,7 +50,7 @@ HRESULT GAME_3::Initialize(void)
 
     //---オブジェクトの初期化---//
     //背景
-    if (FAILED(Back.Initialize(L"Data/Game/BackGround3.jpg")))
+    if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
     {
         return E_FAIL;
     }
@@ -145,7 +145,7 @@ void GAME_3::Update(void)
     Operation.Update();
     for (int i = 0; i < MAX_PLAYER; i++)
     {
-        Player[i].Update(i);
+        Player[i].Update(i, !Timer.GetCheck());
     }
     Back.Update();
     for (int i = 0; i < MAX_PLAYER; i++)
@@ -166,14 +166,22 @@ void GAME_3::Update(void)
     //---画面遷移---//
     if (!Timer.GetTime())
     {
-        for (int i = 0; i < MAX_PLAYER; i++)
+        if (!Timer.GetCheck())
         {
-            if (Player[i].GetHit())
-            {
-                SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
-                return;
-            }
+            Timer.SetTime(CHECK_TIME);
+            Timer.SetCheck(true);
         }
-        SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+        else
+        {
+            for (int i = 0; i < MAX_PLAYER; i++)
+            {
+                if (Player[i].GetHit())
+                {
+                    SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+                    return;
+                }
+            }
+            SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+        }
     }
 }

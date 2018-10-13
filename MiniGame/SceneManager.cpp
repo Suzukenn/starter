@@ -5,6 +5,7 @@
 #include "GameScene2.h"
 #include "GameScene3.h"
 #include "Main.h"
+#include "Manual.h"
 #include "SceneManager.h"
 #include "SelectScene.h"
 #include "Title.h"
@@ -85,6 +86,10 @@ void SCENE_MANAGER::Update(void)
         {
             case SCENE_TITLE:
                 Scene = new TITLE();
+                break;
+
+            case SCENE_MANUAL:
+                Scene = new MANUAL();
                 break;
 
             case SCENE_SELECT:

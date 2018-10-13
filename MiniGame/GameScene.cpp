@@ -111,7 +111,7 @@ void GAME::Update(void)
 	Back.Update();
     Camera.Update();
     Operation.Update();
-    Player.Update(0);
+    Player.Update(0, !Timer.GetCheck());
     Timer.Update();
 
     //---“–‚½‚è”»’è---//
@@ -120,13 +120,21 @@ void GAME::Update(void)
     //---‰æ–Ê‘JˆÚ---//
     if (!Timer.GetTime())
     {
-        if (Player.GetHit())
+        if (!Timer.GetCheck())
         {
-            SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+            Timer.SetTime(CHECK_TIME);
+            Timer.SetCheck(true);
         }
         else
         {
-            SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+            if (Player.GetHit())
+            {
+                SCENE_MANAGER::SetScene(SCENE_GAMEOVER);
+            }
+            else
+            {
+                SCENE_MANAGER::SetScene(SCENE_GAMECLEAR);
+            }
         }
     }
 }
