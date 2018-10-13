@@ -44,7 +44,6 @@ void OPERATION::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
     pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
     pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 
@@ -130,7 +129,7 @@ void OPERATION::Uninitialize(void)
 //関数名：Update
 //
 //機能：操作ポインタの更新
-//m
+//
 //引数：なし
 //
 //戻り値：なし
@@ -171,5 +170,5 @@ void OPERATION::Update(void)
 /////////////////////////////////////////////
 POINT* OPERATION::GetMousePos(void)
 {
-	return &Pos;
+    return &Pos;
 }

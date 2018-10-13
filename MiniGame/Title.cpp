@@ -77,7 +77,6 @@ void TITLE::Uninitialize(void)
 void TITLE::Update(void)
 {
 	//---オブジェクトの更新---//
-	Start_B.Update();
-    //背景
     Back.Update();
+	Start_B.Update();
 }

@@ -20,14 +20,20 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene_2.cpp">
+    <ClCompile Include="GameScene2.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>ソースコード\System\Input</Filter>
+    <ClCompile Include="GameScene3.cpp">
+      <Filter>ソースコード\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>ソースコード\System\Input</Filter>
     </ClCompile>
     <ClCompile Include="Lift.cpp">
       <Filter>ソースコード\Actor</Filter>
@@ -44,38 +50,23 @@
     <ClCompile Include="RetryButton.cpp">
       <Filter>ソースコード\UI</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>ソースコード\System\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="StartButton.cpp">
-      <Filter>ソースコード\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>ソースコード\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソースコード\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleButton.cpp">
-      <Filter>ソースコード\UI</Filter>
-    </ClCompile>
     <ClCompile Include="WavController.cpp">
       <Filter>ソースコード\System\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="GameClear.cpp">
-      <Filter>ソースコード\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Stage_EasyButton.cpp">
       <Filter>ソースコード\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene_3.cpp">
-      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Stage_HardButton.cpp">
       <Filter>ソースコード\UI</Filter>
@@ -83,8 +74,17 @@
     <ClCompile Include="Stage_NormalButton.cpp">
       <Filter>ソースコード\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SelectButton.cpp">
+    <ClCompile Include="StartButton.cpp">
       <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButton.cpp">
+      <Filter>ソースコード\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソースコード\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,20 +104,26 @@
     <ClInclude Include="DeadAngle.h">
       <Filter>ソースコード\Object</Filter>
     </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene_2.h">
+    <ClInclude Include="GameScene2.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>ソースコード\System\Input</Filter>
+    <ClInclude Include="GameScene3.h">
+      <Filter>ソースコード\Scene</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>ソースコード\System\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>ソースコード\System\Input</Filter>
     </ClInclude>
     <ClInclude Include="Lift.h">
       <Filter>ソースコード\Actor</Filter>
@@ -134,41 +140,26 @@
     <ClInclude Include="RetryButton.h">
       <Filter>ソースコード\UI</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
     <ClInclude Include="SelectScene.h">
       <Filter>ソースコード\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>ソースコード\System\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ソースコード\System\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="StartButton.h">
-      <Filter>ソースコード\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>ソースコード\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ソースコード\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleButton.h">
-      <Filter>ソースコード\UI</Filter>
+    <ClInclude Include="SoundParameter.h">
+      <Filter>ソースコード\System\Sound</Filter>
     </ClInclude>
     <ClInclude Include="WavController.h">
       <Filter>ソースコード\System\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="SoundParameter.h">
-      <Filter>ソースコード\System\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClear.h">
-      <Filter>ソースコード\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Stage_EasyButton.h">
       <Filter>ソースコード\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene_3.h">
-      <Filter>ソースコード\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Stage_HardButton.h">
       <Filter>ソースコード\UI</Filter>
@@ -176,37 +167,46 @@
     <ClInclude Include="Stage_NormalButton.h">
       <Filter>ソースコード\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SelectButton.h">
+    <ClInclude Include="StartButton.h">
       <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButton.h">
+      <Filter>ソースコード\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ソースコード\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ソースコード">
-      <UniqueIdentifier>{2a0d5e58-b6ed-4eb6-b33f-0f5776967c8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースコード\System">
-      <UniqueIdentifier>{eb2039a8-f577-4194-894c-f0b91eb4884a}</UniqueIdentifier>
+      <UniqueIdentifier>{9c5ee098-b4ee-4367-a39c-baff47e6c6ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースコード\Actor">
-      <UniqueIdentifier>{1742a6bc-c8de-44ee-b6b9-c94e9928afcc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースコード\System\Input">
-      <UniqueIdentifier>{f1aae937-c792-41d9-a661-426a4319c9aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースコード\Scene">
-      <UniqueIdentifier>{2e0ef4c9-9864-4cb0-878b-5d2764cc1cdb}</UniqueIdentifier>
+      <UniqueIdentifier>{ee083348-4d40-4fa6-b469-4cb8c218e124}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースコード\Object">
-      <UniqueIdentifier>{ddaa3e47-32bb-4250-ba50-d5b8321bdfa8}</UniqueIdentifier>
+      <UniqueIdentifier>{f99fcd64-21f8-4af2-bc66-121314a69721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\Scene">
+      <UniqueIdentifier>{3cc5f9ce-db54-40a0-a809-66789faaa801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System">
+      <UniqueIdentifier>{82719c44-adf0-483d-9abd-d67dc1b123e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースコード\System\Manager">
-      <UniqueIdentifier>{5a4e0fec-d8d0-44df-91e7-8852be104a7e}</UniqueIdentifier>
+      <UniqueIdentifier>{f4ce54e2-3450-40a7-a49d-44d95c479b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースコード\System\Input">
+      <UniqueIdentifier>{ab4fd0bd-667d-45a5-9717-3ff7f3ee66cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースコード\UI">
-      <UniqueIdentifier>{bf33f387-affe-427e-8872-29941d181a2e}</UniqueIdentifier>
+      <UniqueIdentifier>{a63c246d-9758-41ea-a308-265690c8e300}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースコード\System\Sound">
-      <UniqueIdentifier>{bc3b3490-0a40-48d1-9766-9c6c4d34ed11}</UniqueIdentifier>
+      <UniqueIdentifier>{7edc8836-9c25-401b-b899-43667f0bb666}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

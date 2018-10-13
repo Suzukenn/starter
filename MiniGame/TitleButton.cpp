@@ -111,17 +111,8 @@ HRESULT TITLEBUTTON::Initialize(void)
 void TITLEBUTTON::Uninitialize(void)
 {
 	//---解放---//
-	if (VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
-
-	if (Graphic)
-	{
-		Graphic->Release();
-		Graphic = nullptr;
-	}
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic)
 }
 
 //＝＝＝関数定義＝＝＝//
@@ -143,9 +134,8 @@ void TITLEBUTTON::Draw(void)
 	pDevice = GetDevice();
 
 	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
 	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+	pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 	
 	//--- 座標反映 ---//
 	for (int i = 0; i < 4; ++i)
@@ -155,7 +145,7 @@ void TITLEBUTTON::Draw(void)
 	}
 
 	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////

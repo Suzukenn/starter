@@ -135,8 +135,8 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
-    <ClInclude Include="GameScene_3.h" />
-    <ClInclude Include="GameScene_2.h" />
+    <ClInclude Include="GameScene3.h" />
+    <ClInclude Include="GameScene2.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Lift.h" />
@@ -167,8 +167,8 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="GameScene_3.cpp" />
-    <ClCompile Include="GameScene_2.cpp" />
+    <ClCompile Include="GameScene3.cpp" />
+    <ClCompile Include="GameScene2.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Lift.cpp" />

@@ -45,7 +45,7 @@ HRESULT GAME::Initialize(void)
 	}
 
     //ÉvÉåÉCÉÑÅ[ÇÃèâä˙âª
-    if (FAILED(Player.Initialize()))
+    if (FAILED(Player.Initialize(0)))
     {
         return E_FAIL;
     }
@@ -90,7 +90,6 @@ void GAME::Uninitialize(void)
     Camera.Uninitialize();
 	Operation.Uninitialize();
     Player.Uninitialize();
-	Back.Uninitialize();
     Timer.Uninitialize();
 
     //---BGMí‚é~---//
@@ -112,7 +111,7 @@ void GAME::Update(void)
 	Back.Update();
     Camera.Update();
     Operation.Update();
-    Player.Update();
+    Player.Update(0);
     Timer.Update();
 
     //---ìñÇΩÇËîªíË---//

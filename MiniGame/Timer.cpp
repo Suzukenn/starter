@@ -3,7 +3,6 @@
 #include "Main.h"
 #include "Timer.h"
 
-
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FILE_PATH L"Data/Game/Number.tga" //パス名
 #define SIZE 50.0F					//表示サイズ

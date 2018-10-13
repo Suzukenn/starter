@@ -1,24 +1,25 @@
-﻿  Camera.cpp
-Camera.cpp(23): warning C4101: 'bJudge': ローカル変数は 1 度も使われていません。
-  Collision.cpp
-  GameClear.cpp
-  GameOver.cpp
-  GameScene.cpp
-  GameScene_3.cpp
-  GameScene_2.cpp
+﻿  GameScene.cpp
+  GameScene3.cpp
+d:\documents\hal課題\2年\gm\starter\minigame\GameScene3.h(16): warning C4005: 'MAX_PLAYER': マクロが再定義されました。
+  d:\documents\hal課題\2年\gm\starter\minigame\Player.h(14): note: 'MAX_PLAYER' の以前の定義を確認してください
+  GameScene2.cpp
+  Player.cpp
+Player.cpp(227): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+Player.cpp(228): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
   RetryButton.cpp
   SceneManager.cpp
+d:\documents\hal課題\2年\gm\starter\minigame\GameScene3.h(16): warning C4005: 'MAX_PLAYER': マクロが再定義されました。
+  d:\documents\hal課題\2年\gm\starter\minigame\Player.h(14): note: 'MAX_PLAYER' の以前の定義を確認してください
   SelectButton.cpp
   Stage_EasyButton.cpp
   Stage_HardButton.cpp
   Stage_NormalButton.cpp
   StartButton.cpp
-  SelectScene.cpp
   TitleButton.cpp
   コード生成しています。
-  96 of 792 functions (12.1%) were compiled, the rest were copied from previous compilation.
-    25 functions were new in current compilation
-    23 functions had inline decision re-evaluated but remain unchanged
+  89 of 792 functions (11.2%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    15 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Release\MiniGame.exe
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Release\MiniGame.pdb (Full PDB)
