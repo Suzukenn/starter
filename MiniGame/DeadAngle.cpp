@@ -117,10 +117,10 @@ HRESULT DEADANGLE::Initialize(void)
     pDevice = GetDevice();
 
     //---ƒeƒNƒXƒ`ƒƒ‚Ì“Ç‚İ‚İ---//
-    hResult = D3DXCreateTextureFromFileW(pDevice, L"Data/Game/BackGround.tga", &Graphic);
+    hResult = D3DXCreateTextureFromFileW(pDevice, L"Data/Game/BackGround.png", &Graphic);
     if (FAILED(hResult))
     {
-        MessageBoxW(nullptr, L"€Šp—p”wŒi‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½", L"Data/Game/BackGround.tga", MB_OK);
+        MessageBoxW(nullptr, L"€Šp—p”wŒi‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½", L"Data/Game/BackGround.png", MB_OK);
         Uninitialize();
         return hResult;
     }

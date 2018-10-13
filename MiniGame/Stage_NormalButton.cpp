@@ -24,7 +24,7 @@ STAGENORMALBUTTON::STAGENORMALBUTTON()
     Operation = new OPERATION();
     //位置設定
     Pos.x = SCREEN_CENTER_X;
-    Pos.y = SCREEN_CENTER_Y + 110.0F;
+    Pos.y = SCREEN_CENTER_Y + 160.0F;
 }
 
 //=====デストラクタ=====

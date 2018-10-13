@@ -28,7 +28,7 @@ TITLEBUTTON::TITLEBUTTON()
 	Operation = new OPERATION();
 	//位置設定
 	Pos.x = 100.0F;
-	Pos.y = 420.0F;
+	Pos.y = 530.0F;
 }
 
 //=====デストラクタ=====

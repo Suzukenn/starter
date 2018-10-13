@@ -1,8 +1,6 @@
 //
 //	Player.h
 //
-#pragma once
-
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
@@ -24,6 +22,7 @@ class PLAYER
 {
 	private:
         D3DXVECTOR2				Pos;			//プレイヤーの位置
+        D3DXVECTOR2				PosOld;			//プレイヤーの前の位置
         D3DXVECTOR2				Size;			//プレイヤーの大きさ
         D3DXVECTOR2				Move;			//プレイヤーの重力用
 		float					Interval;		//プレイヤーの重力用
@@ -36,22 +35,26 @@ class PLAYER
 		int			Anim;						// モーションNo.0～7
 		int			AnimPat;					// パターンNo.0～2
 		int			AnimCnt;					// フレーム数0～15
+        int			LiftLandCnt;				// 着地アニメーション用カウント
+        bool					LiftLanding;		//プレイヤーの地形着地判定
+        bool					GroundLanding;		//プレイヤーの地上着地判定
 
 	public:
 		PLAYER();
 		~PLAYER();
 
 		//===プロトタイプ宣言===
+        void CheckCollisionLift(D3DXVECTOR2 LiftPos, D3DXVECTOR2 LiftSize);
+        void Draw(void);
 		HRESULT Initialize(int);
+        void SetPlayerAnimFrame(int);
 		void Uninitialize(void);
 		void Update(int, bool);
-		void Draw(void);
 
         bool GetHit(void) { return Hit; }
         D3DXVECTOR2	GetPos(void) { return Pos; }
         D3DXVECTOR2	GetSize(void) { return Size; }
         void SetHit(bool hit) { Hit = hit; }
-		void SetPlayerAnimFrame(int);
 
 };
 

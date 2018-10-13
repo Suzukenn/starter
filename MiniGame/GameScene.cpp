@@ -39,7 +39,7 @@ HRESULT GAME::Initialize(void)
 {
 	//---オブジェクトの初期化---//
     //背景
-	if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
+	if (FAILED(Back.Initialize(L"Data/Game/BackGround.png")))
 	{
 		return E_FAIL;
 	}

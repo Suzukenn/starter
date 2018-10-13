@@ -3,57 +3,9 @@
 #include "Main.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
-#define VIEW_ANGLE 25.0F
+#define VIEW_ANGLE 20.0F
 
 //＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：CheckDeadAngle
-//
-//機能：プレイヤーの死角内判定
-//
-//引数：なし
-//
-//戻り値：(bool)判定結果
-/////////////////////////////////////////////
-bool COLLISION::CheckInst(D3DXVECTOR2 lift_left, D3DXVECTOR2 lift_right, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
-{
-    ////---各種宣言---//
-    //float Crs_v_v1;
-    //float Crs_v_v2;
-    //float Crs_v1_v2;
-    //float t1;
-    //float t2;
-    //D3DXVECTOR2 v;
-
-    //const float eps = 0.00001F;
-
-    //v = Position[0] - lift_left;
-    //Crs_v1_v2 = Position[1].x * lift_right.y - Position[1].y * lift_right.x;
-
-    //// 平行状態
-    //if (!Crs_v1_v2)
-    //{
-    //    return false;
-    //}
-
-    //Crs_v_v1 = v.x * lift_left.y - v.y * lift_left.x;
-    //Crs_v_v2 = v.x * lift_right.y - v.y * lift_right.x;
-
-    //t1 = Crs_v_v2 / Crs_v1_v2;
-    //t2 = Crs_v_v1 / Crs_v1_v2;
-
-    //// 交差していない
-    //if (t1 + eps < 0 || t1 - eps > 1 || t2 + eps < 0 || t2 - eps > 1) 
-    //{
-    //    return false;
-    //}
-
-    //if (outPos)
-    //    *outPos = seg1.s + seg1.v * t1;
-
-    return true;
-}
-
 /////////////////////////////////////////////
 //関数名：CheckPlayer
 //
@@ -229,6 +181,10 @@ void COLLISION::Update(void)
 {
     //---各種宣言---//
     int nCounter;
+    float fCosine;
+    float fDx;
+    float fDy;
+    float fSin;
     float fHeight;
     float fWidth1;
     float fWidth2;
@@ -247,5 +203,22 @@ void COLLISION::Update(void)
     for (nCounter = 0; nCounter < 3; nCounter++)
     {
         Vertex[nCounter].Position = { Position[nCounter].x, Position[nCounter].y, 0.0F };
+    }
+
+    //---回転---//
+    if (!Angle)
+    {
+        return;
+    }
+    fCosine = cosf(D3DXToRadian(Angle));
+    fSin = sinf(D3DXToRadian(Angle));
+
+    for (nCounter = 1; nCounter < 3; nCounter++)
+    {
+        fDx = (nCounter % 2) * 800.0F;
+        fDy = (nCounter / 2) * 800.0F;
+
+        Vertex[nCounter].Position.x = (Position[nCounter].x + (fDx * fCosine - fDy * fSin));
+        Vertex[nCounter].Position.y = (Position[nCounter].y + (fDx * fSin + fDy * fCosine));
     }
 }

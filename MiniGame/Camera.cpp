@@ -9,25 +9,6 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
-//関数名：CheckDeadAngle
-//
-//機能：プレイヤーの死角内判定
-//
-//引数：なし
-//
-//戻り値：(bool)判定結果
-/////////////////////////////////////////////
-bool CAMERA::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 player_size, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
-{
-    //---各種宣言---//
-    bool bJudge;
-    D3DXVECTOR2 vecDifferential;
-
-    vecDifferential = lift_size - Position;
-    return false;
-}
-
-/////////////////////////////////////////////
 //関数名：CheckPlayer
 //
 //機能：プレイヤーの視野角内判定
@@ -96,7 +77,6 @@ HRESULT CAMERA::Initialize(D3DXVECTOR2 position)
     pDevice = GetDevice();
     Position = position;
     Center = { SIZE / 2, SIZE / 2 };
-    Angle = 0.0F;
 
     //---テクスチャの読み込み---//
     hResult = D3DXCreateTextureFromFileW(pDevice, FILE_CAMERAPATH, &Graphic);
@@ -227,8 +207,8 @@ void CAMERA::Update(void)
     float fDy;
     float fSin;
 
-    fCosine = cosf(D3DXToRadian(Angle));
-    fSin = sinf(D3DXToRadian(Angle));
+    fCosine = cosf(D3DXToRadian(0.0F));
+    fSin = sinf(D3DXToRadian(0.0F));
 
     for (nCounter = 0; nCounter < 4; ++nCounter)
     {
@@ -239,6 +219,6 @@ void CAMERA::Update(void)
         Vertex[nCounter].Position.y = (Position.y + (fDx * fSin + fDy * fCosine)) + SIZE / 2;
     }
 
-    Collision.SetData(Position + Center, Angle);
+    Collision.SetData(Position + Center, 0.0F);
     Collision.Update();
 }

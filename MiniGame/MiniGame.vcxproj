@@ -144,6 +144,7 @@
     <ClInclude Include="Manual.h" />
     <ClInclude Include="ManualButton.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MoveCamera.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RetryButton.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Manual.cpp" />
     <ClCompile Include="ManualButton.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="MoveCamera.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RetryButton.cpp" />

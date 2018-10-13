@@ -92,6 +92,9 @@
     <ClCompile Include="Manual.cpp">
       <Filter>ソースコード\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="MoveCamera.cpp">
+      <Filter>ソースコード\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Manual.h">
       <Filter>ソースコード\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCamera.h">
+      <Filter>ソースコード\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

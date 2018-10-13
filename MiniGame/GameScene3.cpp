@@ -24,7 +24,10 @@ void GAME_3::Draw(void)
     {
         Camera[i].Draw();
     }
-    Lift.Draw();
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        Lift[i].Draw();
+    }
     Operation.Draw();
     for (int i = 0; i < MAX_PLAYER; i++)
     {
@@ -46,11 +49,12 @@ void GAME_3::Draw(void)
 HRESULT GAME_3::Initialize(void)
 {
     //---各種宣言---//
-    const D3DXVECTOR2 CameraPos[MAX_CAMERA] = { { 200.0F,10.0F },{ 600.0F,10.0F } };
+    const D3DXVECTOR2 vecCameraPos[MAX_CAMERA] = { { 150.0F,10.0F },{ 500.0F,10.0F } };
+    const D3DXVECTOR2 vecLiftPos[MAX_LIFT] = { { 200.0F,450.0F },{ 600.0F,300.0F } };
 
     //---オブジェクトの初期化---//
     //背景
-    if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
+    if (FAILED(Back.Initialize(L"Data/Game/BackGround.png")))
     {
         return E_FAIL;
     }
@@ -64,9 +68,6 @@ HRESULT GAME_3::Initialize(void)
         }
     }
 
-    //マウスカーソルの初期化
-    Operation.Initialize();
-
     //マウスカーソル
     if (FAILED(Operation.Initialize()))
     {
@@ -76,16 +77,19 @@ HRESULT GAME_3::Initialize(void)
     //カメラ
     for (int i = 0; i < MAX_PLAYER; i++)
     {
-        if (FAILED(Camera[i].Initialize(CameraPos[i])))
+        if (FAILED(Camera[i].Initialize(vecCameraPos[i])))
         {
             return E_FAIL;
         }
     }
 
     //リフト
-    if (FAILED(Lift.Initialize({ 600.0F, 300.0F })))
+    for (int i = 0; i < MAX_LIFT; i++)
     {
-        return E_FAIL;
+        if (FAILED(Lift[i].Initialize(vecLiftPos[i])))
+        {
+            return E_FAIL;
+        }
     }
 
     //タイマー
@@ -117,7 +121,10 @@ void GAME_3::Uninitialize(void)
     {
         Camera[i].Uninitialize();
     }
-    Lift.Uninitialize();
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        Lift[i].Uninitialize();
+    }
     Operation.Uninitialize();
     for (int i = 0; i < MAX_PLAYER; i++)
     {
@@ -142,24 +149,43 @@ void GAME_3::Uninitialize(void)
 void GAME_3::Update(void)
 {
     //---オブジェクトの更新---//
+    Back.Update();
     Operation.Update();
     for (int i = 0; i < MAX_PLAYER; i++)
     {
         Player[i].Update(i, !Timer.GetCheck());
+        for (int j = 0; j < MAX_LIFT; j++)
+        {
+            //---地形判定---//
+            Player[i].CheckCollisionLift(Lift[j].GetPos(), Lift[j].GetSize());
+        }
     }
-    Back.Update();
+    
     for (int i = 0; i < MAX_PLAYER; i++)
     {
         Camera[i].Update();
     }
-    Lift.Update();
+
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        Lift[i].Update();
+    }
+
     Timer.Update();
 
     for (int i = 0; i < MAX_PLAYER; i++)
     {
         for (int j = 0; j < MAX_CAMERA; j++)
         {
-            Player[i].SetHit(Camera[j].CheckPlayer(Player[i].GetPos(), Player[i].GetSize()));
+            if (Camera[j].CheckPlayer(Player[i].GetPos(), Player[i].GetSize()))
+            {
+                Player[i].SetHit(true);
+                break;
+            }
+            else
+            {
+                Player[i].SetHit(false);
+            }
         }
     }
 

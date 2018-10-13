@@ -1,11 +1,10 @@
-﻿  GameScene2.cpp
-  GameScene3.cpp
-d:\documents\hal課題\2年\gm\starter\minigame\GameScene3.h(16): warning C4005: 'MAX_PLAYER': マクロが再定義されました。
-  d:\documents\hal課題\2年\gm\starter\minigame\Player.h(14): note: 'MAX_PLAYER' の以前の定義を確認してください
+﻿  Player.cpp
+Player.cpp(256): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
+Player.cpp(257): warning C4244: '=': 'LONG' から 'FLOAT' への変換です。データが失われる可能性があります。
   コード生成しています。
-  67 of 809 functions ( 8.3%) were compiled, the rest were copied from previous compilation.
+  70 of 818 functions ( 8.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    21 functions had inline decision re-evaluated but remain unchanged
+    22 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Release\MiniGame.exe
   MiniGame.vcxproj -> D:\Documents\HAL課題\2年\GM\starter\x64\Release\MiniGame.pdb (Full PDB)

@@ -46,10 +46,10 @@ HRESULT GAME_2::Initialize(void)
     //---各種宣言---//
     int nCounter;
 
-    const D3DXVECTOR2 CameraPos[MAX_CAMERA] = { {200.0F,10.0F},{600.0F,10.0F} };
+    const D3DXVECTOR2 CameraPos[MAX_CAMERA] = { {300.0F,10.0F},{600.0F,10.0F} };
 
 	//---オブジェクトの初期化---//
-    if (FAILED(Back.Initialize(L"Data/Game/BackGround.tga")))
+    if (FAILED(Back.Initialize(L"Data/Game/BackGround.png")))
     {
         return E_FAIL;
     }
@@ -145,8 +145,19 @@ void GAME_2::Update(void)
     //---当たり判定---//
     for (nCounter = 0; nCounter < MAX_CAMERA; nCounter++)
     {
-        Player.SetHit(Camera[nCounter].CheckPlayer(Player.GetPos(), Player.GetSize()));
+        if (Camera[nCounter].CheckPlayer(Player.GetPos(), Player.GetSize()))
+        {
+            Player.SetHit(true);
+            break;
+        }
+        else
+        {
+            Player.SetHit(false);
+        }
     }
+
+    //---地形判定---//
+    Player.CheckCollisionLift(Lift.GetPos(), Lift.GetSize());
 
     //---画面遷移---//
     if (!Timer.GetTime())

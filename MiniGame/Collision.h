@@ -15,8 +15,6 @@ class COLLISION
         VERTEX* Vertex;
         DEADANGLE DeadAngle;
 
-        bool CheckInst(D3DXVECTOR2 lift_left, D3DXVECTOR2 lift_right, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size);
-
     public:
         bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);
         void Draw(void);

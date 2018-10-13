@@ -16,22 +16,24 @@
 #define PLAYER_WIDTH	(64)	//幅
 #define PLAYER_HEIGHT	(64)	//高さ
 #define PLAYER_HITBOX_WIDTH		(50)
-#define PLAYER_HITBOX_HEIGHT	(64)
+#define PLAYER_HITBOX_HEIGHT	(50)
 //円判定用
 #define PLAYER_RADIUS	(30)
 //重力
 #define VAL_GRAVITY     (0.09f)  //重力
 //テクスチャ分割数
 #define PLAYER_DIV_U	(2)		//横分割数
-#define PLAYER_DIV_V	(2)		//縦分割数
+#define PLAYER_DIV_V	(3)		//縦分割数
 //アニメーションのパターン数
 #define PLAYER_ANIM_PAT
 
 //＝＝＝グローバル宣言＝＝＝//
 //アニメーションパターン
 static ANIM_PAT g_animPat[][3] = {
-	{ { 0,  30 },{ 2,  30 },{ -1, -1 } },
-	{ { 1,  15 },{ 3,  15 },{ -1, -1 } },
+    { { 0,  30 },{ 1,  30 },{ -1, -1 } },		//待機モーション
+    { { 4,  1 },{ 4,  1 },{ -1, -1 } },			//掴まれるモーション
+    { { 2,  1 },{ 2,  1 },{ -1, -1 } },			//落下モーション
+    { { 3,  1 },{ 3,  1 },{ -1, -1 } },			//落下モーション
 };
 
 
@@ -57,25 +59,59 @@ PLAYER::~PLAYER()
 	}
 }
 
+//＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
-//関数名：SetPlayerAnimFrame
+//関数名：CheckCollisionLift
 //
-//機能：プレイヤーのアニメーションフレーム設定
+//機能：プレイヤーとリフトの当たり判定
 //
-//引数：(int)現在のアニメーションフレーム
+//引数：(D3DXVECTOR2)リフトのポジション, (D3DXVECTOR2)リフトのサイズ
 //
 //戻り値：なし
 /////////////////////////////////////////////
-void PLAYER::SetPlayerAnimFrame(int nFrame)
+void PLAYER::CheckCollisionLift(D3DXVECTOR2 LiftPos, D3DXVECTOR2 LiftSize)
 {
-	float fU = (nFrame % PLAYER_DIV_U) * (1.0f / PLAYER_DIV_U);
-	float fV = (nFrame / PLAYER_DIV_U) * (1.0f / PLAYER_DIV_V);
+    //----------上判定----------//
+    if (Pos.x + PLAYER_HITBOX_WIDTH / 2 > LiftPos.x &&
+        Pos.x - PLAYER_HITBOX_WIDTH / 2 < LiftPos.x + LiftSize.x)
+    {
+        //----- 着地 ------//
+        if (Pos.y + PLAYER_HITBOX_HEIGHT / 2 >= LiftPos.y &&
+            PosOld.y + PLAYER_HITBOX_HEIGHT / 2 <= LiftPos.y)
+        {
+            //高さOK
+            Pos.y = LiftPos.y - PLAYER_HITBOX_HEIGHT / 2;
+            Move.y = 0.0f;			//移動量Y方向リセット
+            LiftLanding = true;
+            return;
+        }
+    }
+    return;
+}
 
-	for (int i = 0; i < 4; ++i)
-	{
-		pVertex[i].U = fU + (i % 2) * (1.0f / PLAYER_DIV_U);
-		pVertex[i].V = fV + (i / 2) * (1.0f / PLAYER_DIV_V);
-	}
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：プレイヤーの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void PLAYER::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                               //テクスチャ設定
+
+                                                                   // 頂点配列によるポリゴン描画
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
 }
 
 /////////////////////////////////////////////
@@ -94,11 +130,16 @@ HRESULT PLAYER::Initialize(int num)
 	HRESULT hResult;
 	LPDIRECT3DDEVICE9 pDevice;
 
-	//---初期化処理---//
-	pDevice = GetDevice();
-	Invincible = false;
-	Pos.x = PLAYER_WIDTH / 2.0f;
-	Pos.y = SCREEN_HEIGHT - PLAYER_HEIGHT / 2.0f - (Interval * num);
+    //---初期化処理---//
+    pDevice = GetDevice();
+    Invincible = false;
+    LiftLanding = false;
+    GroundLanding = false;
+    Pos.x = PLAYER_WIDTH / 2.0f;
+    Pos.y = SCREEN_HEIGHT - PLAYER_HEIGHT / 2.0f - (Interval * num);
+    PosOld.x = 0.0f;
+    PosOld.y = 0.0f;
+    LiftLandCnt = 0;
 
 	//---テクスチャの読み込み---//
 	hResult = D3DXCreateTextureFromFileW(pDevice, FILE_PATH, &Graphic);
@@ -140,6 +181,27 @@ HRESULT PLAYER::Initialize(int num)
 }
 
 /////////////////////////////////////////////
+//関数名：SetPlayerAnimFrame
+//
+//機能：プレイヤーのアニメーションフレーム設定
+//
+//引数：(int)現在のアニメーションフレーム
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void PLAYER::SetPlayerAnimFrame(int nFrame)
+{
+    float fU = (nFrame % PLAYER_DIV_U) * (1.0f / PLAYER_DIV_U);
+    float fV = (nFrame / PLAYER_DIV_U) * (1.0f / PLAYER_DIV_V);
+
+    for (int i = 0; i < 4; ++i)
+    {
+        pVertex[i].U = fU + (i % 2) * (1.0f / PLAYER_DIV_U);
+        pVertex[i].V = fV + (i / 2) * (1.0f / PLAYER_DIV_V);
+    }
+}
+
+/////////////////////////////////////////////
 //関数名：Uninitialize
 //
 //機能：プレイヤーの終了
@@ -151,43 +213,8 @@ HRESULT PLAYER::Initialize(int num)
 void PLAYER::Uninitialize(void)
 {
 	//---解放---//
-	if (VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
-
-	if (Graphic)
-	{
-		Graphic->Release();
-		Graphic = nullptr;
-	}
-}
-
-//＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：Draw
-//
-//機能：プレイヤーの描画
-//
-//引数：なし
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void PLAYER::Draw(void)
-{
-	//---各種宣言---//
-	LPDIRECT3DDEVICE9 pDevice;
-
-	//---初期化処理---//
-	pDevice = GetDevice();
-
-	//---書式設定---//
-	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                               //テクスチャ設定
-																	 
-	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic);
 }
 
 /////////////////////////////////////////////
@@ -225,27 +252,49 @@ void PLAYER::Update(int num, bool move)
     {
         if (move)
         {
-
             //ポジションの更新
             Pos.x = MousePos->x;
-            Pos.y = MousePos->y;
+            Pos.y = MousePos->y + PLAYER_HEIGHT / 2;
             //重力の無効
             Move.y = 0.0f;
             //掴まれたアニメーション
             Anim = 1;
             //無敵状態を解放
             Invincible = false;
+            //着地してない
+            LiftLanding = false;
+            GroundLanding = false;
         }
     }
     else
     {
+        //落下アニメーション
+        Anim = 2;
+        //待機＆着地アニメーション
+        if (GroundLanding || LiftLanding)
+        {
+            //着地アニメーション
+            if (LiftLandCnt > 0)
+            {
+                Anim = 3;
+                LiftLandCnt--;
+            }
+            //待機アニメーション
+            else
+            {
+                Anim = 0;
+            }
+        }
+        else
+        {
+            LiftLandCnt = 15;	//0.25秒をセット
+        }
         //無敵位置（スタート位置）判定
-        if (Pos.x - PLAYER_WIDTH < 50.0f)
+        if (Pos.x - PLAYER_WIDTH < 30.0f)
         {
             Invincible = true;
+            Anim = 0;
         }
-        //通常アニメーション
-        Anim = 0;
     }
 
     //-----アニメーション-----//
@@ -287,5 +336,6 @@ void PLAYER::Update(int num, bool move)
 	{
 		Pos.y = SCREEN_HEIGHT - PLAYER_HEIGHT / 2;
 		Move.y = 0.0f;
+        GroundLanding = true;
 	}
 }
