@@ -8,9 +8,6 @@
 #include "Main.h"
 #include "Operation.h"
 
-//=====マクロ定数定義=====
-#define MAX_PLAYER (2)
-
 //＝＝＝構造体定義＝＝＝//
 typedef struct _ANIM_PAT {
 	int Frame;		//パターンNo
@@ -55,7 +52,6 @@ class PLAYER
         D3DXVECTOR2	GetPos(void) { return Pos; }
         D3DXVECTOR2	GetSize(void) { return Size; }
         void SetHit(bool hit) { Hit = hit; }
-
 };
 
 #endif

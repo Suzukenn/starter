@@ -8,6 +8,20 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
+//関数名：CheckDeadAngle
+//
+//機能：プレイヤーの死角内判定
+//
+//引数：(D3DXVECTOR2)プレイヤーの位置,(D3DXVECTOR2)プレイヤーの大きさ
+//
+//戻り値：(bool)判定結果
+/////////////////////////////////////////////
+bool LIFT::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
+{
+    return DeadAngle.CheckDeadAngle(player_pos, size);
+}
+
+/////////////////////////////////////////////
 //関数名：Draw
 //
 //機能：リフトの描画
@@ -30,6 +44,9 @@ void LIFT::Draw(void)
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
+
+    //---死角の描画---//
+    DeadAngle.Draw();
 }
 
 /////////////////////////////////////////////
@@ -92,6 +109,8 @@ HRESULT LIFT::Initialize(D3DXVECTOR2 position)
     //バッファのポインタの解放
     VertexBuffer->Unlock();
 
+    DeadAngle.Initialize();
+
     return hResult;
 }
 
@@ -107,6 +126,7 @@ HRESULT LIFT::Initialize(D3DXVECTOR2 position)
 void LIFT::Uninitialize(void)
 {
     //---解放---//
+    DeadAngle.Uninitialize();
     SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic);
     Vertex = nullptr;
@@ -123,5 +143,6 @@ void LIFT::Uninitialize(void)
 /////////////////////////////////////////////
 void LIFT::Update(void)
 {
-
+    DeadAngle.SetData({ Position.x, Position.y + Size.y }, {Size.x, SCREEN_HEIGHT - (Position.y + Size.y) });
+    DeadAngle.Update();
 }

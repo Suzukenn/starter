@@ -156,6 +156,11 @@ void GAME_2::Update(void)
         }
     }
 
+    if (Lift.CheckDeadAngle(Player.GetPos(), Player.GetSize()))
+    {
+        Player.SetHit(false);
+    }
+
     //---’nŒ`”»’è---//
     Player.CheckCollisionLift(Lift.GetPos(), Lift.GetSize());
 

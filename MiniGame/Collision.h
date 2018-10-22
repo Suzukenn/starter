@@ -2,7 +2,6 @@
 #define _COLLISION_H_
 
 //＝＝＝ヘッダファイル読み込み＝＝＝//
-#include "DeadAngle.h"
 #include "Main.h"
 
 //＝＝＝クラス宣言＝＝＝//
@@ -13,7 +12,6 @@ class COLLISION
         float Angle;
         LPDIRECT3DVERTEXBUFFER9 VertexBuffer; //頂点バッファ
         VERTEX* Vertex;
-        DEADANGLE DeadAngle;
 
     public:
         bool CheckPlayer(D3DXVECTOR2, D3DXVECTOR2);

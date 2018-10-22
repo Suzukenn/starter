@@ -72,6 +72,8 @@ PLAYER::~PLAYER()
 void PLAYER::CheckCollisionLift(D3DXVECTOR2 LiftPos, D3DXVECTOR2 LiftSize)
 {
     //----------上判定----------//
+    //if (Pos.x + PLAYER_HITBOX_WIDTH / 2 > LiftPos.x &&
+    //    Pos.x - PLAYER_HITBOX_WIDTH / 2 < LiftPos.x + LiftSize.x)
     if (Pos.x + PLAYER_HITBOX_WIDTH / 2 > LiftPos.x &&
         Pos.x - PLAYER_HITBOX_WIDTH / 2 < LiftPos.x + LiftSize.x)
     {
@@ -232,6 +234,8 @@ void PLAYER::Update(int num, bool move)
     POINT* MousePos = Operation->GetMousePos();
     GetCursorPos(MousePos);										// マウス座標(スクリーン座標)取得
     ScreenToClient(*GethWnd(), MousePos);						// ウィンドウ ローカル座標に変換
+
+    PosOld = Pos;
 
     if (!Invincible)
     {

@@ -59,11 +59,7 @@ bool COLLISION::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
         //”»’è
         if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0))
         {
-            //Ž€Šp”»’è
-            if (!DeadAngle.CheckDeadAngle(player_pos, size))
-            {
                 return true;
-            }
         }
     }
 
@@ -93,9 +89,6 @@ void COLLISION::Draw(void)
 
     //---•`‰æ---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, Vertex, sizeof(VERTEX));
-
-    //---Ž€Šp‚Ì•`‰æ---//
-    DeadAngle.Draw();
 }
 
 /////////////////////////////////////////////
@@ -146,8 +139,6 @@ HRESULT COLLISION::Initialize(void)
     //ƒoƒbƒtƒ@‚Ìƒ|ƒCƒ“ƒ^‚Ì‰ð•ú
     VertexBuffer->Unlock();
 
-    DeadAngle.Initialize();
-
     return hResult;
 }
 
@@ -163,7 +154,6 @@ HRESULT COLLISION::Initialize(void)
 void COLLISION::Uninitialize(void)
 {
     //---‰ð•ú---//
-    DeadAngle.Uninitialize();
     SAFE_RELEASE(VertexBuffer);
     Vertex = nullptr;
 }

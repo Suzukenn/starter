@@ -189,6 +189,17 @@ void GAME_3::Update(void)
         }
     }
 
+    for (int i = 0; i < MAX_PLAYER; i++)
+    {
+        for (int j = 0; j < MAX_CAMERA; j++)
+        {
+            if (Lift[j].CheckDeadAngle(Player[i].GetPos(), Player[i].GetSize()))
+            {
+                Player[i].SetHit(false);
+            }
+        }
+    }
+
     //---‰æ–Ê‘JˆÚ---//
     if (!Timer.GetTime())
     {
