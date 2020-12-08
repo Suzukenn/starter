@@ -5,6 +5,7 @@
 #include "BackGround.h"
 #include "BaseScene.h"
 #include "Main.h"
+#include "ManualButton.h"
 #include "StartButton.h"
 
 //ƒNƒ‰ƒXéŒ¾//
@@ -13,6 +14,7 @@ class TITLE final: public BASE_SCENE
     private:
 		BACKGROUND Back;
 		STARTBUTTON Start_B;
+        MANUALBUTTON Manual_B;
 
     public:
         virtual void Draw(void) final;

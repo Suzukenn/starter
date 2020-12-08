@@ -5,8 +5,8 @@
 #include "BackGround.h"
 #include "BaseScene.h"
 #include "Main.h"
+#include "SelectButton.h"
 #include "RetryButton.h"
-#include "TitleButton.h"
 
 //＝＝＝クラス宣言＝＝＝//
 class GAMEOVER final : public BASE_SCENE
@@ -14,7 +14,7 @@ class GAMEOVER final : public BASE_SCENE
     private:
 		BACKGROUND Back;
 		RETRYBUTTON Retry_B;	//リトライボタン用
-		TITLEBUTTON Title_B;	//タイトルボタン用
+		SELECTBUTTON Select_B;	//セレクトボタン用
 
     public:
         virtual void Draw(void) final;

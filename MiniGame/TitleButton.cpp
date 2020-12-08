@@ -11,7 +11,7 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/TitleButton.tga"
+#define FILE_PATH	L"Data/Game/TitleButton.png"
 //タイトルボタンサイズ
 #define TITLEBUTTON_WIDTH	(170)	//幅
 #define TITLEBUTTON_HEIGHT	(57)	//高さ
@@ -27,8 +27,8 @@ TITLEBUTTON::TITLEBUTTON()
 	//動的確保
 	Operation = new OPERATION();
 	//位置設定
-	Pos.x = SCREEN_CENTER_X - 150;
-	Pos.y = SCREEN_CENTER_Y + 150;
+	Pos.x = 100.0F;
+	Pos.y = 530.0F;
 }
 
 //=====デストラクタ=====
@@ -111,17 +111,8 @@ HRESULT TITLEBUTTON::Initialize(void)
 void TITLEBUTTON::Uninitialize(void)
 {
 	//---解放---//
-	if (VertexBuffer)
-	{
-		VertexBuffer->Release();
-		VertexBuffer = nullptr;
-	}
-
-	if (Graphic)
-	{
-		Graphic->Release();
-		Graphic = nullptr;
-	}
+    SAFE_RELEASE(VertexBuffer);
+    SAFE_RELEASE(Graphic)
 }
 
 //＝＝＝関数定義＝＝＝//
@@ -143,9 +134,8 @@ void TITLEBUTTON::Draw(void)
 	pDevice = GetDevice();
 
 	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
 	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+	pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 	
 	//--- 座標反映 ---//
 	for (int i = 0; i < 4; ++i)
@@ -155,7 +145,7 @@ void TITLEBUTTON::Draw(void)
 	}
 
 	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(VERTEX));
 }
 
 /////////////////////////////////////////////
@@ -182,5 +172,8 @@ void TITLEBUTTON::Update(void)
 	{
 		//ゲームシーン切替
 		SCENE_MANAGER::SetScene(SCENE_TITLE);
+
+        //---決定音再生---//
+        SOUND_MANAGER::Play(SE_DECISION);
 	}
 }

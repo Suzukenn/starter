@@ -33,41 +33,54 @@ bool DEADANGLE::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
     D3DXVECTOR2 vecDP;
 
     D3DXVECTOR2 vecPlayerVertex[4];
+    D3DXVECTOR2 vecSize;
 
     //---初期化処理---//
     vecPlayerVertex[0] = player_pos;
     vecPlayerVertex[1] = { player_pos.x + size.x, player_pos.y };
     vecPlayerVertex[2] = player_pos + size;
     vecPlayerVertex[3] = { player_pos.x, player_pos.y + size.y };
+    vecSize;
 
     //---判定---//
-    for (nCounter = 0; nCounter < 4; nCounter++)
+    if (Position[0].x <= player_pos.x + size.x && player_pos.x <= Position[0].x + Size.x)
     {
-        //方向ベクトル計算
-        vecAB = Position[0] - Position[1];
-        vecBP = vecPlayerVertex[nCounter] - Position[0];
-
-        vecBC = Position[1] - Position[2];
-        vecCP = vecPlayerVertex[nCounter] - Position[1];
-
-        vecCD = Position[2] - Position[3];
-        vecDP = vecPlayerVertex[nCounter] - Position[2];
-
-        vecCD = Position[3] - Position[0];
-        vecAP = vecPlayerVertex[nCounter] - Position[3];
-
-        //外積の計算
-        dCorner1 = vecAB.x * vecBP.y - vecAB.y * vecBP.x;
-        dCorner2 = vecBC.x * vecCP.y - vecBC.y * vecCP.x;
-        dCorner3 = vecCD.x * vecDP.y - vecCD.y * vecDP.x;
-        dCorner4 = vecDA.x * vecAP.y - vecDA.y * vecAP.x;
-
-        //判定
-        if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0 && dCorner4 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0 && dCorner4 < 0))
+        if (Position[0].y <= player_pos.y + size.y && player_pos.y <= Position[0].y + Size.y)
         {
             return true;
         }
     }
+
+
+
+
+    //for (nCounter = 0; nCounter < 4; nCounter++)
+    //{
+    //    //方向ベクトル計算
+    //    vecAB = Position[0] - Position[1];
+    //    vecBP = vecPlayerVertex[nCounter] - Position[0];
+
+    //    vecBC = Position[1] - Position[2];
+    //    vecCP = vecPlayerVertex[nCounter] - Position[1];
+
+    //    vecCD = Position[2] - Position[3];
+    //    vecDP = vecPlayerVertex[nCounter] - Position[2];
+
+    //    vecCD = Position[3] - Position[0];
+    //    vecAP = vecPlayerVertex[nCounter] - Position[3];
+
+    //    //外積の計算
+    //    dCorner1 = vecAB.x * vecBP.y - vecAB.y * vecBP.x;
+    //    dCorner2 = vecBC.x * vecCP.y - vecBC.y * vecCP.x;
+    //    dCorner3 = vecCD.x * vecDP.y - vecCD.y * vecDP.x;
+    //    dCorner4 = vecDA.x * vecAP.y - vecDA.y * vecAP.x;
+
+    //    //判定
+    //    if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0 && dCorner4 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0 && dCorner4 < 0))
+    //    {
+    //        return true;
+    //    }
+    //}
 
     return false;
 }
@@ -117,10 +130,10 @@ HRESULT DEADANGLE::Initialize(void)
     pDevice = GetDevice();
 
     //---テクスチャの読み込み---//
-    hResult = D3DXCreateTextureFromFileW(pDevice, L"Data/Game/BackGround.tga", &Graphic);
+    hResult = D3DXCreateTextureFromFileW(pDevice, L"Data/Game/BackGround.png", &Graphic);
     if (FAILED(hResult))
     {
-        MessageBoxW(nullptr, L"死角用背景の初期化に失敗しました", L"Data/Game/BackGround.tga", MB_OK);
+        MessageBoxW(nullptr, L"死角用背景の初期化に失敗しました", L"Data/Game/BackGround.png", MB_OK);
         Uninitialize();
         return hResult;
     }
@@ -197,12 +210,12 @@ void DEADANGLE::Update(void)
     //---頂点の算出---//
     for (nCounter = 1; nCounter < 4; nCounter++)
     {
-        Position[nCounter].x = Position[0].x + nRate[nCounter & 1] * Size.x;
-        Position[nCounter].y = Position[0].y + nRate[nCounter >> 1] * Size.y;
+        Position[nCounter].x = Position[0].x + (nCounter & 1) * Size.x;
+        Position[nCounter].y = Position[0].y + (nCounter >> 1) * Size.y;
     }
 
     //---バッファに反映---//
-    for (nCounter = 0; nCounter < 3; nCounter++)
+    for (nCounter = 0; nCounter < 4; nCounter++)
     {
         Vertex[nCounter].Position = { Position[nCounter].x, Position[nCounter].y, 0.0F };
         Vertex[nCounter].U = SCREEN_WIDTH / Position[nCounter].x;

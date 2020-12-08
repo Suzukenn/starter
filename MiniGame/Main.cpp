@@ -8,8 +8,8 @@
 
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FPS 1000 / 60
-#define WINDOW_CAPTION L"スパイの僕に対する当たり判定を作るのはずいぶん難しいらしい"	//ウインドウのキャプション名
-#define WINDOW_CLASS_NAME L"MiniGame"			    //ウインドウのクラス名
+#define WINDOW_CAPTION L"SPY's"	        //ウインドウのキャプション名
+#define WINDOW_CLASS_NAME L"MiniGame"	//ウインドウのクラス名
 
 //＝＝＝プロトタイプ宣言＝＝＝//
 void Draw(void);

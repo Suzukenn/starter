@@ -5,12 +5,20 @@
 #include "BackGround.h"
 #include "BaseScene.h"
 #include "Main.h"
+#include "Stage_EasyButton.h"
+#include "Stage_HardButton.h"
+#include "Stage_NormalButton.h"
+#include "TitleButton.h"
 
 //ƒNƒ‰ƒXéŒ¾//
 class SELECTSCENE final : public BASE_SCENE
 {
     private:
         BACKGROUND Back;
+        STAGEEASYBUTTON Easy;
+        STAGEHARDBUTTON Hard;
+        STAGENORMALBUTTON Normal;
+        TITLEBUTTON Title;
 
     public:
         virtual void Draw(void) final;

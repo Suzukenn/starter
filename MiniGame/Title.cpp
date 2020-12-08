@@ -18,6 +18,7 @@ void TITLE::Draw(void)
 {
 	Back.Draw();
 	Start_B.Draw();
+    Manual_B.Draw();
 }
 
 /////////////////////////////////////////////
@@ -37,8 +38,15 @@ HRESULT TITLE::Initialize(void)
 		return E_FAIL;
 	}
 
-	//スタートボタンの初期化
-	Start_B.Initialize();
+    if (FAILED(Start_B.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Manual_B.Initialize()))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_OPENING);
@@ -58,8 +66,9 @@ HRESULT TITLE::Initialize(void)
 void TITLE::Uninitialize(void)
 {
     //---解放---//
-	Start_B.Uninitialize();
-	Back.Uninitialize();
+    Start_B.Uninitialize();
+    Manual_B.Uninitialize();
+    Back.Uninitialize();
 
     //---BGM停止---//
     SOUND_MANAGER::Stop(BGM_OPENING);
@@ -77,7 +86,7 @@ void TITLE::Uninitialize(void)
 void TITLE::Update(void)
 {
 	//---オブジェクトの更新---//
-	Start_B.Update();
-    //背景
     Back.Update();
+    Start_B.Update();
+    Manual_B.Update();
 }

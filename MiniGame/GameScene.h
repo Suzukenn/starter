@@ -17,9 +17,8 @@ class GAME final : public BASE_SCENE
     private:
 		BACKGROUND Back;
         CAMERA Camera;
-        LIFT Lift;
 		OPERATION Operation;
-		PLAYER Player[MAX_PLAYER];
+		PLAYER Player;
         TIMER Timer;
 
     public:

@@ -18,7 +18,7 @@ void GAMEOVER::Draw(void)
 {
 	Back.Draw();
 	Retry_B.Draw();
-	Title_B.Draw();
+    Select_B.Draw();
 }
 
 /////////////////////////////////////////////
@@ -38,10 +38,15 @@ HRESULT GAMEOVER::Initialize(void)
 		return E_FAIL;
 	}
 
-	//リトライボタンの初期化
-	Retry_B.Initialize();
-	//タイトルボタンの初期化
-	Title_B.Initialize();
+    if (FAILED(Retry_B.Initialize()))
+    {
+        return E_FAIL;
+    }
+
+    if (FAILED(Select_B.Initialize()))
+    {
+        return E_FAIL;
+    }
 
     //---BGM再生---//
     SOUND_MANAGER::Play(BGM_GAMEOVER);
@@ -61,7 +66,7 @@ HRESULT GAMEOVER::Initialize(void)
 void GAMEOVER::Uninitialize(void)
 {
     //---解放---//
-	Title_B.Uninitialize();
+    Select_B.Uninitialize();
 	Retry_B.Uninitialize();
     Back.Uninitialize();
    
@@ -86,5 +91,5 @@ void GAMEOVER::Update(void)
 	//リトライボタンの更新処理
 	Retry_B.Update();
 	//タイトルボタンの更新処理
-	Title_B.Update();
+    Select_B.Update();
 }

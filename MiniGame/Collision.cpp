@@ -3,57 +3,9 @@
 #include "Main.h"
 
 //＝＝＝定数・マクロ定義＝＝＝//
-#define VIEW_ANGLE 15.0F
+#define VIEW_ANGLE 20.0F
 
 //＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：CheckDeadAngle
-//
-//機能：プレイヤーの死角内判定
-//
-//引数：なし
-//
-//戻り値：(bool)判定結果
-/////////////////////////////////////////////
-bool COLLISION::CheckInst(D3DXVECTOR2 lift_left, D3DXVECTOR2 lift_right, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
-{
-    ////---各種宣言---//
-    //float Crs_v_v1;
-    //float Crs_v_v2;
-    //float Crs_v1_v2;
-    //float t1;
-    //float t2;
-    //D3DXVECTOR2 v;
-
-    //const float eps = 0.00001F;
-
-    //v = Position[0] - lift_left;
-    //Crs_v1_v2 = Position[1].x * lift_right.y - Position[1].y * lift_right.x;
-
-    //// 平行状態
-    //if (!Crs_v1_v2)
-    //{
-    //    return false;
-    //}
-
-    //Crs_v_v1 = v.x * lift_left.y - v.y * lift_left.x;
-    //Crs_v_v2 = v.x * lift_right.y - v.y * lift_right.x;
-
-    //t1 = Crs_v_v2 / Crs_v1_v2;
-    //t2 = Crs_v_v1 / Crs_v1_v2;
-
-    //// 交差していない
-    //if (t1 + eps < 0 || t1 - eps > 1 || t2 + eps < 0 || t2 - eps > 1) 
-    //{
-    //    return false;
-    //}
-
-    //if (outPos)
-    //    *outPos = seg1.s + seg1.v * t1;
-
-    return true;
-}
-
 /////////////////////////////////////////////
 //関数名：CheckPlayer
 //
@@ -107,11 +59,7 @@ bool COLLISION::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
         //判定
         if ((dCorner1 > 0 && dCorner2 > 0 && dCorner3 > 0) || (dCorner1 < 0 && dCorner2 < 0 && dCorner3 < 0))
         {
-            //死角判定
-            if (!DeadAngle.CheckDeadAngle(player_pos, size))
-            {
                 return true;
-            }
         }
     }
 
@@ -141,9 +89,6 @@ void COLLISION::Draw(void)
 
     //---描画---//
     pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 1, Vertex, sizeof(VERTEX));
-
-    //---死角の描画---//
-    DeadAngle.Draw();
 }
 
 /////////////////////////////////////////////
@@ -155,7 +100,7 @@ void COLLISION::Draw(void)
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
+HRESULT COLLISION::Initialize(void)
 {
     //---各種宣言---//
     int nCounter;
@@ -188,13 +133,11 @@ HRESULT COLLISION::Initialize(D3DXVECTOR2 position)
         Vertex[nCounter].Position.y = 0.0F;
         Vertex[nCounter].Position.z = 0.0F;
         Vertex[nCounter].RHW = 1.0F;
-        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 255, 255);
+        Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(128, 255, 255, 255);
     }
 
     //バッファのポインタの解放
     VertexBuffer->Unlock();
-
-    DeadAngle.Initialize();
 
     return hResult;
 }
@@ -228,6 +171,10 @@ void COLLISION::Update(void)
 {
     //---各種宣言---//
     int nCounter;
+    float fCosine;
+    float fDx;
+    float fDy;
+    float fSin;
     float fHeight;
     float fWidth1;
     float fWidth2;
@@ -236,15 +183,32 @@ void COLLISION::Update(void)
     fHeight = SCREEN_HEIGHT - Position[0].y;
 
     //---頂点の算出---//
-    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F + VIEW_ANGLE)));
+    fWidth1 = fabsf(fHeight * tanf(D3DXToRadian(VIEW_ANGLE)));
     Position[1] = { Position[0].x + fWidth1, SCREEN_HEIGHT };
 
-    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(Angle - 90.0F - VIEW_ANGLE)));
-    Position[2] = { Position[0].x + fWidth2, SCREEN_HEIGHT };
+    fWidth2 = fabsf(fHeight * tanf(D3DXToRadian(VIEW_ANGLE)));
+    Position[2] = { Position[0].x - fWidth2, SCREEN_HEIGHT };
 
     //---バッファに反映---//
     for (nCounter = 0; nCounter < 3; nCounter++)
     {
         Vertex[nCounter].Position = { Position[nCounter].x, Position[nCounter].y, 0.0F };
+    }
+
+    //---回転---//
+    if (!Angle)
+    {
+        return;
+    }
+    fCosine = cosf(D3DXToRadian(Angle));
+    fSin = sinf(D3DXToRadian(Angle));
+
+    for (nCounter = 1; nCounter < 3; nCounter++)
+    {
+        fDx = (nCounter % 2) * 800.0F;
+        fDy = (nCounter / 2) * 800.0F;
+
+        Vertex[nCounter].Position.x = (Position[nCounter].x + (fDx * fCosine - fDy * fSin));
+        Vertex[nCounter].Position.y = (Position[nCounter].y + (fDx * fSin + fDy * fCosine));
     }
 }

@@ -11,10 +11,10 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/StartButton.tga"
+#define FILE_PATH	L"Data/Game/GameStartButton.png"
 //スタートボタンサイズ
-#define STARTBUTTON_WIDTH	(170)	//幅
-#define STARTBUTTON_HEIGHT	(57)	//高さ
+#define STARTBUTTON_WIDTH	(250)	//幅
+#define STARTBUTTON_HEIGHT	(120)	//高さ
 //四角判定用
 #define STARTBUTTON_HIT_WIDTH	(80)	//幅
 #define STARTBUTTON_HIT_HEIGHT	(25)	//高さ
@@ -39,6 +39,32 @@ STARTBUTTON::~STARTBUTTON()
 	{
 		delete Operation;
 	}
+}
+
+//＝＝＝関数定義＝＝＝//
+/////////////////////////////////////////////
+//関数名：Draw
+//
+//機能：スタートボタンの描画
+//
+//引数：なし
+//
+//戻り値：なし
+/////////////////////////////////////////////
+void STARTBUTTON::Draw(void)
+{
+    //---各種宣言---//
+    LPDIRECT3DDEVICE9 pDevice;
+
+    //---初期化処理---//
+    pDevice = GetDevice();
+
+    //---書式設定---//
+    pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
+    pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
+
+    // 頂点配列によるポリゴン描画
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
 }
 
 /////////////////////////////////////////////
@@ -124,40 +150,6 @@ void STARTBUTTON::Uninitialize(void)
 	}
 }
 
-//＝＝＝関数定義＝＝＝//
-/////////////////////////////////////////////
-//関数名：Draw
-//
-//機能：スタートボタンの描画
-//
-//引数：なし
-//
-//戻り値：なし
-/////////////////////////////////////////////
-void STARTBUTTON::Draw(void)
-{
-	//---各種宣言---//
-	LPDIRECT3DDEVICE9 pDevice;
-
-	//---初期化処理---//
-	pDevice = GetDevice();
-
-	//---書式設定---//
-	pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
-	pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
-	pDevice->SetTexture(0, Graphic);                                 //テクスチャ設定
-	
-	//--- 座標反映 ---//
-	for (int i = 0; i < 4; ++i)
-	{
-		pVertex[i].Position.x = Pos.x + (i % 2) * STARTBUTTON_WIDTH - STARTBUTTON_WIDTH / 2;
-		pVertex[i].Position.y = Pos.y + (i / 2) * STARTBUTTON_HEIGHT - STARTBUTTON_HEIGHT / 2;
-	}
-
-	// 頂点配列によるポリゴン描画
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(pVertex[0]));
-}
-
 /////////////////////////////////////////////
 //関数名：Update
 //
@@ -174,13 +166,22 @@ void STARTBUTTON::Update(void)
 	GetCursorPos(MousePos);										// マウス座標(スクリーン座標)取得
 	ScreenToClient(*GethWnd(), MousePos);						// ウィンドウ ローカル座標に変換
 
+    //--- 座標反映 ---//
+    for (int i = 0; i < 4; ++i)
+    {
+        pVertex[i].Position.x = Pos.x + (i % 2) * STARTBUTTON_WIDTH - STARTBUTTON_WIDTH / 2;
+        pVertex[i].Position.y = Pos.y + (i / 2) * STARTBUTTON_HEIGHT - STARTBUTTON_HEIGHT / 2;
+    }
+
 	//スタートボタンとマウスカーソルの当たり判定
 	if (INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, TRIGGER) &&
-		(Pos.x - STARTBUTTON_HIT_WIDTH <= MousePos->x + OPERATION_HIT_WIDTH && MousePos->x - OPERATION_HIT_WIDTH 
-			<= Pos.x + STARTBUTTON_HIT_WIDTH && Pos.y - STARTBUTTON_HIT_HEIGHT
-			<= MousePos->y + OPERATION_HIT_HEIGHT && MousePos->y - OPERATION_HIT_HEIGHT <= Pos.y + STARTBUTTON_HIT_HEIGHT))
+		(Pos.x - STARTBUTTON_HIT_WIDTH <= MousePos->x + OPERATION_HIT_WIDTH && MousePos->x - OPERATION_HIT_WIDTH <= Pos.x + STARTBUTTON_HIT_WIDTH && 
+            Pos.y - STARTBUTTON_HIT_HEIGHT <= MousePos->y + OPERATION_HIT_HEIGHT && MousePos->y - OPERATION_HIT_HEIGHT <= Pos.y + STARTBUTTON_HIT_HEIGHT))
 	{
 		//ゲームシーン切替
-		SCENE_MANAGER::SetScene(SCENE_GAME);
+		SCENE_MANAGER::SetScene(SCENE_SELECT);
+
+        //---決定音再生---//
+        SOUND_MANAGER::Play(SE_DECISION);
 	}
 }

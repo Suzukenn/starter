@@ -9,25 +9,6 @@
 
 //＝＝＝関数定義＝＝＝//
 /////////////////////////////////////////////
-//関数名：CheckDeadAngle
-//
-//機能：プレイヤーの死角内判定
-//
-//引数：なし
-//
-//戻り値：(bool)判定結果
-/////////////////////////////////////////////
-bool CAMERA::CheckDeadAngle(D3DXVECTOR2 player_pos, D3DXVECTOR2 player_size, D3DXVECTOR2 lift_pos, D3DXVECTOR2 lift_size)
-{
-    //---各種宣言---//
-    bool bJudge;
-    D3DXVECTOR2 vecDifferential;
-
-    vecDifferential = lift_size - Position;
-    return false;
-}
-
-/////////////////////////////////////////////
 //関数名：CheckPlayer
 //
 //機能：プレイヤーの視野角内判定
@@ -52,6 +33,9 @@ bool CAMERA::CheckPlayer(D3DXVECTOR2 player_pos, D3DXVECTOR2 size)
 /////////////////////////////////////////////
 void CAMERA::Draw(void)
 {
+    //---当たり判定描画---//
+    Collision.Draw();
+
     //---各種宣言---//
     LPDIRECT3DDEVICE9 pDevice;
 
@@ -63,17 +47,14 @@ void CAMERA::Draw(void)
 
     //---書式設定---//
 	pDevice->SetFVF(FVF_VERTEX);       //フォーマット設定
+
+    //---カメラ支柱描画---//
+    pDevice->SetTexture(0, GraphicRoot);   //テクスチャ設定
+    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, VertexRoot, sizeof(VERTEX));
+
+    //---カメラ描画---//
 	pDevice->SetTexture(0, Graphic);   //テクスチャ設定
-
-	//---描画---//
 	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, Vertex, sizeof(VERTEX));
-
-	pDevice->SetTexture(0, GraphicRoot);   //テクスチャ設定
-
-	//---描画---//
-	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, VertexRoot, sizeof(VERTEX));
-
-    Collision.Draw();
 }
 
 /////////////////////////////////////////////
@@ -85,7 +66,7 @@ void CAMERA::Draw(void)
 //
 //戻り値：(HRESULT)処理の成否
 /////////////////////////////////////////////
-HRESULT CAMERA::Initialize(void)
+HRESULT CAMERA::Initialize(D3DXVECTOR2 position)
 {
     //---各種宣言---//
     int nCounter;
@@ -94,9 +75,8 @@ HRESULT CAMERA::Initialize(void)
 
     //---初期化処理---//
     pDevice = GetDevice();
-    Position = { SCREEN_CENTER_X, 50.0F };
+    Position = position;
     Center = { SIZE / 2, SIZE / 2 };
-    Angle = 300.0F;
 
     //---テクスチャの読み込み---//
     hResult = D3DXCreateTextureFromFileW(pDevice, FILE_CAMERAPATH, &Graphic);
@@ -164,7 +144,7 @@ HRESULT CAMERA::Initialize(void)
 	{
 		VertexRoot[nCounter].U = (float)(nCounter & 1);
 		VertexRoot[nCounter].V = (float)((nCounter >> 1) & 1);
-		VertexRoot[nCounter].Position.x = Vertex[nCounter].Position.x + 16.5F;
+		VertexRoot[nCounter].Position.x = Vertex[nCounter].Position.x - 26.5F;
 		VertexRoot[nCounter].Position.y = Vertex[nCounter].Position.y + 10.0F;
 		VertexRoot[nCounter].Position.z = 0.0F;
 		VertexRoot[nCounter].RHW = 1.0F;
@@ -175,7 +155,8 @@ HRESULT CAMERA::Initialize(void)
 	VertexBufferRoot->Unlock();
 
 	//当たり判定の初期化
-    hResult = Collision.Initialize(Center);
+    Collision.SetData(Position + Center, 0.0F);
+    hResult = Collision.Initialize();
     if (FAILED(hResult))
     {
         MessageBoxW(nullptr, L"カメラの初期化に失敗しました", L"当たり判定", MB_OK);
@@ -226,8 +207,8 @@ void CAMERA::Update(void)
     float fDy;
     float fSin;
 
-    fCosine = cosf(D3DXToRadian(Angle));
-    fSin = sinf(D3DXToRadian(Angle));
+    fCosine = cosf(D3DXToRadian(0.0F));
+    fSin = sinf(D3DXToRadian(0.0F));
 
     for (nCounter = 0; nCounter < 4; ++nCounter)
     {
@@ -238,6 +219,6 @@ void CAMERA::Update(void)
         Vertex[nCounter].Position.y = (Position.y + (fDx * fSin + fDy * fCosine)) + SIZE / 2;
     }
 
-    Collision.SetData(Position + Center, Angle);
+    Collision.SetData(Position + Center, 0.0F);
     Collision.Update();
 }

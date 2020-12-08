@@ -16,6 +16,7 @@ OPERATION::OPERATION()
 	//位置設定
 	Pos.x = 0.0f;
 	Pos.y = 0.0f;
+	Catch = false;
 }
 
 //=====デストラクタ=====
@@ -43,7 +44,6 @@ void OPERATION::Draw(void)
     pDevice = GetDevice();
 
     //---書式設定---//
-    pDevice->SetStreamSource(0, VertexBuffer, 0, sizeof(VERTEX)); //頂点書式設定
     pDevice->SetFVF(FVF_VERTEX);                                  //フォーマット設定
     pDevice->SetTexture(0, Graphic);                              //テクスチャ設定
 
@@ -140,11 +140,22 @@ void OPERATION::Update(void)
 	GetCursorPos(&Pos);									// マウス座標(スクリーン座標)取得
 	ScreenToClient(*GethWnd(), &Pos);					// ウィンドウ ローカル座標に変換
 
+	//---入力判定---//
+	if (INPUT_MANAGER::GetMouseButton(BUTTON_LEFT, HOLD))
+	{
+		Catch = true;
+	}
+	else
+	{
+		Catch = false;
+	}
+
 	//---座標反映---//
 	for (int i = 0; i < 4; ++i)
 	{
         Vertex[i].Position.x = Pos.x + (i & 1) * OPERATION_WIDTH - OPERATION_WIDTH / 2;
-        Vertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
+		Vertex[i].Position.y = Pos.y + (i >> 1) * OPERATION_HEIGHT - OPERATION_HEIGHT / 2;
+		Vertex[i].U = (float)(i & 1) * 0.5F + (float)Catch * 0.5F;
 	}
 }
 
@@ -159,5 +170,5 @@ void OPERATION::Update(void)
 /////////////////////////////////////////////
 POINT* OPERATION::GetMousePos(void)
 {
-	return &Pos;
+    return &Pos;
 }

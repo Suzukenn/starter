@@ -11,7 +11,7 @@
 
 //======定数・マクロ定義=====
 // パス名
-#define FILE_PATH	L"Data/Game/RetryButton.tga"
+#define FILE_PATH	L"Data/Game/RestartButton.png"
 //リトライボタンサイズ
 #define RETRYBUTTON_WIDTH	(170)	//幅
 #define RETRYBUTTON_HEIGHT	(57)	//高さ
@@ -30,8 +30,8 @@ RETRYBUTTON::RETRYBUTTON()
 	//動的確保
 	Operation = new OPERATION();
 	//位置設定
-	Pos.x = SCREEN_CENTER_X + 150;
-	Pos.y = SCREEN_CENTER_Y + 150;
+	Pos.x = SCREEN_CENTER_X + 150.0F;
+	Pos.y = SCREEN_CENTER_Y + 150.0F;
 }
 
 //=====デストラクタ=====
@@ -185,6 +185,9 @@ void RETRYBUTTON::Update(void)
 	{
 		//ゲームシーン切替
 		SCENE_MANAGER::SetScene(RetryScene);
+
+        //---決定音再生---//
+        SOUND_MANAGER::Play(SE_DECISION);
 	}
 }
 

@@ -3,7 +3,6 @@
 #include "Main.h"
 #include "Timer.h"
 
-
 //＝＝＝定数・マクロ定義＝＝＝//
 #define FILE_PATH L"Data/Game/Number.tga" //パス名
 #define SIZE 50.0F					//表示サイズ
@@ -51,8 +50,7 @@ void TIMER::Draw(void)
 ///////////////////////////////////
 void TIMER::Uninitialize(void)
 {
-    //---各種宣言---//
-    int nCounter;
+    SAFE_RELEASE(VertexBuffer);
     SAFE_RELEASE(Graphic);
 }
 
@@ -74,7 +72,7 @@ HRESULT TIMER::Initialize(void)
     D3DXVECTOR2 vecPosition;
 
     //---初期化処理---//
-    vecPosition = { 800.0F, 5.0F };
+    vecPosition = { 746.0F, 5.0F };
     Fream = 600;
     Time = 9;
     pDevice = GetDevice();
@@ -117,6 +115,8 @@ HRESULT TIMER::Initialize(void)
     //バッファのポインタの解放
     VertexBuffer->Unlock();
 
+    Check = false;
+
     return hResult;
 }
 
@@ -150,5 +150,13 @@ void TIMER::Update(void)
     for (nCounter = 0; nCounter < 4; nCounter++)
     {
         Vertex[nCounter].U = (float)(Time + (nCounter & 1)) * 0.1F;
+    }
+
+    if (Check)
+    {
+        for (nCounter = 0; nCounter < 4; nCounter++)
+        {
+            Vertex[nCounter].Diffuse = D3DCOLOR_ARGB(255, 255, 0, 0);
+        }
     }
 }
